@@ -31,4 +31,28 @@ public class Options {
   
   public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;
   public static final int HAUTEUR_PX = HAUTEUR * TAILLE_CASE;
+  
+  public static final String MAPPATH = "assets/maps/";
+  
+  public static final int[][] MAPCOLORS = {
+		{255,0,0}, //red = ennemi
+		{0,255,0}, //green = item
+		{0,0,255}, //blue = 
+		{255,255,0}, //yellow = porte
+		{255,0,255}, //pink = boss
+		{0,255,255}, //cyan	= entree
+		{0,0,0}, //black = mur
+		{255,255,255} //white = rien
+	};
+
+  public static final String[] TILES = {
+		"enemy",
+		"item",
+		"",
+		"door",
+		"boss",
+		"spawn",
+		"wall",
+		"ground"
+	};
 }

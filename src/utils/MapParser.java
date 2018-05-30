@@ -5,34 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
+import controller.Options;
+
 
 public class MapParser {
 
-	private static final String MAPPATH = "assets/maps/";
-	private static final int WIDTH = 32;
-	private static final int HEIGHT = 24;
+	private static final String MAPPATH = Options.MAPPATH;
+	private static final int WIDTH = Options.LARGEUR;
+	private static final int HEIGHT = Options.HAUTEUR;
 	
-	private static final int[][] colors = {
-		{255,0,0}, //red = ennemi
-		{0,255,0}, //green = item
-		{0,0,255}, //blue = 
-		{255,255,0}, //yellow = porte
-		{255,0,255}, //pink = boss
-		{0,255,255}, //cyan	= entree
-		{0,0,0}, //black = mur
-		{255,255,255} //white = rien
-	};
+	private static final int[][] colors = Options.MAPCOLORS;
 
-	private static final String[] tiles = {
-		"enemy",
-		"item",
-		"",
-		"door",
-		"boss",
-		"spawn",
-		"wall",
-		"ground"
-	};
+	private static final String[] tiles = Options.TILES;
 	
 	public static String[][] getMap(String mapname){
 
