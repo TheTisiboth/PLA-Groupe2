@@ -22,6 +22,7 @@ import java.awt.Graphics;
 
 import controller.Controller;
 import edu.ricm3.game.GameView;
+import model.Background;
 import model.Model;
 
 public class View extends GameView {
@@ -34,10 +35,12 @@ public class View extends GameView {
   int m_fps;
   Model m_model;
   Controller m_ctr;
+  Background m_back;
   
   public View(Model m, Controller c) {
     m_model = m;
     m_ctr = c;
+    m_back = new Background();
   }
   
   private void computeFPS() {
@@ -55,7 +58,7 @@ public class View extends GameView {
   protected void _paint(Graphics g) {
     computeFPS();
 
-    
+    m_back.paint(g);
     // paint everybody
     /*
     if (Options.SHOW_COWBOYS) {

@@ -1,4 +1,5 @@
 /*
+
  * Educational software for a basic game development
  * Copyright (C) 2018  Pr. Olivier Gruber
  *
@@ -23,5 +24,11 @@ public class Options {
   public static final boolean ECHO_MOUSE = true;
   public static final boolean ECHO_MOUSE_MOTION = true;
   public static final boolean ECHO_KEYBOARD = true;
-
+  
+  public static final int LARGEUR = 32;
+  public static final int HAUTEUR = 24;
+  public static final int TAILLE_CASE = 32;
+  
+  public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;
+  public static final int HAUTEUR_PX = HAUTEUR * TAILLE_CASE;
 }

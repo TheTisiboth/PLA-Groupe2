@@ -6,3 +6,8 @@ Chacun seul : - Etude du Framework de O.Gruber
 
 ToDo 
 ->
+
+
+
+Informations:
+largeur map: 32, hauteur: 24

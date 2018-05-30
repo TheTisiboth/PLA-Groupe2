@@ -47,7 +47,8 @@ import model.Model;
 public class Controller extends GameController implements ActionListener {
 
   Model m_model;
-  Music m_player;
+  //Music m_player;
+  
   public Controller(Model m) {
     m_model = m;
   }

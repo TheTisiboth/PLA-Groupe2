@@ -3,6 +3,7 @@ package main;
 import java.awt.Dimension;
 
 import controller.Controller;
+import controller.Options;
 import edu.ricm3.game.GameUI;
 import model.Model;
 import view.View;
@@ -15,7 +16,7 @@ public class GameMain {
 		    Controller controller = new Controller(model);
 		    View view = new View(model,controller);
 
-		    Dimension d = new Dimension(1024, 768);
+		    Dimension d = new Dimension(Options.LARGEUR_PX, Options.HAUTEUR_PX);
 		    new GameUI(model,view,controller,d);
 		    
 		    // notice that the main thread will exit here,
