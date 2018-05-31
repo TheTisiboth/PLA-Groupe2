@@ -26,7 +26,7 @@ public class Options {
   public static final boolean ECHO_KEYBOARD = true;
   
   public static final int LARGEUR = 32;
-  public static final int HAUTEUR = 24;
+  public static final int HAUTEUR = 22;
   public static final int TAILLE_CASE = 32;
   
   public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;

@@ -55,7 +55,6 @@ public class GameUI {
 //     */
 //  }
 
-
   JFrame m_frame;
   GameView m_view;
   Timer m_timer;

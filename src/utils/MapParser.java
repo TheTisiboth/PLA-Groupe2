@@ -38,7 +38,7 @@ public class MapParser {
 			br.readLine();
 			//dimensions 32 24
 			line = br.readLine();
-			if(!line.equals("32 24")) throw new Error("Taille de carte incorrecte");
+			if(!line.equals(WIDTH + " " + HEIGHT)) throw new Error("Taille de carte incorrecte");
 			//taille max = 255
 			br.readLine();
 
