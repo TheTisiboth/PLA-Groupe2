@@ -18,43 +18,38 @@
  */
 package controller;
 
+import java.util.HashMap;
+
 public class Options {
-  public static final boolean USE_DOUBLE_BUFFERING = true;
+	public static final boolean USE_DOUBLE_BUFFERING = true;
 
-  public static final boolean ECHO_MOUSE = true;
-  public static final boolean ECHO_MOUSE_MOTION = true;
-  public static final boolean ECHO_KEYBOARD = true;
-  
-  public static final int LARGEUR = 32;
-  public static final int HAUTEUR = 22;
-  public static final int TAILLE_CASE = 32;
-  
-  public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;
-  public static final int HAUTEUR_PX = HAUTEUR * TAILLE_CASE;
-  
-  public static final String MAPPATH = "assets/maps/";
-  
-  public static final int[][] MAPCOLORS = {
-		{255,0,0}, //red = ennemi
-		{0,255,0}, //green = item
-		{0,0,255}, //blue = pet
-		{255,255,0}, //yellow = porte
-		{255,0,255}, //pink = boss
-		{0,255,255}, //cyan	= entree
-		{0,0,0}, //black = mur
-		{255,255,255} //white = rien
-	};
+	public static final boolean ECHO_MOUSE = true;
+	public static final boolean ECHO_MOUSE_MOTION = true;
+	public static final boolean ECHO_KEYBOARD = true;
+	
+	public static final int LARGEUR = 32;
+	public static final int HAUTEUR = 22;
+	public static final int TAILLE_CASE = 32;
+	
+	public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;
+	public static final int HAUTEUR_PX = HAUTEUR * TAILLE_CASE;
+	
+	public static final String MAPPATH = "assets/maps/";
 
-  public static final TileObject[] TILES = {
-		TileObject.ENEMY,
-		TileObject.ITEM,
-		TileObject.PET,
-		TileObject.DOOR,
-		TileObject.BOSS,
-		TileObject.SPAWN,
-		TileObject.WALL,
-		TileObject.GROUND
-	};
+	public static HashMap<int[],TileObject> tileColorMap = new HashMap<int[],TileObject>();
+
+	static{
+
+		tileColorMap.put(new int[]{255,0,0},TileObject.ENEMY); //RED
+		tileColorMap.put(new int[]{0,255,0},TileObject.ITEM); //GREEN
+		tileColorMap.put(new int[]{0,0,255},TileObject.PET); //BLUE
+		tileColorMap.put(new int[]{255,255,0},TileObject.DOOR); //YELLOW
+		tileColorMap.put(new int[]{255,0,255},TileObject.BOSS); //PINK
+		tileColorMap.put(new int[]{0,255,255},TileObject.SPAWN); //CYAN
+		tileColorMap.put(new int[]{0,0,0},TileObject.WALL); //BLACK
+		tileColorMap.put(new int[]{255,255,255},TileObject.GROUND); //WHITE
+	}
+
 	public enum TileObject {
 		ENEMY,
 		ITEM,
@@ -66,5 +61,5 @@ public class Options {
 		GROUND,
 		UNKNOWN
 	}
-	
+
 }

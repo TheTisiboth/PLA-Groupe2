@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Graphics;
+
 public abstract class Entity {
 	Model m_model;
 	
@@ -18,4 +20,9 @@ public abstract class Entity {
 	public void hit() {
 		
 	}
+
+	public void paint(Graphics g){
+		
+	}
+
 }

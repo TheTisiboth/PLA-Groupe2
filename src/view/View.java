@@ -23,7 +23,9 @@ import java.awt.Graphics;
 import controller.Controller;
 import edu.ricm3.game.GameView;
 import model.Background;
+import model.Level;
 import model.Model;
+import model.Room;
 
 public class View extends GameView {
 
@@ -36,14 +38,17 @@ public class View extends GameView {
   Model m_model;
   Controller m_ctr;
   Background m_back;
+  Room m_room;
   
   public View(Model m, Controller c) {
     m_model = m;
     m_ctr = c;
     m_back = new Background();
+    m_room = new Room(new Level(2, 5), 0);
   }
-  
-  private void computeFPS() {
+
+
+private void computeFPS() {
     long now = System.currentTimeMillis();
     if (now - m_last > 1000L) {
       m_fps = m_npaints;
@@ -59,6 +64,7 @@ public class View extends GameView {
     computeFPS();
 
     m_back.paint(g);
+    m_room.paint(g);
     // paint everybody
     /*
     if (Options.SHOW_COWBOYS) {

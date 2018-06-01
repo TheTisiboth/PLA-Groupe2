@@ -3,6 +3,7 @@ package utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.Arrays;
 
 import controller.Options;
@@ -14,10 +15,6 @@ public class MapParser {
 	private static final String MAPPATH = Options.MAPPATH;
 	private static final int WIDTH = Options.LARGEUR;
 	private static final int HEIGHT = Options.HAUTEUR;
-	
-	private static final int[][] colors = Options.MAPCOLORS;
-
-	private static final TileObject[] tiles = Options.TILES;
 	
 	public static TileObject[][] getMap(String mapname){
 
@@ -49,8 +46,8 @@ public class MapParser {
 						line = br.readLine();
 						currentcolor[k] = Integer.parseInt(line);
 					}
-					tile_list[i][j] = color_to_entity(currentcolor);
-
+						//takes a RGB color and outputs its corresponding entity
+					tile_list[i][j] = Options.tileColorMap.get(currentcolor);
 				}
 			}
 
@@ -76,14 +73,6 @@ public class MapParser {
 				ex.printStackTrace();
 			}
 		}
-	}
-	
-	//takes a RGB color and outputs its corresponding entity
-	private static TileObject color_to_entity(int[] color){
-		for (int i = 0; i < colors.length; i++) {
-			if(Arrays.equals(colors[i], color)) return tiles[i];
-		}
-		return TileObject.UNKNOWN;
 	}
 
 }
