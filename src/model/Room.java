@@ -28,7 +28,8 @@ public class Room{
 		for (int i = 0; i < Options.HAUTEUR; i++) {
 			for (int j = 0; j < Options.LARGEUR; j++) {
 				if(to[i][j].equals(TileObject.WALL)) 
-					m_tiles[i][j] = new Wall(new Model(), Color.black);
+					m_tiles[i][j] = new Wall(new Model(), Color.black, j, i);
+				else m_tiles[i][j] = new Wall(new Model(), Color.white, j, i);
 			}
 		}
 	}

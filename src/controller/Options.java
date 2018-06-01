@@ -18,6 +18,7 @@
  */
 package controller;
 
+import java.awt.Color;
 import java.util.HashMap;
 
 public class Options {
@@ -36,18 +37,17 @@ public class Options {
 	
 	public static final String MAPPATH = "assets/maps/";
 
-	public static HashMap<int[],TileObject> tileColorMap = new HashMap<int[],TileObject>();
+	public static HashMap<Color,TileObject> tileColorMap = new HashMap<Color,TileObject>();
 
 	static{
-
-		tileColorMap.put(new int[]{255,0,0},TileObject.ENEMY); //RED
-		tileColorMap.put(new int[]{0,255,0},TileObject.ITEM); //GREEN
-		tileColorMap.put(new int[]{0,0,255},TileObject.PET); //BLUE
-		tileColorMap.put(new int[]{255,255,0},TileObject.DOOR); //YELLOW
-		tileColorMap.put(new int[]{255,0,255},TileObject.BOSS); //PINK
-		tileColorMap.put(new int[]{0,255,255},TileObject.SPAWN); //CYAN
-		tileColorMap.put(new int[]{0,0,0},TileObject.WALL); //BLACK
-		tileColorMap.put(new int[]{255,255,255},TileObject.GROUND); //WHITE
+		tileColorMap.put(Color.red,TileObject.ENEMY); //RED
+		tileColorMap.put(Color.green,TileObject.ITEM); //GREEN
+		tileColorMap.put(Color.blue,TileObject.PET); //BLUE
+		tileColorMap.put(Color.yellow,TileObject.DOOR); //YELLOW
+		tileColorMap.put(Color.pink,TileObject.BOSS); //PINK
+		tileColorMap.put(Color.cyan,TileObject.SPAWN); //CYAN
+		tileColorMap.put(Color.black,TileObject.WALL); //BLACK
+		tileColorMap.put(Color.white,TileObject.GROUND); //WHITE
 	}
 
 	public enum TileObject {

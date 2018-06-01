@@ -1,5 +1,6 @@
 package utils;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class MapParser {
 			String line;
 			TileObject[][] tile_list = new TileObject[HEIGHT][WIDTH];
 			int[] currentcolor = new int[3];
+			Color color;
 
 			//P3
 			br.readLine();
@@ -47,7 +49,8 @@ public class MapParser {
 						currentcolor[k] = Integer.parseInt(line);
 					}
 						//takes a RGB color and outputs its corresponding entity
-					tile_list[i][j] = Options.tileColorMap.get(currentcolor);
+					color = new Color(currentcolor[0],currentcolor[1],currentcolor[2]);
+					tile_list[i][j] = Options.tileColorMap.get(color);
 				}
 			}
 
