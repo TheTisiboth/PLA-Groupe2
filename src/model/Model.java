@@ -19,11 +19,20 @@ package model;
 
 import edu.ricm3.game.GameModel;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 public class Model extends GameModel {
-  //BufferedImage m_cowboySprite;
+  BufferedImage m_sprite;
+  Entity m_perso;
 
   public Model() {
 	  loadSprites();
+	  m_perso = new Entity(0, 0, true, m_sprite,0.1);
+	  
   }
   
   @Override
@@ -39,6 +48,7 @@ public class Model extends GameModel {
    */
   @Override
   public void step(long now) {
+	  m_perso.step(now);
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
@@ -46,14 +56,24 @@ public class Model extends GameModel {
   }
 
   private void loadSprites() {
-	  /*Exemple chargement sprites
-    File imageFile = new File("game.sample/sprites/winchester.png");
+	 
+    File imageFile = new File("assets/sprite.png");
     try {
-      m_cowboySprite = ImageIO.read(imageFile);
+      m_sprite = ImageIO.read(imageFile);
     } catch (IOException ex) {
       ex.printStackTrace();
       System.exit(-1);
-    }*/
+    }
   }
+
+public Entity getM_perso() {
+	return m_perso;
+}
+
+public void setM_perso(Entity m_perso) {
+	this.m_perso = m_perso;
+}
+  
+  
 
 }

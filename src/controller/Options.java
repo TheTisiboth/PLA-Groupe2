@@ -21,9 +21,9 @@ package controller;
 public class Options {
   public static final boolean USE_DOUBLE_BUFFERING = true;
 
-  public static final boolean ECHO_MOUSE = true;
-  public static final boolean ECHO_MOUSE_MOTION = true;
-  public static final boolean ECHO_KEYBOARD = true;
+  public static final boolean ECHO_MOUSE = false;
+  public static final boolean ECHO_MOUSE_MOTION = false;
+  public static final boolean ECHO_KEYBOARD = false;
   
   public static final int LARGEUR = 32;
   public static final int HAUTEUR = 24;

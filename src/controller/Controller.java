@@ -31,6 +31,7 @@ import java.io.File;
 import edu.ricm3.game.GameController;
 import edu.ricm3.game.*;
 import controller.Options;
+import model.Directions;
 import model.Model;
 
 /**
@@ -65,13 +66,15 @@ public class Controller extends GameController implements ActionListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
-    //if (e.getKeyChar() == '+') {œ&
+	  
+	  
   }
 
   @Override
   public void keyPressed(KeyEvent e) {
     if (Options.ECHO_KEYBOARD)
       System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
+    m_model.getM_perso().move(Directions.RIGHT);
   }
 
   @Override

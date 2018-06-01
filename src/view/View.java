@@ -23,6 +23,7 @@ import java.awt.Graphics;
 import controller.Controller;
 import edu.ricm3.game.GameView;
 import model.Background;
+import model.Entity;
 import model.Model;
 
 public class View extends GameView {
@@ -60,12 +61,12 @@ public class View extends GameView {
 
     m_back.paint(g);
     // paint everybody
-    /*
-    if (Options.SHOW_COWBOYS) {
-      Cowboy[] cowboys = m_model.m_cowboys;
-      for (int i = 0; i < cowboys.length && i<Options.SHOW_NCOWBOYS; i++)
-        cowboys[i].paint(g);
-    }*/
+   
+    
+      Entity perso = m_model.getM_perso();
+      
+        perso.paint(g);
+    
   }
 
 }
