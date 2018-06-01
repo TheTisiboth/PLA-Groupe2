@@ -1,0 +1,32 @@
+{
+  "enemies": [
+    "wolf",
+    "bear",
+    "scorpion",
+    "hornet",
+    "shark"
+  ],
+  "items": [
+    "potion",
+    "big_potion",
+    "revival",
+    "rifle",
+    "bomb"
+  ],
+  "rooms": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "pets": [
+    "dog",
+    "cat",
+    "rabbit",
+    "dolphin",
+    "chicken"
+  ],
+  "boss": "elephant"
+}
