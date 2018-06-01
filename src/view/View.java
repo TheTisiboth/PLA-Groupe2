@@ -17,8 +17,11 @@
  */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+
+import javax.swing.JPanel;
 
 import controller.Controller;
 import edu.ricm3.game.GameView;

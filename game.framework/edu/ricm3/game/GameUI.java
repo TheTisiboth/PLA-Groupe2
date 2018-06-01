@@ -25,7 +25,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import controller.Options;
+import view.Menu;
 
 public class GameUI {
 
@@ -56,6 +60,7 @@ public class GameUI {
 //  }
 
   JFrame m_frame;
+  Menu m_menu;
   GameView m_view;
   Timer m_timer;
   GameModel m_model;
@@ -73,6 +78,7 @@ public class GameUI {
     m_model = m; m_model.m_game = this;
     m_view = v; m_view.m_game = this;
     m_controller = c; m_controller.m_game = this;
+    m_menu = new Menu();
 
     System.out.println(license);
 
@@ -109,8 +115,11 @@ public class GameUI {
 
   private void createWindow(Dimension d) {
     m_frame = new JFrame();
-    m_frame.setTitle("Sample Game");
     m_frame.setLayout(new BorderLayout());
+    m_frame.setResizable(false);
+	m_frame.setTitle("PLA - Groupe2 - Bandol Party");
+	m_frame.setSize(Options.LARGEUR_PX, Options.HAUTEUR_PX);
+	m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     m_frame.add(m_view, BorderLayout.CENTER);
 
@@ -118,7 +127,6 @@ public class GameUI {
     m_text.setText("Starting up...");
     m_frame.add(m_text, BorderLayout.NORTH);
 
-    m_frame.setSize(d);
     m_frame.doLayout();
     m_frame.setVisible(true);
 
@@ -144,6 +152,11 @@ public class GameUI {
     m_view.requestFocusInWindow();
 
     m_controller.notifyVisible();
+    
+	m_view.setVisible(false); m_text.setVisible(false);
+	m_menu.setVisible(true);
+	m_frame.add(m_menu, BorderLayout.CENTER);
+	
   }
 
   /* 
@@ -177,7 +190,7 @@ public class GameUI {
     m_controller.step(now);
     
     elapsed = now - m_lastRepaint;
-    if (elapsed > Options.REPAINT_DELAY) {
+    if (elapsed > edu.ricm3.game.Options.REPAINT_DELAY) {
       double tick = (double) m_elapsed / (double) m_nTicks;
       long tmp = (long) (tick * 10.0);
       tick = tmp / 10.0;
