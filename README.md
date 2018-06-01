@@ -32,5 +32,22 @@ Globalement, aujourd'hui nous avons continué de consolider l'idée de notre pro
 
 
 
-Informations:
-largeur map: 32, hauteur: 24
+# Informations complémentaires sur le jeu
+
+### Taille des maps :
+- Largeur map : 32
+- Hauteur : 22
+- Plusieurs maps par niveau -> Sur la dernière map : un boss + un familier à sauver
+
+### Codes couleur pour la création des maps :
+- Cyan : Entrée
+- Jaune : Sortie
+- Noir : Mur
+- Vert : Item
+- Rouge : Ennemi
+- Rose : Boss
+
+### Convention code:
+  - Tabulation
+  - Variables de classe: m_ au début et majuscule entre les mots
+  - Anglais
