@@ -37,7 +37,7 @@ public class Options {
   public static final int[][] MAPCOLORS = {
 		{255,0,0}, //red = ennemi
 		{0,255,0}, //green = item
-		{0,0,255}, //blue = 
+		{0,0,255}, //blue = pet
 		{255,255,0}, //yellow = porte
 		{255,0,255}, //pink = boss
 		{0,255,255}, //cyan	= entree
@@ -45,14 +45,26 @@ public class Options {
 		{255,255,255} //white = rien
 	};
 
-  public static final String[] TILES = {
-		"enemy",
-		"item",
-		"",
-		"door",
-		"boss",
-		"spawn",
-		"wall",
-		"ground"
+  public static final TileObject[] TILES = {
+		TileObject.ENEMY,
+		TileObject.ITEM,
+		TileObject.PET,
+		TileObject.DOOR,
+		TileObject.BOSS,
+		TileObject.SPAWN,
+		TileObject.WALL,
+		TileObject.GROUND
 	};
+	public enum TileObject {
+		ENEMY,
+		ITEM,
+		PET,
+		DOOR,
+		BOSS,
+		SPAWN,
+		WALL,
+		GROUND,
+		UNKNOWN
+	}
+	
 }

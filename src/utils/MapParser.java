@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import controller.Options;
+import controller.Options.TileObject;
 
 
 public class MapParser {
@@ -16,9 +17,9 @@ public class MapParser {
 	
 	private static final int[][] colors = Options.MAPCOLORS;
 
-	private static final String[] tiles = Options.TILES;
+	private static final TileObject[] tiles = Options.TILES;
 	
-	public static String[][] getMap(String mapname){
+	public static TileObject[][] getMap(String mapname){
 
 		BufferedReader br = null;
 		FileReader fr = null;
@@ -29,7 +30,7 @@ public class MapParser {
 			br = new BufferedReader(fr);
 
 			String line;
-			String[][] tile_list = new String[HEIGHT][WIDTH];
+			TileObject[][] tile_list = new TileObject[HEIGHT][WIDTH];
 			int[] currentcolor = new int[3];
 
 			//P3
@@ -77,11 +78,12 @@ public class MapParser {
 		}
 	}
 	
-	private static String color_to_entity(int[] color){
+	//takes a RGB color and outputs its corresponding entity
+	private static TileObject color_to_entity(int[] color){
 		for (int i = 0; i < colors.length; i++) {
 			if(Arrays.equals(colors[i], color)) return tiles[i];
 		}
-		return "unknown";
+		return TileObject.UNKNOWN;
 	}
 
 }
