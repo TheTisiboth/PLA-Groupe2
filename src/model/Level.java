@@ -14,7 +14,7 @@ public class Level {
 	Boss m_boss;
 	Pet m_pet;
 	
-	public Level(int d, int levelID) {
+	public Level(int d, int levelID, Model m) {
 		m_difficulty = d;
 		//parse(levelID);
 	}

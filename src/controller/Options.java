@@ -43,7 +43,7 @@ public class Options {
 		tileColorMap.put(Color.red,TileObject.ENEMY); //RED
 		tileColorMap.put(Color.green,TileObject.ITEM); //GREEN
 		tileColorMap.put(Color.blue,TileObject.PET); //BLUE
-		tileColorMap.put(Color.yellow,TileObject.DOOR); //YELLOW
+		tileColorMap.put(Color.yellow,TileObject.EXIT); //YELLOW
 		tileColorMap.put(Color.pink,TileObject.BOSS); //PINK
 		tileColorMap.put(Color.cyan,TileObject.SPAWN); //CYAN
 		tileColorMap.put(Color.black,TileObject.WALL); //BLACK
@@ -54,7 +54,7 @@ public class Options {
 		ENEMY,
 		ITEM,
 		PET,
-		DOOR,
+		EXIT,
 		BOSS,
 		SPAWN,
 		WALL,

@@ -19,6 +19,8 @@ public class Room{
 	TileObject[][] m_startingEntities;
 	List<Entity> m_entities;
 	Level m_level;
+	int[] m_spawn;
+	int[] m_exit;
 
 	public Room(Level level, int mapID){
 		m_level = level;
@@ -30,9 +32,34 @@ public class Room{
 	private void tileConstructor(TileObject[][] to){
 		for (int i = 0; i < Options.HAUTEUR; i++) {
 			for (int j = 0; j < Options.LARGEUR; j++) {
-				if(to[i][j].equals(TileObject.WALL)) 
-					m_entities.add(new Wall(new Model(), j, i));
-					System.out.println("Nouveau Mur en "+i+" "+j);
+				switch (to[i][j]) {
+					case WALL:
+						m_entities.add(new Wall(new Model(), j, i));			
+						break;
+					case ENEMY:
+						m_entities.add(new Boss(new Model(), j, i));
+						break;
+					case BOSS:
+						m_entities.add(new Boss(new Model(), j, i));
+						break;
+					case EXIT:
+						m_exit = new int[]{j,i};
+						break;
+					case SPAWN:
+						m_spawn = new int[]{j,i};
+						break;
+					case PET:
+						m_entities.add(new Pet(new Model(), j, i));
+						break;
+					case GROUND:
+						break;
+					case ITEM:
+						m_entities.add(new Item(new Model(), j, i));
+						break;
+
+					default:
+						break;
+				}
 			}
 		}
 	}

@@ -30,6 +30,7 @@ public abstract class Entity {
 		pixelY = y * Options.TAILLE_CASE;
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(spriteFile, m_spritesList);
+
 	}
 	
 	public void move() {

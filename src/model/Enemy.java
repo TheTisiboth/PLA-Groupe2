@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Enemy extends Entity {
+public class Enemy extends Entity {
 
 	static String m_spriteFile = "assets/sprites/wall.png";
 

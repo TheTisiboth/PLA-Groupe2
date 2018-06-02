@@ -44,7 +44,7 @@ public class View extends GameView {
     m_model = m;
     m_ctr = c;
     m_back = new Background();
-    m_room = new Room(new Level(2, 5), 0);
+    m_room = new Room(new Level(2, 5, m), 0);
   }
 
 
