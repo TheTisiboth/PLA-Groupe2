@@ -1,10 +1,11 @@
 package model;
 
-public class Enemy extends Entity {
+public abstract class Enemy extends Entity {
 
-	public Enemy(Model model) {
-		super(model);
-		// TODO Auto-generated constructor stub
+	static String m_spriteFile = "assets/sprites/wall.png";
+
+	public Enemy(Model model, int x, int y, String spriteFile) {
+		super(model, x, y, spriteFile);
 	}
 
 }

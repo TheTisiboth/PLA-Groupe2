@@ -2,9 +2,10 @@ package model;
 
 public class Pet extends Entity {
 
-	public Pet(Model model) {
-		super(model);
-		// TODO Auto-generated constructor stub
+	static String m_spriteFile = "assets/sprites/wall.png";
+
+	public Pet(Model model, int x, int y) {
+		super(model, x, y, m_spriteFile);
 	}
 
 }

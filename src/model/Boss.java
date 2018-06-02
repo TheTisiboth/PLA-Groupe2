@@ -2,9 +2,10 @@ package model;
 
 public class Boss extends Enemy {
 
-	public Boss(Model model) {
-		super(model);
-		// TODO Auto-generated constructor stub
+	static String m_spriteFile = "assets/sprites/wall.png";
+
+	public Boss(Model model, int x, int y) {
+		super(model, x, y, m_spriteFile);
 	}
 
 }
