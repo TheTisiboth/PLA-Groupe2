@@ -22,6 +22,8 @@ public abstract class Entity {
 	BufferedImage m_currentSprite;
 
 	String m_state;
+
+	static int m_layer = 0;
 	
 	public Entity(Model model, int x, int y, String spriteFile) {
 		m_model = model;
