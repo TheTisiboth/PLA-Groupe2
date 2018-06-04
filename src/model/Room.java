@@ -60,6 +60,10 @@ public class Room{
 			}
 		}
 	}
+	
+	public Tile getTile(int x, int y) {
+		return m_tiles[x][y];
+	}
 
 
 }

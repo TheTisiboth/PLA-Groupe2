@@ -20,6 +20,7 @@ public class Tile {
         m_entities.add(null);
         m_entities.add(null);
         m_entities.add(null);
+        m_entities.add(null);
         switch (to) {
             case WALL:
                 putEntity(Wall.m_layer, new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
@@ -41,16 +42,37 @@ public class Tile {
         }
     }
 
+    public Portal getPortal() {
+    	return (Portal)m_entities.get(Options.LAYER_PORTAL);
+    }
+    
+    public boolean hasPortal() {
+    	if(m_entities.get(Options.LAYER_PORTAL) == null)
+    		return false;
+    	return true;
+    }
+    
     public void paint(Graphics g){
         for (int i = 0; i < 3; i++) {
             if(m_entities.get(i) != null)
                 m_entities.get(i).paint(g);
         }
     }
+    
+    public void deletePortal() {
+    	m_entities.set(Options.LAYER_PORTAL, null);
+    }
 
     public void putEntity(int l, Entity e){
         if(m_entities.get(l) == null)
             m_entities.set(l, e);			
     }
+
+	public void setPortal(Portal portal) {
+		m_entities.set(Options.LAYER_PORTAL, portal);
+		
+	}
+    
+    
 
 }

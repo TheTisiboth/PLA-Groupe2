@@ -63,18 +63,40 @@ public class Entity{
 
 	public void wizz() {
 		if(m_portals.size() >= 2) {
+			m_portals.get(0).delete();
 			m_portals.remove(0);
 		}
 		//TODO MAuvaise tile
+		int newPosX = m_pixelX;
+		int newPosY = m_pixelY;
+		Directions newDir = null;
+		
+		if(m_orientation == Directions.LEFT) {
+			newPosX -= Options.TAILLE_CASE;
+			newDir = Directions.RIGHT;
+		}
+		if(m_orientation == Directions.RIGHT) {
+			newDir = Directions.LEFT;
+			newPosX += Options.TAILLE_CASE;
+		}
+		if(m_orientation == Directions.UP) {
+			newPosY -= Options.TAILLE_CASE;
+			newDir = Directions.DOWN;
+		}
+		if(m_orientation == Directions.DOWN) {
+			newDir = Directions.UP;
+			newPosY += Options.TAILLE_CASE;
+		}
 
-		if(m_orientation == Directions.LEFT)
-			m_portals.add(new Portal(m_model, m_pixelX - Options.TAILLE_CASE, m_pixelY, Directions.RIGHT, m_tile));
-		if(m_orientation == Directions.RIGHT)
-			m_portals.add(new Portal(m_model, m_pixelX + Options.TAILLE_CASE, m_pixelY, Directions.LEFT, m_tile));
-		if(m_orientation == Directions.UP)
-			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY - Options.TAILLE_CASE, Directions.DOWN, m_tile));
-		if(m_orientation == Directions.DOWN)
-			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY + Options.TAILLE_CASE, Directions.UP, m_tile));
+		Tile new_tile = m_model.get_room().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
+		Portal portal = new Portal(m_model, newPosX, newPosY, newDir, new_tile);
+		
+		if(m_portals.size() >= 1) {
+			Portal.setPortalPair(portal, m_portals.get(0));
+		}
+		
+		new_tile.setPortal(portal);
+		m_portals.add(portal);
 	}
 
 	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
@@ -155,6 +177,12 @@ public class Entity{
 
 					m_moving = null;
 					m_pixelDone = 0;
+					
+					//Passage dans un portail
+					Tile new_tile = m_model.get_room().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
+					if(new_tile.hasPortal()){
+						new_tile.getPortal().GoThrough(this);
+					}
 				}
 
 			}
