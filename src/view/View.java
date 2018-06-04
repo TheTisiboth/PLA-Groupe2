@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,7 +24,9 @@ import controller.Controller;
 import edu.ricm3.game.GameView;
 import model.Background;
 import model.Entity;
+import model.Level;
 import model.Model;
+import model.Room;
 
 public class View extends GameView {
 
@@ -37,14 +39,17 @@ public class View extends GameView {
   Model m_model;
   Controller m_ctr;
   Background m_back;
-  
+  Room m_room;
+
   public View(Model m, Controller c) {
     m_model = m;
     m_ctr = c;
     m_back = new Background();
+    m_room = new Room(new Level(2, 5, m), 0);
   }
-  
-  private void computeFPS() {
+
+
+private void computeFPS() {
     long now = System.currentTimeMillis();
     if (now - m_last > 1000L) {
       m_fps = m_npaints;
@@ -60,13 +65,14 @@ public class View extends GameView {
     computeFPS();
 
     m_back.paint(g);
+    m_room.paint(g);
     // paint everybody
-   
-    
+
+
       m_model.get_perso().paint(g);
-      
+
         //perso.paint(g);
-    
+
   }
 
 }

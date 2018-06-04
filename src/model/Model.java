@@ -31,7 +31,7 @@ public class Model extends GameModel {
 
   public Model() {
 	  loadSprites();
-	  m_perso = new Entity(0, 0, true, m_sprite,0.1);
+	  m_perso = new Entity(this, 0, 0, true, "assets/sprite.png",0.1);
 	  
   }
   
