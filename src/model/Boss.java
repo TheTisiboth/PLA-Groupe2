@@ -8,8 +8,8 @@ public class Boss extends Enemy {
 	static int m_layer = 1;
 	static double m_startingSpeed = Options.velocities.get("boss"); 
 
-	public Boss(Model model, int x, int y, Tile t) {
-		super(model, x, y, m_spriteFile, m_startingSpeed, t);
+	public Boss(Model model, int x, int y, String spriteFile, double speed, Tile t) {
+		super(model, x, y, spriteFile, speed, t);
 	}
 
 }
