@@ -25,7 +25,9 @@ public class Entity{
 	BufferedImage m_currentSprite;
 	BufferedImage m_sprites;
 	Model m_model;
-	
+
+	static int m_layer = 0;
+
 	public Entity(Model model, int posX, int posY, boolean moveable,/*BufferedImage sprites, */String filename, double vitesse) {
 		super();
 		m_model = model;
