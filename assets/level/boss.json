@@ -1,0 +1,6 @@
+{
+  "elephant": {
+    "sprite": "elephant.png",
+    "speed": 0.02
+  }
+}
