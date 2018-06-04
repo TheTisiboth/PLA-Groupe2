@@ -59,6 +59,15 @@ public class Portal extends Entity {
 			return false;
 		return true;
 	}
+	
+	public void setDestPortal(Portal p) {
+		m_destPortal = p;
+	}
+	
+	public static void setPortalPair(Portal p1, Portal p2) {
+		p1.setDestPortal(p2);
+		p2.setDestPortal(p1);
+	}
 
 	@Override
 	public void paint(Graphics g) {
