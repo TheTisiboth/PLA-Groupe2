@@ -25,11 +25,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import controller.Options;
-import view.Menu;
 
 public class GameUI {
 
@@ -60,7 +56,6 @@ public class GameUI {
 //  }
 
   JFrame m_frame;
-  Menu m_menu;
   GameView m_view;
   Timer m_timer;
   GameModel m_model;
@@ -78,14 +73,12 @@ public class GameUI {
     m_model = m; m_model.m_game = this;
     m_view = v; m_view.m_game = this;
     m_controller = c; m_controller.m_game = this;
-    m_menu = new Menu();
 
     System.out.println(license);
 
     // create the main window and the periodic timer
     // to drive the overall clock of the simulation.
     createWindow(d);
-    createTimer();
   }
 
   public GameModel getModel() {
@@ -115,11 +108,8 @@ public class GameUI {
 
   private void createWindow(Dimension d) {
     m_frame = new JFrame();
-    m_frame.setLayout(new BorderLayout());
-    m_frame.setResizable(false);
 	m_frame.setTitle("PLA - Groupe2 - Bandol Party");
-	m_frame.setSize(Options.LARGEUR_PX, Options.HAUTEUR_PX);
-	m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    m_frame.setLayout(new BorderLayout());
 
     m_frame.add(m_view, BorderLayout.CENTER);
 
@@ -127,14 +117,14 @@ public class GameUI {
     m_text.setText("Starting up...");
     m_frame.add(m_text, BorderLayout.NORTH);
 
+    m_frame.setSize(d);
     m_frame.doLayout();
-    m_frame.setVisible(true);
-
+    
     // hook window events so that we exit the Java Platform
     // when the window is closed by the end user.
     m_frame.addWindowListener(new WindowListener(m_model));
 
-    m_frame.pack();
+    //m_frame.pack();
     m_frame.setLocationRelativeTo(null);
     
     GameController ctr = getController();
@@ -150,13 +140,14 @@ public class GameUI {
     // which part of the overall GUI receives the keyboard events.
     m_view.setFocusable(true);
     m_view.requestFocusInWindow();
-
-    m_controller.notifyVisible();
-    
-	m_view.setVisible(false); m_text.setVisible(false);
-	m_menu.setVisible(true);
-	m_frame.add(m_menu, BorderLayout.CENTER);
-	
+  }
+  
+  public void displayWindow() {
+	  m_frame.setVisible(true);
+	  m_frame.pack();
+	  m_controller.notifyVisible();
+	  
+	  createTimer();
   }
 
   /* 
