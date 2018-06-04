@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import controller.Controller;
 import controller.Options;
@@ -38,20 +36,18 @@ public class Menu extends JFrame {
 		});
 		this.add(m_playButton);
 		
-		// construct the game elements: model, controller, and view.
-	    Model model = new Model();
-	    Controller controller = new Controller(model);
-	    View view = new View(model,controller);
-
-	    Dimension d = new Dimension(Options.LARGEUR_PX, Options.HAUTEUR_PX);
-	    new GameUI(model,view,controller,d);
-		
 		m_optionsButton = new JButton("Options");
 		m_optionsButton.setBounds(387,465,250,60);
 		this.add(m_optionsButton);
 		
 		m_quitButton = new JButton("Quitter");
 		m_quitButton.setBounds(387,530,250,60);
+		m_quitButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		this.add(m_quitButton);
 		
 		
@@ -69,8 +65,7 @@ public class Menu extends JFrame {
 	    View view = new View(model,controller);
 
 	    Dimension d = new Dimension(Options.LARGEUR_PX, Options.HAUTEUR_PX);
-	    GameUI game = new GameUI(model,view,controller,d);
-	    game.displayWindow();
+	    new GameUI(model,view,controller,d);
 	    this.setVisible(false);
 	}
 	

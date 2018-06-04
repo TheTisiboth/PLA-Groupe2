@@ -79,6 +79,7 @@ public class GameUI {
     // create the main window and the periodic timer
     // to drive the overall clock of the simulation.
     createWindow(d);
+    createTimer();
   }
 
   public GameModel getModel() {
@@ -119,12 +120,13 @@ public class GameUI {
 
     m_frame.setSize(d);
     m_frame.doLayout();
+    m_frame.setVisible(true);
     
     // hook window events so that we exit the Java Platform
     // when the window is closed by the end user.
     m_frame.addWindowListener(new WindowListener(m_model));
 
-    //m_frame.pack();
+    m_frame.pack();
     m_frame.setLocationRelativeTo(null);
     
     GameController ctr = getController();
@@ -140,14 +142,8 @@ public class GameUI {
     // which part of the overall GUI receives the keyboard events.
     m_view.setFocusable(true);
     m_view.requestFocusInWindow();
-  }
-  
-  public void displayWindow() {
-	  m_frame.setVisible(true);
-	  m_frame.pack();
-	  m_controller.notifyVisible();
-	  
-	  createTimer();
+    
+    m_controller.notifyVisible();
   }
 
   /* 
