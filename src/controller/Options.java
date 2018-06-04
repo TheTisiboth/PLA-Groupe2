@@ -7,64 +7,82 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package controller;
 
+import java.awt.Color;
+import java.util.HashMap;
+
 public class Options {
-  public static final boolean USE_DOUBLE_BUFFERING = true;
+	public static final boolean USE_DOUBLE_BUFFERING = true;
 
-  public static final boolean ECHO_MOUSE = true;
-  public static final boolean ECHO_MOUSE_MOTION = true;
-  public static final boolean ECHO_KEYBOARD = true;
-  
-  public static final int LARGEUR = 32;
-  public static final int HAUTEUR = 22;
-  public static final int TAILLE_CASE = 32;
-  
-  public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;
-  public static final int HAUTEUR_PX = HAUTEUR * TAILLE_CASE;
-  
-  public static final String MAPPATH = "assets/maps/";
-  
-  public static final int[][] MAPCOLORS = {
-		{255,0,0}, //red = ennemi
-		{0,255,0}, //green = item
-		{0,0,255}, //blue = pet
-		{255,255,0}, //yellow = porte
-		{255,0,255}, //pink = boss
-		{0,255,255}, //cyan	= entree
-		{0,0,0}, //black = mur
-		{255,255,255} //white = rien
-	};
+	public static final boolean ECHO_MOUSE = true;
+	public static final boolean ECHO_MOUSE_MOTION = true;
+	public static final boolean ECHO_KEYBOARD = true;
 
-  public static final TileObject[] TILES = {
-		TileObject.ENEMY,
-		TileObject.ITEM,
-		TileObject.PET,
-		TileObject.DOOR,
-		TileObject.BOSS,
-		TileObject.SPAWN,
-		TileObject.WALL,
-		TileObject.GROUND
-	};
+	public static final int LARGEUR = 32;
+	public static final int HAUTEUR = 22;
+	public static final int TAILLE_CASE = 32;
+
+	public static final int LARGEUR_PX = LARGEUR * TAILLE_CASE;
+	public static final int HAUTEUR_PX = HAUTEUR * TAILLE_CASE;
+
+	public static final String MAPPATH = "assets/maps/";
+
+	public static final HashMap<Color,TileObject> tileColorMap = new HashMap<Color,TileObject>();
+
+	static{
+		tileColorMap.put(Color.red,TileObject.ENEMY); //RED
+		tileColorMap.put(Color.green,TileObject.ITEM); //GREEN
+		tileColorMap.put(Color.blue,TileObject.PET); //BLUE
+		tileColorMap.put(Color.yellow,TileObject.EXIT); //YELLOW
+		tileColorMap.put(Color.pink,TileObject.BOSS); //PINK
+		tileColorMap.put(Color.cyan,TileObject.SPAWN); //CYAN
+		tileColorMap.put(Color.black,TileObject.WALL); //BLACK
+		tileColorMap.put(Color.white,TileObject.GROUND); //WHITE
+	}
+
 	public enum TileObject {
 		ENEMY,
 		ITEM,
 		PET,
-		DOOR,
+		EXIT,
 		BOSS,
 		SPAWN,
 		WALL,
 		GROUND,
 		UNKNOWN
 	}
-	
+
+	public static final HashMap<String,String> sprites = new HashMap<String,String>();
+
+	static{
+		sprites.put("wall","assets/sprites/wall.png");
+		sprites.put("boss","assets/sprites/boss.png");
+		sprites.put("player","assets/sprites/player.png");
+		sprites.put("pet","assets/sprites/pet.png");
+		sprites.put("item","assets/sprites/item.png");
+	}
+
+	public static final HashMap<String,Double> velocities = new HashMap<String,Double>();
+
+	static{
+		velocities.put("wall",0.0);
+		velocities.put("boss",0.1);
+		velocities.put("player",0.2);
+		velocities.put("pet",1.0);
+		velocities.put("item",0.0);
+	}
+
+	public enum Directions {
+		RIGHT,LEFT,UP,DOWN;
+	}
 }

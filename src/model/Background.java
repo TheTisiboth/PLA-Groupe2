@@ -12,7 +12,7 @@ public class Background {
 	BufferedImage m_sprite;
 	
 	public Background(){
-		File image = new File("assets/img/fond.png");
+		File image = new File("assets/tiles/ground.png");
 	    try {
 	        m_sprite = ImageIO.read(image);
 	    } catch (IOException ex) {
@@ -26,7 +26,11 @@ public class Background {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(m_sprite, 0, 0, Options.LARGEUR_PX, Options.HAUTEUR_PX, null);
+		for (int i = 0; i < Options.LARGEUR; i++) {
+			for (int j = 0; j < Options.HAUTEUR; j++) {
+				g.drawImage(m_sprite, i*Options.TAILLE_CASE, j*Options.TAILLE_CASE, Options.TAILLE_CASE, Options.TAILLE_CASE, null);				
+			}
+		}
 	}
 	
 }

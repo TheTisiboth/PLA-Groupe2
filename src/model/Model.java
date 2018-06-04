@@ -19,11 +19,18 @@ package model;
 
 import edu.ricm3.game.GameModel;
 
+import java.awt.image.BufferedImage;
+
 public class Model extends GameModel {
-  //BufferedImage m_cowboySprite;
+  BufferedImage m_sprite;
+  Player m_player;
+  Level m_level;
+  Room m_room;
 
   public Model() {
-	  loadSprites();
+    m_player = new Player(this, 0, 0);
+    m_level = new Level(1, 0, this);
+    m_room = m_level.getCurrentRoom();
   }
   
   @Override
@@ -39,21 +46,19 @@ public class Model extends GameModel {
    */
   @Override
   public void step(long now) {
+	  m_player.step(now);
+	  
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
       m_cowboys[i].step(now);*/
   }
 
-  private void loadSprites() {
-	  /*Exemple chargement sprites
-    File imageFile = new File("game.sample/sprites/winchester.png");
-    try {
-      m_cowboySprite = ImageIO.read(imageFile);
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      System.exit(-1);
-    }*/
-  }
+public Player getPlayer() {
+	return m_player;
+}
+
+  
+  
 
 }
