@@ -27,12 +27,22 @@ import javax.imageio.ImageIO;
 
 public class Model extends GameModel {
   BufferedImage m_sprite;
+  Room m_room;
+  public Portal m_portal;
+  public Portal m_portalDest;
+  
   Entity m_perso;
 
   public Model() {
 	  loadSprites();
 	  m_perso = new Entity(this, 0, 0, true, "assets/sprite.png",0.1);
+	  m_room = new Room(new Level(2, 5, this), 0);
 	  
+	  m_portal = new Portal(this, 128, 128, Directions.LEFT);
+	  m_portalDest = new Portal(this, 256, 256, Directions.UP);
+	  m_portal.AddDest(m_portalDest);
+	  
+	  m_portal.GoThrough(m_perso);
   }
   
   @Override
@@ -49,6 +59,7 @@ public class Model extends GameModel {
   @Override
   public void step(long now) {
 	  m_perso.step(now);
+	
 	  
     //appeler step sur toutes les entites
 	/*
@@ -67,10 +78,13 @@ public class Model extends GameModel {
     }
   }
 
-public Entity get_perso() {
+  public Entity get_perso() {
 	return m_perso;
-}
+  }
 
+  public Room get_room() {
+	return m_room;
+  }
   
   
 

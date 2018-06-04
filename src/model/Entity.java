@@ -128,9 +128,30 @@ public class Entity{
 		m_currentSprite = m_spritesList.get(m_state);
 		g.drawImage(m_currentSprite, m_PixelX, m_PixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
 	}
+	
+	public Directions get_Orientation() {
+		return m_Moving;
+	}
+	
+	public void set_orientation(Directions directions) {
+		m_Moving = directions;
+	}
 
 	public Directions getM_Moving() {
 		return m_Moving;
+	}
+	
+	public void setPosition(int x, int y) {
+		m_PixelX = x;
+		m_PixelY = y;
+	}
+	
+	public int getPositionX() {
+		return m_PixelX;
+	}
+	
+	public int getPositionY() {
+		return m_PixelY;
 	}
 }
 
