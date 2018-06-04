@@ -62,6 +62,7 @@ public class Entity{
 		  ex.printStackTrace();
 		  System.exit(-1);
 		}
+		
 	}
 
 	public void step(long now) {
