@@ -82,7 +82,5 @@ public class Options {
 		velocities.put("item",0.0);
 	}
 
-	public enum Directions {
-		RIGHT,LEFT,UP,DOWN;
-	}
+
 }

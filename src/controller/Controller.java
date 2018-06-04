@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import edu.ricm3.game.GameController;
+import main.Directions;
 import edu.ricm3.game.*;
 import controller.Options;
 import model.Model;
@@ -47,7 +48,7 @@ import model.Model;
  *
  * @author Pr. Olivier Gruber
  */
-import controller.Options.Directions;
+
 
 public class Controller extends GameController implements ActionListener {
 
@@ -99,6 +100,8 @@ public class Controller extends GameController implements ActionListener {
 		m_keys.put(Directions.RIGHT, true);
 	if(e.getKeyCode() == 40)
 		m_keys.put(Directions.DOWN, true);
+	if(e.getKeyCode() == 32)
+		m_model.getPlayer().wizz();
 
     if (Options.ECHO_KEYBOARD)
     	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());

@@ -8,13 +8,7 @@ public class Player extends Entity {
 	static int m_layer = 2;
 	static double m_startingSpeed = Options.velocities.get("player"); 
 
-	public Player(Model model, int x, int y) {
-		super(model, x, y, true, m_spriteFile, m_startingSpeed);
+	public Player(Model model, int x, int y, Tile t) {
+		super(model, x, y, true, m_spriteFile, m_startingSpeed, t);
 	}
-
-	public void setPos(int x, int y){
-		this.m_pixelX = x;
-		this.m_pixelY = y;
-	}
-
 }

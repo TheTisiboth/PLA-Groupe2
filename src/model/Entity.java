@@ -4,31 +4,39 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 // import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import controller.Options;
-import controller.Options.Directions;
+import main.Directions;
 
 public class Entity{
-
 	int m_pixelX,m_pixelY;
 	boolean m_moveable;
 	Directions m_moving;
-	double m_speed;
-	long m_lastTime;
+	Directions m_orientation;
 	int m_pixelDone;
+	double m_speed;
+
+	long m_lastTime;
 	long m_updatePhysics;
+
 	String m_state;
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
-	Model m_model;
-
 	static int m_layer = 0;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed) {
+	Model m_model;
+	Tile m_tile;
+
+	List<Portal> m_portals;
+
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t) {
 		super();
 		m_model = model;
 		m_pixelX = posX;
@@ -39,6 +47,8 @@ public class Entity{
 		m_pixelDone = 0;
 		m_updatePhysics = 30;
 		m_state = "default";
+		m_portals = new ArrayList<Portal>();
+		m_tile = t;
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
@@ -47,10 +57,25 @@ public class Entity{
 	public void move(Directions moving) {
 		if(m_moving == null){
 			m_moving = moving;
+			m_orientation = moving;
 		}
 	}
 
+	public void wizz() {
+		if(m_portals.size() >= 2) {
+			m_portals.remove(0);
+		}
+		//TODO MAuvaise tile
 
+		if(m_orientation == Directions.LEFT)
+			m_portals.add(new Portal(m_model, m_pixelX - Options.TAILLE_CASE, m_pixelY, Directions.RIGHT, m_tile));
+		if(m_orientation == Directions.RIGHT)
+			m_portals.add(new Portal(m_model, m_pixelX + Options.TAILLE_CASE, m_pixelY, Directions.LEFT, m_tile));
+		if(m_orientation == Directions.UP)
+			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY - Options.TAILLE_CASE, Directions.DOWN, m_tile));
+		if(m_orientation == Directions.DOWN)
+			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY + Options.TAILLE_CASE, Directions.UP, m_tile));
+	}
 
 	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
 		File imageFile = new File(spriteFile);
@@ -126,13 +151,13 @@ public class Entity{
 							m_pixelX += Options.TAILLE_CASE;
 						if(m_moving == Directions.UP)
 							m_pixelY += Options.TAILLE_CASE;
-						
+
 					}
 
 					m_moving = null;
 					m_pixelDone = 0;
 				}
-				
+
 			}
 		}
 	}
@@ -140,9 +165,22 @@ public class Entity{
 	public void paint(Graphics g){
 		m_currentSprite = m_spritesList.get(m_state);
 		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
+
+		Iterator<Portal> it = m_portals.iterator();
+		while(it.hasNext()) {
+			it.next().paint(g);
+		}
 	}
 
-	public Directions getM_moving() {
+	public Directions getOrientation() {
+		return m_orientation;
+	}
+
+	public void setOrientation(Directions directions) {
+		m_orientation = directions;
+	}
+
+	public Directions getMoving() {
 		return m_moving;
 	}
 
@@ -154,6 +192,18 @@ public class Entity{
 		return m_layer;
 	}
 
+	public void setPosition(int x, int y) {
+		m_pixelX = x;
+		m_pixelY = y;
+	}
+
+	public int getPositionX() {
+		return m_pixelX;
+	}
+
+	public int getPositionY() {
+		return m_pixelY;
+	}
 }
 
 
