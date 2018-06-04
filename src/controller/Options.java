@@ -61,5 +61,7 @@ public class Options {
 		GROUND,
 		UNKNOWN
 	}
-
+	public enum Directions {
+		RIGHT,LEFT,UP,DOWN;
+	}
 }

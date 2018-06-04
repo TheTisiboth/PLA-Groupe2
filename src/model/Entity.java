@@ -23,7 +23,6 @@ public class Entity{
 	String m_state;
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
-	BufferedImage m_sprites;
 	Model m_model;
 
 	static int m_layer = 0;
@@ -34,7 +33,6 @@ public class Entity{
 		m_PixelX = posX;
 		m_PixelY = posY;
 		m_Moveable = moveable;
-		//m_sprites = sprites;
 		m_Vitesse = vitesse;
 		m_Moving = null;
 		m_pixelDone = 0;
