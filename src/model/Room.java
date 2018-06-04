@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import java.util.*;
@@ -22,9 +21,11 @@ public class Room{
 	Level m_level;
 	Tile m_spawn;
 	Tile m_exit;
+	Model m_model;
 
 	public Room(Level level, int mapID){
 		m_level = level;
+		m_model = level.m_model;
 		m_startingEntities = MapParser.getMap(mapID+"");
 		m_entities = new ArrayList<Entity>();
 		m_tiles = new Tile[Options.LARGEUR][Options.HAUTEUR];
@@ -41,6 +42,8 @@ public class Room{
 						break;
 					case SPAWN:
 						m_spawn = m_tiles[j][i];
+						m_model.getPlayer().setPos(j*Options.TAILLE_CASE, i*Options.TAILLE_CASE);
+						m_spawn.putEntity(m_model.getPlayer().getLayer(), m_model.getPlayer());
 						break;
 					default:
 						break;

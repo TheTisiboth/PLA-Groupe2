@@ -47,7 +47,7 @@ import model.Model;
  *
  * @author Pr. Olivier Gruber
  */
-import model.Directions;
+import controller.Options.Directions;
 
 public class Controller extends GameController implements ActionListener {
 
@@ -75,13 +75,13 @@ public class Controller extends GameController implements ActionListener {
   @Override
   public void step(long now) {
 	  if(m_keys.get(Directions.UP))
-		  m_model.get_perso().move(Directions.UP);
+		  m_model.getPlayer().move(Directions.UP);
 	  if(m_keys.get(Directions.DOWN))
-		  m_model.get_perso().move(Directions.DOWN);
+		  m_model.getPlayer().move(Directions.DOWN);
 	  if(m_keys.get(Directions.LEFT))
-		  m_model.get_perso().move(Directions.LEFT);
+		  m_model.getPlayer().move(Directions.LEFT);
 	  if(m_keys.get(Directions.RIGHT))
-		  m_model.get_perso().move(Directions.RIGHT);
+		  m_model.getPlayer().move(Directions.RIGHT);
   }
 
   @Override
