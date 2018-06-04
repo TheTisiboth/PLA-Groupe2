@@ -63,6 +63,7 @@ public class Entity{
 
 	public void wizz() {
 		if(m_portals.size() >= 2) {
+			m_portals.get(0).delete();
 			m_portals.remove(0);
 		}
 		//TODO MAuvaise tile
@@ -95,7 +96,6 @@ public class Entity{
 		}
 		
 		new_tile.setPortal(portal);
-		
 		m_portals.add(portal);
 	}
 

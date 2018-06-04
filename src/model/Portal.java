@@ -68,6 +68,10 @@ public class Portal extends Entity {
 		p1.setDestPortal(p2);
 		p2.setDestPortal(p1);
 	}
+	
+	public void delete() {
+		m_tile.deletePortal();
+	}
 
 	@Override
 	public void paint(Graphics g) {

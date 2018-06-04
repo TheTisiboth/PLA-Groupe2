@@ -58,6 +58,10 @@ public class Tile {
                 m_entities.get(i).paint(g);
         }
     }
+    
+    public void deletePortal() {
+    	m_entities.set(Options.LAYER_PORTAL, null);
+    }
 
     public void putEntity(int l, Entity e){
         if(m_entities.get(l) == null)
