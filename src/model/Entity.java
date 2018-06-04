@@ -4,29 +4,36 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 // import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
 import controller.Options;
-import controller.Options.Directions;
+import main.Directions;
 
 public class Entity{
-
 	int m_pixelX,m_pixelY;
 	boolean m_moveable;
 	Directions m_moving;
-	double m_speed;
-	long m_lastTime;
+	Directions m_orientation;
 	int m_pixelDone;
+	double m_speed;
+	
+	long m_lastTime;
 	long m_updatePhysics;
+	
 	String m_state;
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
+	static int m_layer = 0;	
+	
 	Model m_model;
 
-	static int m_layer = 0;
+	List<Portal> m_portals;
 
 	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed) {
 		super();
@@ -39,6 +46,7 @@ public class Entity{
 		m_pixelDone = 0;
 		m_updatePhysics = 30;
 		m_state = "default";
+		m_portals = new ArrayList<Portal>();
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
@@ -47,10 +55,24 @@ public class Entity{
 	public void move(Directions moving) {
 		if(m_moving == null){
 			m_moving = moving;
+			m_orientation = moving;
 		}
 	}
-
-
+	
+	public void wizz() {
+		if(m_portals.size() >= 2) {
+			m_portals.remove(0);
+		}
+			
+		if(m_orientation == Directions.LEFT)
+			m_portals.add(new Portal(m_model, m_pixelX - Options.TAILLE_CASE, m_pixelY, Directions.RIGHT));
+		if(m_orientation == Directions.RIGHT)
+			m_portals.add(new Portal(m_model, m_pixelX + Options.TAILLE_CASE, m_pixelY, Directions.LEFT));
+		if(m_orientation == Directions.UP)
+			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY - Options.TAILLE_CASE, Directions.DOWN));
+		if(m_orientation == Directions.DOWN)
+			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY + Options.TAILLE_CASE, Directions.UP));
+	}
 
 	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
 		File imageFile = new File(spriteFile);
@@ -128,17 +150,22 @@ public class Entity{
 	public void paint(Graphics g){
 		m_currentSprite = m_spritesList.get(m_state);
 		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
+	
+		Iterator<Portal> it = m_portals.iterator();
+		while(it.hasNext()) {
+			it.next().paint(g);
+		}
 	}
 	
-	public Directions get_Orientation() {
-		return m_Moving;
+	public Directions getOrientation() {
+		return m_orientation;
 	}
 	
-	public void set_orientation(Directions directions) {
-		m_Moving = directions;
+	public void setOrientation(Directions directions) {
+		m_orientation = directions;
 	}
 
-	public Directions getM_moving() {
+	public Directions getMoving() {
 		return m_moving;
 	}
 
@@ -150,16 +177,16 @@ public class Entity{
 	}
 	
 	public void setPosition(int x, int y) {
-		m_PixelX = x;
-		m_PixelY = y;
+		m_pixelX = x;
+		m_pixelY = y;
 	}
 	
 	public int getPositionX() {
-		return m_PixelX;
+		return m_pixelX;
 	}
 	
 	public int getPositionY() {
-		return m_PixelY;
+		return m_pixelY;
 	}
 }
 

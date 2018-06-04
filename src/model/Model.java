@@ -18,29 +18,20 @@
 package model;
 
 import edu.ricm3.game.GameModel;
+import main.Directions;
 
 import java.awt.image.BufferedImage;
 
 public class Model extends GameModel {
-  BufferedImage m_sprite;
-  public Portal m_portal;
-  public Portal m_portalDest;
-
   Player m_player;
   Level m_level;
   Room m_room;
 
   public Model() {
-	  loadSprites();
     m_player = new Player(this, 0, 0);
     m_level = new Level(1, 0, this);
     m_room = m_level.getCurrentRoom();
 
-	  m_portal = new Portal(this, 128, 128, Directions.LEFT);
-	  m_portalDest = new Portal(this, 256, 256, Directions.UP);
-	  m_portal.AddDest(m_portalDest);
-
-	  m_portal.GoThrough(m_perso);
   }
 
   @Override
