@@ -22,19 +22,19 @@ public class Tile {
         m_entities.add(null);
         switch (to) {
             case WALL:
-                putEntity(Wall.m_layer, new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
+                putEntity(Options.layers.get("wall"), new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
                 break;
             case ENEMY:
-                putEntity(Boss.m_layer, new Boss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
+                putEntity(Options.layers.get("character"), new Boss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
                 break;
             case BOSS:
-                putEntity(Boss.m_layer, new Boss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
+                putEntity(Options.layers.get("character"), new Boss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
                 break;
             case PET:
-                putEntity(Pet.m_layer, new Pet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
+                putEntity(Options.layers.get("character"), new Pet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
                 break;
             case ITEM:
-                putEntity(Item.m_layer, new Item(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
+                putEntity(Options.layers.get("item"), new Item(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
                 break;
             default:
                 break;
@@ -49,8 +49,12 @@ public class Tile {
     }
 
     public void putEntity(int l, Entity e){
-        if(m_entities.get(l) == null)
+        if(getEntityOnLayer(l) == null)
             m_entities.set(l, e);			
+    }
+
+    public Entity getEntityOnLayer(int l){
+        return m_entities.get(l);
     }
 
 }

@@ -12,6 +12,7 @@ public class Wall extends Entity {
 
 	public Wall(Model model, int x, int y, Tile t) {
 		super(model, x, y, false, m_spriteFile, m_startingSpeed, t);
+		m_layer = Options.layers.get("wall");
 	}
 
 }

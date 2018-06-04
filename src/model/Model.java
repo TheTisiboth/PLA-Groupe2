@@ -54,11 +54,12 @@ public class Model extends GameModel {
       m_cowboys[i].step(now);*/
   }
 
-public Player getPlayer() {
-	return m_player;
-}
-
+  public Player getPlayer() {
+    return m_player;
+  }
   
-  
+  public Room getRoom(){
+    return m_room;
+  }
 
 }

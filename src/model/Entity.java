@@ -26,8 +26,7 @@ public class Entity{
 	BufferedImage m_currentSprite;
 	Model m_model;
 	Tile m_tile;
-
-	static int m_layer = 0;
+	int m_layer;
 
 	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t) {
 		super();
@@ -48,7 +47,37 @@ public class Entity{
 
 	public void move(Directions moving) {
 		if(m_moving == null){
-			m_moving = moving;
+			Tile[][] tiles = m_model.getRoom().getTiles();
+			System.out.println("X : "+m_tile.m_x+" Y : "+m_tile.m_y);
+			switch (moving) {
+				case RIGHT:
+					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE && tiles[m_tile.m_x+1][m_tile.m_y].getEntityOnLayer(m_layer)==null){
+						m_moving = Directions.RIGHT;
+						setTile(tiles[m_tile.m_x+1][m_tile.m_y]);
+					}
+					break;
+				case LEFT:
+					if (m_pixelX > 0 && tiles[m_tile.m_x-1][m_tile.m_y].getEntityOnLayer(m_layer)==null){
+						m_moving = Directions.LEFT;
+						setTile(tiles[m_tile.m_x-1][m_tile.m_y]);
+					}
+					break;
+				case UP:
+					if (m_pixelY > 0 && tiles[m_tile.m_x][m_tile.m_y-1].getEntityOnLayer(m_layer)==null){
+						m_moving = Directions.UP;
+						setTile(tiles[m_tile.m_x][m_tile.m_y-1]);
+					}
+					break;
+				case DOWN:
+					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE && tiles[m_tile.m_x][m_tile.m_y+1].getEntityOnLayer(m_layer)==null){
+						m_moving = Directions.DOWN;
+						setTile(tiles[m_tile.m_x][m_tile.m_y+1]);
+					}
+					break;
+			
+				default:
+					break;
+			}
 		}
 	}
 
@@ -82,22 +111,18 @@ public class Entity{
 
 				switch (this.m_moving) {
 				case RIGHT :
-					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE )
-						this.m_pixelX += deplacement;
+					this.m_pixelX += deplacement;
 					break;
 
 				case LEFT :
-					if (m_pixelX > 0)
-						this.m_pixelX -= deplacement;
+					this.m_pixelX -= deplacement;
 					break;
 
 				case UP :
-					if (m_pixelY > 0)
-						this.m_pixelY -= deplacement;
+					this.m_pixelY -= deplacement;
 					break;
 
 				case DOWN :
-					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE)
 					this.m_pixelY += deplacement;
 					break;
 
@@ -151,13 +176,17 @@ public class Entity{
 	/**
 	 * @return the m_layer
 	 */
-	public static int getLayer() {
+	public int getLayer() {
 		return m_layer;
 	}
 
 	public void setPos(int x, int y){
 		m_pixelX = x;
 		m_pixelY = y;
+	}
+
+	public void setTile(Tile t){
+		m_tile = t;
 	}
 }
 

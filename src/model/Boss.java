@@ -10,6 +10,7 @@ public class Boss extends Enemy {
 
 	public Boss(Model model, int x, int y, Tile t) {
 		super(model, x, y, m_spriteFile, m_startingSpeed, t);
+		m_layer = Options.layers.get("character");
 	}
 
 }

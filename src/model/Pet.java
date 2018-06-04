@@ -10,6 +10,7 @@ public class Pet extends Entity {
 
 	public Pet(Model model, int x, int y, Tile t) {
 		super(model, x, y, true, m_spriteFile, m_startingSpeed, t);
+		m_layer = Options.layers.get("character");
 	}
 
 }

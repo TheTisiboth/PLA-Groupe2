@@ -24,9 +24,9 @@ import java.util.HashMap;
 public class Options {
 	public static final boolean USE_DOUBLE_BUFFERING = true;
 
-	public static final boolean ECHO_MOUSE = true;
-	public static final boolean ECHO_MOUSE_MOTION = true;
-	public static final boolean ECHO_KEYBOARD = true;
+	public static final boolean ECHO_MOUSE = false;
+	public static final boolean ECHO_MOUSE_MOTION = false;
+	public static final boolean ECHO_KEYBOARD = false;
 
 	public static final int LARGEUR = 32;
 	public static final int HAUTEUR = 22;
@@ -70,6 +70,15 @@ public class Options {
 		sprites.put("player","assets/sprites/player.png");
 		sprites.put("pet","assets/sprites/pet.png");
 		sprites.put("item","assets/sprites/item.png");
+	}
+
+	public static final HashMap<String,Integer> layers = new HashMap<String,Integer>();
+
+	static{
+		layers.put("wall",1);
+		layers.put("character",1);
+		layers.put("item",0);
+		layers.put("projectile",2);
 	}
 
 	public static final HashMap<String,Double> velocities = new HashMap<String,Double>();
