@@ -25,10 +25,11 @@ public class Entity{
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
 	Model m_model;
+	Tile m_tile;
 
 	static int m_layer = 0;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t) {
 		super();
 		m_model = model;
 		m_pixelX = posX;
@@ -39,6 +40,7 @@ public class Entity{
 		m_pixelDone = 0;
 		m_updatePhysics = 30;
 		m_state = "default";
+		m_tile = t;
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
@@ -130,7 +132,7 @@ public class Entity{
 		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
 	}
 
-	public Directions getM_moving() {
+	public Directions getMoving() {
 		return m_moving;
 	}
 
@@ -139,6 +141,11 @@ public class Entity{
 	 */
 	public static int getLayer() {
 		return m_layer;
+	}
+
+	public void setPos(int x, int y){
+		m_pixelX = x;
+		m_pixelY = y;
 	}
 }
 

@@ -8,8 +8,8 @@ public class Pet extends Entity {
 	static int m_layer = 1;
 	static double m_startingSpeed = Options.velocities.get("pet"); 
 
-	public Pet(Model model, int x, int y) {
-		super(model, x, y, true, m_spriteFile, m_startingSpeed);
+	public Pet(Model model, int x, int y, Tile t) {
+		super(model, x, y, true, m_spriteFile, m_startingSpeed, t);
 	}
 
 }
