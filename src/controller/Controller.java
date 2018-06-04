@@ -47,7 +47,7 @@ import model.Model;
  *
  * @author Pr. Olivier Gruber
  */
-import model.Directions;
+import controller.Options.Directions;
 
 public class Controller extends GameController implements ActionListener {
 

@@ -10,16 +10,17 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 import controller.Options;
+import controller.Options.Directions;
 
 public class Entity{
 
-	int m_PixelX,m_PixelY;
-	boolean m_Moveable;
-	Directions m_Moving;
-	double m_Vitesse;
-	long m_LastTime;
+	int m_pixelX,m_pixelY;
+	boolean m_moveable;
+	Directions m_moving;
+	double m_speed;
+	long m_lastTime;
 	int m_pixelDone;
-	long m_update_physic;
+	long m_updatePhysics;
 	String m_state;
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
@@ -27,16 +28,16 @@ public class Entity{
 
 	static int m_layer = 0;
 
-	public Entity(Model model, int posX, int posY, boolean moveable,/*BufferedImage sprites, */String filename, double vitesse) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed) {
 		super();
 		m_model = model;
-		m_PixelX = posX;
-		m_PixelY = posY;
-		m_Moveable = moveable;
-		m_Vitesse = vitesse;
-		m_Moving = null;
+		m_pixelX = posX;
+		m_pixelY = posY;
+		m_moveable = moveable;
+		m_speed = speed;
+		m_moving = null;
 		m_pixelDone = 0;
-		m_update_physic = 30;
+		m_updatePhysics = 30;
 		m_state = "default";
 
 		m_spritesList = new HashMap<String,BufferedImage>();
@@ -44,8 +45,8 @@ public class Entity{
 	}
 
 	public void move(Directions moving) {
-		if(m_Moving == null){
-			m_Moving = moving;
+		if(m_moving == null){
+			m_moving = moving;
 		}
 	}
 
@@ -64,37 +65,37 @@ public class Entity{
 	}
 
 	public void step(long now) {
-		long timeElapsed = now-this.m_LastTime;
+		long timeElapsed = now-this.m_lastTime;
 
-		if(timeElapsed >= m_update_physic) {
-			this.m_LastTime = now;
+		if(timeElapsed >= m_updatePhysics) {
+			this.m_lastTime = now;
 
 
 			//Movement
-			if(m_Moveable && m_Moving != null) {
-				int deplacement = (int)(m_Vitesse * timeElapsed);
+			if(m_moveable && m_moving != null) {
+				int deplacement = (int)(m_speed * timeElapsed);
 				m_pixelDone += deplacement;
 
 				System.out.print("Deplacement " + deplacement + " time elapsed: " + timeElapsed + "\n");
 
-				switch (this.m_Moving) {
+				switch (this.m_moving) {
 				case RIGHT :
-					this.m_PixelX += deplacement;
+					this.m_pixelX += deplacement;
 					break;
 
 				case LEFT :
 
-					this.m_PixelX -= deplacement;
+					this.m_pixelX -= deplacement;
 					break;
 
 				case UP :
 
-					this.m_PixelY -= deplacement;
+					this.m_pixelY -= deplacement;
 					break;
 
 				case DOWN :
 
-					this.m_PixelY += deplacement;
+					this.m_pixelY += deplacement;
 					break;
 
 				default : break;
@@ -103,21 +104,21 @@ public class Entity{
 
 				//Replace l'entité au milieu de sa case
 				if(m_pixelDone> Options.TAILLE_CASE){
-					if(m_PixelX < 0)
-						m_PixelX = 0;
-					else if(m_PixelY < 0)
-						m_PixelY = 0;
+					if(m_pixelX < 0)
+						m_pixelX = 0;
+					else if(m_pixelY < 0)
+						m_pixelY = 0;
 					else {
-						m_PixelX = (m_PixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
-						m_PixelY = (m_PixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
+						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
+						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
 
-						if(m_Moving == Directions.LEFT)
-							m_PixelX += Options.TAILLE_CASE;
-						if(m_Moving == Directions.UP)
-							m_PixelY += Options.TAILLE_CASE;
+						if(m_moving == Directions.LEFT)
+							m_pixelX += Options.TAILLE_CASE;
+						if(m_moving == Directions.UP)
+							m_pixelY += Options.TAILLE_CASE;
 					}
 
-					m_Moving = null;
+					m_moving = null;
 					m_pixelDone = 0;
 				}
 			}
@@ -126,11 +127,11 @@ public class Entity{
 
 	public void paint(Graphics g){
 		m_currentSprite = m_spritesList.get(m_state);
-		g.drawImage(m_currentSprite, m_PixelX, m_PixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
+		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
 	}
 
-	public Directions getM_Moving() {
-		return m_Moving;
+	public Directions getM_moving() {
+		return m_moving;
 	}
 }
 
