@@ -49,6 +49,7 @@ public class Model extends GameModel {
   @Override
   public void step(long now) {
 	  m_perso.step(now);
+	  
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
@@ -66,13 +67,10 @@ public class Model extends GameModel {
     }
   }
 
-public Entity getM_perso() {
+public Entity get_perso() {
 	return m_perso;
 }
 
-public void setM_perso(Entity m_perso) {
-	this.m_perso = m_perso;
-}
   
   
 

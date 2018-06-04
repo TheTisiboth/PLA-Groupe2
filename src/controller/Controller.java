@@ -27,11 +27,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import edu.ricm3.game.GameController;
 import edu.ricm3.game.*;
 import controller.Options;
-import model.Directions;
 import model.Model;
 
 /**
@@ -44,14 +47,23 @@ import model.Model;
  * 
  * @author Pr. Olivier Gruber
  */
+import model.Directions;
 
 public class Controller extends GameController implements ActionListener {
 
   Model m_model;
-  //Music m_player;
+  EnumMap<Directions, Boolean> m_keys;
+  
   
   public Controller(Model m) {
     m_model = m;
+    
+    m_keys = new EnumMap<Directions, Boolean>(Directions.class);
+    
+    m_keys.put(Directions.DOWN, false);
+    m_keys.put(Directions.UP, false);
+    m_keys.put(Directions.RIGHT, false);
+    m_keys.put(Directions.LEFT, false);
   }
 
   /**
@@ -62,23 +74,48 @@ public class Controller extends GameController implements ActionListener {
    */
   @Override
   public void step(long now) {
+	  if(m_keys.get(Directions.UP))
+		  m_model.get_perso().move(Directions.UP);
+	  if(m_keys.get(Directions.DOWN))
+		  m_model.get_perso().move(Directions.DOWN);
+	  if(m_keys.get(Directions.LEFT))
+		  m_model.get_perso().move(Directions.LEFT);
+	  if(m_keys.get(Directions.RIGHT))
+		  m_model.get_perso().move(Directions.RIGHT);
   }
 
   @Override
   public void keyTyped(KeyEvent e) {
-	  
-	  
+    //if (e.getKeyChar() == '+') {œ
   }
 
   @Override
   public void keyPressed(KeyEvent e) {
+	if(e.getKeyCode() == 37)
+		m_keys.put(Directions.LEFT, true);
+	if(e.getKeyCode() == 38)
+		m_keys.put(Directions.UP, true);
+	if(e.getKeyCode() == 39)
+		m_keys.put(Directions.RIGHT, true);
+	if(e.getKeyCode() == 40)
+		m_keys.put(Directions.DOWN, true);
+	
     if (Options.ECHO_KEYBOARD)
-      System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
-    m_model.getM_perso().move(Directions.RIGHT);
+    	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
+	if(e.getKeyCode() == 37)
+		m_keys.put(Directions.LEFT, false);
+	if(e.getKeyCode() == 38)
+		m_keys.put(Directions.UP, false);
+	if(e.getKeyCode() == 39)
+		m_keys.put(Directions.RIGHT, false);
+	if(e.getKeyCode() == 40)
+		m_keys.put(Directions.DOWN, false);
+	
+	
     if (Options.ECHO_KEYBOARD)
       System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
   }
@@ -129,7 +166,6 @@ public class Controller extends GameController implements ActionListener {
 	  
   }
 
-  @Override
   public void actionPerformed(ActionEvent e) {
 	  
   }

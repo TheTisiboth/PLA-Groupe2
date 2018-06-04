@@ -63,9 +63,9 @@ public class View extends GameView {
     // paint everybody
    
     
-      Entity perso = m_model.getM_perso();
+      m_model.get_perso().paint(g);
       
-        perso.paint(g);
+        //perso.paint(g);
     
   }
 
