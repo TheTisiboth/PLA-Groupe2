@@ -22,15 +22,15 @@ public class Entity{
 	Directions m_orientation;
 	int m_pixelDone;
 	double m_speed;
-	
+
 	long m_lastTime;
 	long m_updatePhysics;
-	
+
 	String m_state;
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
-	static int m_layer = 0;	
-	
+	static int m_layer = 0;
+
 	Model m_model;
 
 	List<Portal> m_portals;
@@ -58,12 +58,12 @@ public class Entity{
 			m_orientation = moving;
 		}
 	}
-	
+
 	public void wizz() {
 		if(m_portals.size() >= 2) {
 			m_portals.remove(0);
 		}
-			
+
 		if(m_orientation == Directions.LEFT)
 			m_portals.add(new Portal(m_model, m_pixelX - Options.TAILLE_CASE, m_pixelY, Directions.RIGHT));
 		if(m_orientation == Directions.RIGHT)
@@ -102,21 +102,22 @@ public class Entity{
 
 				switch (this.m_moving) {
 				case RIGHT :
-					this.m_pixelX += deplacement;
+					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE )
+						this.m_pixelX += deplacement;
 					break;
 
 				case LEFT :
-
-					this.m_pixelX -= deplacement;
+					if (m_pixelX > 0)
+						this.m_pixelX -= deplacement;
 					break;
 
 				case UP :
-
-					this.m_pixelY -= deplacement;
+					if (m_pixelY > 0)
+						this.m_pixelY -= deplacement;
 					break;
 
 				case DOWN :
-
+					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE)
 					this.m_pixelY += deplacement;
 					break;
 
@@ -126,10 +127,18 @@ public class Entity{
 
 				//Replace l'entité au milieu de sa case
 				if(m_pixelDone> Options.TAILLE_CASE){
-					if(m_pixelX < 0)
+					if(m_pixelX <= 0) {
 						m_pixelX = 0;
-					else if(m_pixelY < 0)
+						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
+						if(m_moving == Directions.UP)
+							m_pixelY += Options.TAILLE_CASE;
+					}
+					else if(m_pixelY <= 0) {
 						m_pixelY = 0;
+						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
+						if(m_moving == Directions.LEFT)
+							m_pixelX += Options.TAILLE_CASE;
+					}
 					else {
 						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
 						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
@@ -138,11 +147,13 @@ public class Entity{
 							m_pixelX += Options.TAILLE_CASE;
 						if(m_moving == Directions.UP)
 							m_pixelY += Options.TAILLE_CASE;
+
 					}
 
 					m_moving = null;
 					m_pixelDone = 0;
 				}
+
 			}
 		}
 	}
@@ -150,17 +161,17 @@ public class Entity{
 	public void paint(Graphics g){
 		m_currentSprite = m_spritesList.get(m_state);
 		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
-	
+
 		Iterator<Portal> it = m_portals.iterator();
 		while(it.hasNext()) {
 			it.next().paint(g);
 		}
 	}
-	
+
 	public Directions getOrientation() {
 		return m_orientation;
 	}
-	
+
 	public void setOrientation(Directions directions) {
 		m_orientation = directions;
 	}
@@ -169,22 +180,23 @@ public class Entity{
 		return m_moving;
 	}
 
+
 	/**
 	 * @return the m_layer
 	 */
 	public static int getLayer() {
 		return m_layer;
 	}
-	
+
 	public void setPosition(int x, int y) {
 		m_pixelX = x;
 		m_pixelY = y;
 	}
-	
+
 	public int getPositionX() {
 		return m_pixelX;
 	}
-	
+
 	public int getPositionY() {
 		return m_pixelY;
 	}
