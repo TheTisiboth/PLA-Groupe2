@@ -40,6 +40,8 @@ public class Entity{
 		if(timeElapsed >= m_update_physic) {
 			this.m_LastTime = now;
 			
+			
+			//Movement
 			if(m_Moveable && m_Moving != null) {
 				int deplacement = (int)(m_Vitesse * timeElapsed);
 				m_pixelDone += deplacement;
@@ -70,13 +72,11 @@ public class Entity{
 				
 				}
 				
-				System.out.println("Nouvelle position: " + m_PixelX + ";" + m_PixelY + "\n");
-				
 				//Replace l'entité au milieu de sa case
 				if(m_pixelDone> Options.TAILLE_CASE){	
 					if(m_PixelX < 0)
 						m_PixelX = 0;
-					if(m_PixelY < 0)
+					else if(m_PixelY < 0)
 						m_PixelY = 0;
 					else {
 						m_PixelX = (m_PixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
@@ -96,9 +96,7 @@ public class Entity{
 	}	
 	
 	public void paint(Graphics g) {		
-		
 		Image img = m_sprites;
-	
 	    g.drawImage(img, m_PixelX, m_PixelY, null);
 		
 	}
