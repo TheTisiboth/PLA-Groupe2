@@ -56,7 +56,7 @@ private void computeFPS() {
       m_npaints = 0;
     }
     m_game.setFPS(m_fps, "npaints=" + m_npaints);
-    m_npaints++;
+    m_npaints++;		
   }
 
   @Override
