@@ -80,21 +80,22 @@ public class Entity{
 
 				switch (this.m_moving) {
 				case RIGHT :
-					this.m_pixelX += deplacement;
+					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE )
+						this.m_pixelX += deplacement;
 					break;
 
 				case LEFT :
-
-					this.m_pixelX -= deplacement;
+					if (m_pixelX > 0)
+						this.m_pixelX -= deplacement;
 					break;
 
 				case UP :
-
-					this.m_pixelY -= deplacement;
+					if (m_pixelY > 0)
+						this.m_pixelY -= deplacement;
 					break;
 
 				case DOWN :
-
+					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE)
 					this.m_pixelY += deplacement;
 					break;
 
@@ -104,10 +105,18 @@ public class Entity{
 
 				//Replace l'entité au milieu de sa case
 				if(m_pixelDone> Options.TAILLE_CASE){
-					if(m_pixelX < 0)
+					if(m_pixelX <= 0) {
 						m_pixelX = 0;
-					else if(m_pixelY < 0)
+						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
+						if(m_moving == Directions.UP)
+							m_pixelY += Options.TAILLE_CASE;
+					}
+					else if(m_pixelY <= 0) {
 						m_pixelY = 0;
+						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
+						if(m_moving == Directions.LEFT)
+							m_pixelX += Options.TAILLE_CASE;
+					}
 					else {
 						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
 						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
@@ -116,11 +125,13 @@ public class Entity{
 							m_pixelX += Options.TAILLE_CASE;
 						if(m_moving == Directions.UP)
 							m_pixelY += Options.TAILLE_CASE;
+						
 					}
 
 					m_moving = null;
 					m_pixelDone = 0;
 				}
+				
 			}
 		}
 	}
@@ -133,6 +144,8 @@ public class Entity{
 	public Directions getM_moving() {
 		return m_moving;
 	}
+	
+	
 }
 
 
