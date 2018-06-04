@@ -20,19 +20,17 @@ package model;
 import edu.ricm3.game.GameModel;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Model extends GameModel {
   BufferedImage m_sprite;
-  Entity m_perso;
+  Player m_player;
+  Level m_level;
+  Room m_room;
 
   public Model() {
-	  loadSprites();
-	  m_perso = new Entity(this, 0, 0, true, "assets/sprite.png",0.1);
-	  
+    m_player = new Player(this, 0, 0);
+    m_level = new Level(1, 0, this);
+    m_room = m_level.getCurrentRoom();
   }
   
   @Override
@@ -48,7 +46,7 @@ public class Model extends GameModel {
    */
   @Override
   public void step(long now) {
-	  m_perso.step(now);
+	  m_player.step(now);
 	  
     //appeler step sur toutes les entites
 	/*
@@ -56,19 +54,8 @@ public class Model extends GameModel {
       m_cowboys[i].step(now);*/
   }
 
-  private void loadSprites() {
-	 
-    File imageFile = new File("assets/sprite.png");
-    try {
-      m_sprite = ImageIO.read(imageFile);
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      System.exit(-1);
-    }
-  }
-
-public Entity get_perso() {
-	return m_perso;
+public Player getPlayer() {
+	return m_player;
 }
 
   

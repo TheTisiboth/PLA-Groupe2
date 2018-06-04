@@ -144,8 +144,18 @@ public class Entity{
 	public Directions getM_moving() {
 		return m_moving;
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+	/**
+	 * @return the m_layer
+	 */
+	public static int getLayer() {
+		return m_layer;
+	}
+>>>>>>> 06a83ec26059cb1c9f24af538d906315c2e30aea
 }
 
 
