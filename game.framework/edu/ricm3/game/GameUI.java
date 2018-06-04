@@ -79,7 +79,6 @@ public class GameUI {
     // create the main window and the periodic timer
     // to drive the overall clock of the simulation.
     createWindow(d);
-    createTimer();
   }
 
   public GameModel getModel() {
@@ -109,7 +108,7 @@ public class GameUI {
 
   private void createWindow(Dimension d) {
     m_frame = new JFrame();
-    m_frame.setTitle("Sample Game");
+	m_frame.setTitle("PLA - Groupe2 - Bandol Party");
     m_frame.setLayout(new BorderLayout());
 
     m_frame.add(m_view, BorderLayout.CENTER);
@@ -120,13 +119,12 @@ public class GameUI {
 
     m_frame.setSize(d);
     m_frame.doLayout();
-    m_frame.setVisible(true);
-
+    
     // hook window events so that we exit the Java Platform
     // when the window is closed by the end user.
     m_frame.addWindowListener(new WindowListener(m_model));
 
-    m_frame.pack();
+    //m_frame.pack();
     m_frame.setLocationRelativeTo(null);
     
     GameController ctr = getController();
@@ -142,8 +140,14 @@ public class GameUI {
     // which part of the overall GUI receives the keyboard events.
     m_view.setFocusable(true);
     m_view.requestFocusInWindow();
-
-    m_controller.notifyVisible();
+  }
+  
+  public void displayWindow() {
+	  m_frame.setVisible(true);
+	  m_frame.pack();
+	  m_controller.notifyVisible();
+	  
+	  createTimer();
   }
 
   /* 
@@ -177,7 +181,7 @@ public class GameUI {
     m_controller.step(now);
     
     elapsed = now - m_lastRepaint;
-    if (elapsed > Options.REPAINT_DELAY) {
+    if (elapsed > edu.ricm3.game.Options.REPAINT_DELAY) {
       double tick = (double) m_elapsed / (double) m_nTicks;
       long tmp = (long) (tick * 10.0);
       tick = tmp / 10.0;
