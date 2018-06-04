@@ -133,6 +133,13 @@ public class Entity{
 	public Directions getM_moving() {
 		return m_moving;
 	}
+
+	/**
+	 * @return the m_layer
+	 */
+	public static int getLayer() {
+		return m_layer;
+	}
 }
 
 

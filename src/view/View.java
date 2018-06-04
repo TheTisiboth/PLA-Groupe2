@@ -67,11 +67,7 @@ private void computeFPS() {
     m_back.paint(g);
     m_room.paint(g);
     // paint everybody
-
-
-      m_model.get_perso().paint(g);
-
-        //perso.paint(g);
+    
 
   }
 
