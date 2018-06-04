@@ -56,4 +56,27 @@ public class Tile {
 			m_entities.set(l, e);
 	}
 
+    public Portal getPortal() {
+    	return (Portal)m_entities.get(Options.LAYER_PORTAL);
+    }
+    
+    public boolean hasPortal() {
+    	if(m_entities.get(Options.LAYER_PORTAL) == null)
+    		return false;
+    	return true;
+    }
+
+    
+    public void deletePortal() {
+    	m_entities.set(Options.LAYER_PORTAL, null);
+    }
+
+
+	public void setPortal(Portal portal) {
+		m_entities.set(Options.LAYER_PORTAL, portal);
+		
+	}
+    
+    
+
 }
