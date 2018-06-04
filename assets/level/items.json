@@ -1,17 +1,17 @@
 {
   "potion": {
-    "sprite": "potion.png"
+    "sprite": "assets/sprites/potion.png"
   },
   "big_potion": {
-    "sprite": "big_potion.png"
+    "sprite": "assets/sprites/big_potion.png"
   },
   "revival": {
-    "sprite": "revival.png"
+    "sprite": "assets/sprites/revival.png"
   },
   "rifle": {
-    "sprite": "rifle.png"
+    "sprite": "assets/sprites/rifle.png"
   },
   "bomb": {
-    "sprite": "bomb.png"
+    "sprite": "assets/sprites/bomb.png"
   }
 }

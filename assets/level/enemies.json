@@ -1,22 +1,22 @@
 {
   "wolf": {
-    "sprite": "wolf.png",
+    "sprite": "assets/sprites/wolf.png",
     "speed": "0.2"
   },
   "bear": {
-    "sprite": "bear.png",
+    "sprite": "assets/sprites/bear.png",
     "speed": "0.1"
   },
   "scorpion": {
-    "sprite": "scorpion.png",
+    "sprite": "assets/sprites/scorpion.png",
     "speed": "0.08"
   },
   "hornet": {
-    "sprite": "hornet.png",
+    "sprite": "assets/sprites/hornet.png",
     "speed": "0.3"
   },
   "shark": {
-    "sprite": "shark.png",
+    "sprite": "assets/sprites/shark.png",
     "speed": "0.15"
   }
 }
