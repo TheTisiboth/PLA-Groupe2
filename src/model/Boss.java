@@ -1,11 +1,15 @@
 package model;
 
+import controller.Options;
+
 public class Boss extends Enemy {
 
-	static String m_spriteFile = "assets/sprites/enemy.png";
+	static String m_spriteFile = Options.sprites.get("boss");
+	static int m_layer = 1;
+	static double m_startingSpeed = Options.velocities.get("boss"); 
 
 	public Boss(Model model, int x, int y) {
-		super(model, x, y, m_spriteFile);
+		super(model, x, y, m_spriteFile, m_startingSpeed);
 	}
 
 }

@@ -1,7 +1,7 @@
 # [PLA] : *JOURNAL DE BORD* - Groupe 2
 
 ## **28/05/2018 & 29/05/2018**
-- Création de notre projet de jeu, voir le doc suivant : https://docs.google.com/document/d/1xm8RrV3marbpYX4PS8rGZVIzWwMr_bfBu3qsKPhUCyg/edit
+- Création de notre projet de jeu, voir le doc suivant : https://docs.google.com/document/d/1xm8RrV3marbpYX4PS8rGZVIzWwMr_bfBu3qsKPhUCyg/edit?usp=sharing
 - Etude du langage automate donné par M.Perrin
 
 ## **30/05/2018**
@@ -64,6 +64,7 @@ Globalement, aujourd'hui nous avons continué de consolider l'idée de notre pro
 - Vert : Item
 - Rouge : Ennemi
 - Rose : Boss
+- Bleu : Familier de fin 
 
 ### Convention code:
   - Tabulation

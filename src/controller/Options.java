@@ -37,7 +37,7 @@ public class Options {
 
 	public static final String MAPPATH = "assets/maps/";
 
-	public static HashMap<Color,TileObject> tileColorMap = new HashMap<Color,TileObject>();
+	public static final HashMap<Color,TileObject> tileColorMap = new HashMap<Color,TileObject>();
 
 	static{
 		tileColorMap.put(Color.red,TileObject.ENEMY); //RED
@@ -61,6 +61,27 @@ public class Options {
 		GROUND,
 		UNKNOWN
 	}
+
+	public static final HashMap<String,String> sprites = new HashMap<String,String>();
+
+	static{
+		sprites.put("wall","assets/sprites/wall.png");
+		sprites.put("boss","assets/sprites/boss.png");
+		sprites.put("player","assets/sprites/player.png");
+		sprites.put("pet","assets/sprites/pet.png");
+		sprites.put("item","assets/sprites/item.png");
+	}
+
+	public static final HashMap<String,Double> velocities = new HashMap<String,Double>();
+
+	static{
+		velocities.put("wall",0.0);
+		velocities.put("boss",0.1);
+		velocities.put("player",0.2);
+		velocities.put("pet",1.0);
+		velocities.put("item",0.0);
+	}
+
 	public enum Directions {
 		RIGHT,LEFT,UP,DOWN;
 	}
