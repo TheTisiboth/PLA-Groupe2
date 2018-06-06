@@ -28,7 +28,7 @@ public class Model extends GameModel {
   Room m_room;
 
   public Model() {
-    m_player = new Player(this, 0, 0, null);
+    m_player = new Player(this, 0, 0, null,20);
     m_level = new Level(1, 0, this);
     m_room = m_level.getCurrentRoom();
 

@@ -22,6 +22,9 @@ public class Entity{
 	Directions m_orientation;
 	int m_pixelDone;
 	double m_speed;
+	LifeBar m_lifeBar;
+	int m_life;
+	int m_lifeMax;
 
 	long m_lastTime;
 	long m_updatePhysics;
@@ -36,7 +39,7 @@ public class Entity{
 
 	List<Portal> m_portals;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t,int life) {
 		super();
 		m_model = model;
 		m_pixelX = posX;
@@ -49,6 +52,9 @@ public class Entity{
 		m_state = "default";
 		m_portals = new ArrayList<Portal>();
 		m_tile = t;
+		m_lifeBar = new LifeBar(this);
+		m_life = life;
+		m_lifeMax =life;
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
@@ -68,13 +74,13 @@ public class Entity{
 		//TODO MAuvaise tile
 
 		if(m_orientation == Directions.LEFT)
-			m_portals.add(new Portal(m_model, m_pixelX - Options.TAILLE_CASE, m_pixelY, Directions.RIGHT, m_tile));
+			m_portals.add(new Portal(m_model, m_pixelX - Options.TAILLE_CASE, m_pixelY, Directions.RIGHT, m_tile,-1));
 		if(m_orientation == Directions.RIGHT)
-			m_portals.add(new Portal(m_model, m_pixelX + Options.TAILLE_CASE, m_pixelY, Directions.LEFT, m_tile));
+			m_portals.add(new Portal(m_model, m_pixelX + Options.TAILLE_CASE, m_pixelY, Directions.LEFT, m_tile,-1));
 		if(m_orientation == Directions.UP)
-			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY - Options.TAILLE_CASE, Directions.DOWN, m_tile));
+			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY - Options.TAILLE_CASE, Directions.DOWN, m_tile,-1));
 		if(m_orientation == Directions.DOWN)
-			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY + Options.TAILLE_CASE, Directions.UP, m_tile));
+			m_portals.add(new Portal(m_model, m_pixelX, m_pixelY + Options.TAILLE_CASE, Directions.UP, m_tile,-1));
 	}
 
 	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
@@ -170,6 +176,7 @@ public class Entity{
 		while(it.hasNext()) {
 			it.next().paint(g);
 		}
+		m_lifeBar.paint(g);
 	}
 
 	public Directions getOrientation() {
@@ -203,6 +210,10 @@ public class Entity{
 
 	public int getPositionY() {
 		return m_pixelY;
+	}
+	
+	public int getLife() {
+		return m_life;
 	}
 }
 

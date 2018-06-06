@@ -8,8 +8,8 @@ public class Item extends Entity {
 	static int m_layer = 0;
 	static double m_startingSpeed = Options.velocities.get("item"); 
 
-	public Item(Model model, int x, int y, Tile t) {
-		super(model, x, y, false, m_spriteFile, m_startingSpeed, t);
+	public Item(Model model, int x, int y, Tile t,int life) {
+		super(model, x, y, false, m_spriteFile, m_startingSpeed, t,life);
 	}
 
 }
