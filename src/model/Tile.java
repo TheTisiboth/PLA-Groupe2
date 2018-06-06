@@ -20,6 +20,7 @@ public class Tile {
         m_entities.add(null);
         m_entities.add(null);
         m_entities.add(null);
+        m_entities.add(null);
         switch (to) {
             case WALL:
                 putEntity(Options.layers.get("wall"), new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));			
@@ -41,20 +42,28 @@ public class Tile {
         }
     }
 
-    public void paint(Graphics g){
-        for (int i = 0; i < 3; i++) {
-            if(m_entities.get(i) != null)
-                m_entities.get(i).paint(g);
+    public void paint(Graphics g, int l){
+        if(m_entities.get(l) != null){
+            m_entities.get(l).paint(g);
         }
     }
 
-    public void putEntity(int l, Entity e){
-        if(getEntityOnLayer(l) == null)
-            m_entities.set(l, e);			
+    //if this tile has nothing on the same layer as e, add it to the entity list and change e's tile
+    public boolean putEntity(int l, Entity e){
+        if(getEntityOnLayer(l) == null){
+            m_entities.set(l, e);
+            e.setTile(this);
+            return true;
+        }
+        return false;
     }
 
     public Entity getEntityOnLayer(int l){
         return m_entities.get(l);
+    }
+
+    public void delEntity(Entity e){
+        m_entities.set(m_entities.indexOf(e),null);
     }
 
 }

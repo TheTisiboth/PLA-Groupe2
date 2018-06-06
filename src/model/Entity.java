@@ -47,40 +47,36 @@ public class Entity{
 
 	public void move(Directions moving) {
 		if(m_moving == null){
-			Tile[][] tiles = m_model.getRoom().getTiles();
-			System.out.println("X : "+m_tile.m_x+" Y : "+m_tile.m_y);
 			switch (moving) {
 				case RIGHT:
-					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE && tiles[m_tile.m_x+1][m_tile.m_y].getEntityOnLayer(m_layer)==null){
-						m_moving = Directions.RIGHT;
-						setTile(tiles[m_tile.m_x+1][m_tile.m_y]);
+					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE){
+						if(changeTile(1, 0))
+							m_moving = Directions.RIGHT;
 					}
 					break;
 				case LEFT:
-					if (m_pixelX > 0 && tiles[m_tile.m_x-1][m_tile.m_y].getEntityOnLayer(m_layer)==null){
-						m_moving = Directions.LEFT;
-						setTile(tiles[m_tile.m_x-1][m_tile.m_y]);
-					}
+					if (m_pixelX > 0){
+						if(changeTile(-1, 0))
+							m_moving = Directions.LEFT;				
+						}
 					break;
 				case UP:
-					if (m_pixelY > 0 && tiles[m_tile.m_x][m_tile.m_y-1].getEntityOnLayer(m_layer)==null){
-						m_moving = Directions.UP;
-						setTile(tiles[m_tile.m_x][m_tile.m_y-1]);
+					if (m_pixelY > 0){
+						if(changeTile(0, -1))
+							m_moving = Directions.UP;
 					}
 					break;
 				case DOWN:
-					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE && tiles[m_tile.m_x][m_tile.m_y+1].getEntityOnLayer(m_layer)==null){
-						m_moving = Directions.DOWN;
-						setTile(tiles[m_tile.m_x][m_tile.m_y+1]);
+					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE){
+						if(changeTile(0, 1))
+							m_moving = Directions.DOWN;
 					}
 					break;
-			
 				default:
 					break;
 			}
 		}
 	}
-
 
 
 	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
@@ -188,9 +184,21 @@ public class Entity{
 	public void setTile(Tile t){
 		m_tile = t;
 	}
+
+	public Tile getTile(){
+		return m_tile;
+	}
+
+	public boolean changeTile(int incX, int incY){
+		if(m_tile.m_x+incX > Options.LARGEUR || m_tile.m_y+incY > Options.HAUTEUR || m_tile.m_x+incX < 0 || m_tile.m_y+incY < 0)
+			return false;
+		Tile newTile = m_model.getRoom().getTiles()[m_tile.m_x+incX][m_tile.m_y+incY];
+		if(newTile.getEntityOnLayer(m_layer)==null){
+			getTile().delEntity(this);
+			newTile.putEntity(m_layer, this);
+			setTile(newTile);
+			return true;
+		}
+		return false;
+	}
 }
-
-
-
-
-
