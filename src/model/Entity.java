@@ -182,28 +182,9 @@ public class Entity{
 
 				//Replace l'entité au milieu de sa case
 				if(m_pixelDone> Options.TAILLE_CASE){
-					if(m_pixelX <= 0) {
-						m_pixelX = 0;
-						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
-						if(m_moving == Directions.UP)
-							m_pixelY += Options.TAILLE_CASE;
-					}
-					else if(m_pixelY <= 0) {
-						m_pixelY = 0;
-						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
-						if(m_moving == Directions.LEFT)
-							m_pixelX += Options.TAILLE_CASE;
-					}
-					else {
-						m_pixelX = (m_pixelX / Options.TAILLE_CASE) * Options.TAILLE_CASE;
-						m_pixelY = (m_pixelY / Options.TAILLE_CASE) * Options.TAILLE_CASE;
 
-						if(m_moving == Directions.LEFT)
-							m_pixelX += Options.TAILLE_CASE;
-						if(m_moving == Directions.UP)
-							m_pixelY += Options.TAILLE_CASE;
-
-					}
+					m_pixelX = m_tile.m_x * Options.TAILLE_CASE;
+					m_pixelY = m_tile.m_y * Options.TAILLE_CASE;
 
 					m_moving = null;
 					m_pixelDone = 0;
