@@ -26,7 +26,7 @@ public class Menu extends JFrame {
 		this.setSize(1024,704);
 		this.setLocationRelativeTo(null);
 		
-		m_playButton = new JButton("Jouer");
+		m_playButton = new JButton();
 		m_playButton.setBounds(362,400,300,80);
 		m_playButton.setOpaque(false);
 		m_playButton.setContentAreaFilled(false);
@@ -40,7 +40,7 @@ public class Menu extends JFrame {
 		});
 		this.add(m_playButton);
 		
-		m_automataButton = new JButton("Automates");
+		m_automataButton = new JButton();
 		m_automataButton.setBounds(362,490,300,80);
 		m_automataButton.setOpaque(false);
 		m_automataButton.setContentAreaFilled(false);
@@ -54,7 +54,7 @@ public class Menu extends JFrame {
 		});
 		this.add(m_automataButton);
 		
-		m_quitButton = new JButton("Quitter");
+		m_quitButton = new JButton();
 		m_quitButton.setBounds(362,580,300,80);
 		m_quitButton.setOpaque(false);
 		m_quitButton.setContentAreaFilled(false);
