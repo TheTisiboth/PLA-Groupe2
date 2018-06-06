@@ -121,13 +121,15 @@ public class Entity{
 		}
 
 		Tile new_tile = m_model.getRoom().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
-		Portal portal = new Portal(m_model, newPosX, newPosY, newDir, new_tile);
+		Portal portal = new Portal(m_model, newPosX, newPosY, newDir);
 		
 		if(m_portals.size() >= 1) {
 			Portal.setPortalPair(portal, m_portals.get(0));
 		}
 		
-		new_tile.setPortal(portal);
+		
+		//new_tile.setPortal(portal);
+		new_tile.putEntity(Options.LAYER_PORTAL, portal);
 		m_portals.add(portal);
 	}
 
