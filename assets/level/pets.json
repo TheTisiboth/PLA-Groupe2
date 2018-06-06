@@ -1,0 +1,22 @@
+{
+  "dog": {
+    "sprite": "assets/sprites/dog.png",
+    "speed": "0.1"
+  },
+  "cat": {
+    "sprite": "assets/sprites/cat.png",
+    "speed": "0.05"
+  },
+  "rabbit": {
+    "sprite": "assets/sprites/rabbit.png",
+    "speed": "0.3"
+  },
+  "dolphin": {
+    "sprite": "assets/sprites/dolphin.png",
+    "speed": "0.15"
+  },
+  "chicken": {
+    "sprite": "assets/sprites/chicken.png",
+    "speed": "0.25"
+  }
+}

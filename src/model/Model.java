@@ -18,9 +18,6 @@
 package model;
 
 import edu.ricm3.game.GameModel;
-import main.Directions;
-
-import java.awt.image.BufferedImage;
 
 public class Model extends GameModel {
   Player m_player;
@@ -28,8 +25,9 @@ public class Model extends GameModel {
   Room m_room;
 
   public Model() {
-    m_player = new Player(this, 0, 0, null,20);
-    m_level = new Level(1, 0, this);
+    m_player = new Player(this, 0, 0, null, 20);
+    m_level = new Level("assets/level/level.json",this);
+    m_level.loadLevel();
     m_room = m_level.getCurrentRoom();
 
   }
@@ -55,11 +53,12 @@ public class Model extends GameModel {
       m_cowboys[i].step(now);*/
   }
 
-public Player getPlayer() {
-	return m_player;
-}
-
-  public Room get_room() {
-	return m_room;
+  public Player getPlayer() {
+    return m_player;
   }
+  
+  public Room getRoom(){
+    return m_room;
+  }
+
 }

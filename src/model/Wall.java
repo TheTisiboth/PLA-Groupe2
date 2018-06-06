@@ -10,8 +10,10 @@ public class Wall extends Entity {
 	static double m_startingSpeed = Options.velocities.get("wall"); 
 
 
-	public Wall(Model model, int x, int y, Tile t,int life) {
-		super(model, x, y, false, m_spriteFile, m_startingSpeed, t,life);
+
+	public Wall(Model model, int x, int y, Tile t, int life) {
+		super(model, x, y, false, m_spriteFile, m_startingSpeed, t, life);
+		m_layer = Options.layers.get("wall");
 	}
 
 }

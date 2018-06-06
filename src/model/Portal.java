@@ -16,7 +16,6 @@ public class Portal extends Entity {
 	EnumMap<Directions, BufferedImage> m_sprites;
 	
 	public Portal(Model model, int posX, int posY, Directions orientation, Tile t,int life) {
-		//TODO ça pue la merde
 		super(model, posX, posY, false, "assets/sprites/portal_down.png", 0.0, t,life);
 		m_orientation = orientation;
 		m_destPortal = null;
@@ -58,6 +57,19 @@ public class Portal extends Entity {
 		if(m_destPortal == null)
 			return false;
 		return true;
+	}
+	
+	public void setDestPortal(Portal p) {
+		m_destPortal = p;
+	}
+	
+	public static void setPortalPair(Portal p1, Portal p2) {
+		p1.setDestPortal(p2);
+		p2.setDestPortal(p1);
+	}
+	
+	public void delete() {
+		m_tile.deletePortal();
 	}
 
 	@Override
