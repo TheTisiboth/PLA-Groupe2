@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,59 +19,46 @@ package model;
 
 import edu.ricm3.game.GameModel;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 public class Model extends GameModel {
-  BufferedImage m_sprite;
-  Entity m_perso;
+  Player m_player;
+  Level m_level;
+  Room m_room;
 
   public Model() {
-	  loadSprites();
-	  m_perso = new Entity(this, 0, 0, true, "assets/sprite.png",0.1);
-	  
+    m_player = new Player(this, 0, 0, null);
+    m_level = new Level("assets/level/level.json",this);
+    m_level.loadLevel();
+    m_room = m_level.getCurrentRoom();
+
   }
-  
+
   @Override
   public void shutdown() {
-    
+
   }
-  
+
   /**
    * Simulation step.
-   * 
+   *
    * @param now
    *          is the current time in milliseconds.
    */
   @Override
   public void step(long now) {
-	  m_perso.step(now);
-	  
+	  m_player.step(now);
+
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
       m_cowboys[i].step(now);*/
   }
 
-  private void loadSprites() {
-	 
-    File imageFile = new File("assets/sprite.png");
-    try {
-      m_sprite = ImageIO.read(imageFile);
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      System.exit(-1);
-    }
+  public Player getPlayer() {
+    return m_player;
   }
-
-public Entity get_perso() {
-	return m_perso;
-}
-
   
-  
+  public Room getRoom(){
+    return m_room;
+  }
 
 }

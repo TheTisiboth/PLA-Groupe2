@@ -4,12 +4,12 @@ import controller.Options;
 
 public class Item extends Entity {
 
-	static String m_spriteFile = Options.sprites.get("item");
-	static int m_layer = 0;
-	static double m_startingSpeed = Options.velocities.get("item"); 
+	// static String m_spriteFile = Options.sprites.get("item");
+	// static int m_layer = 0;
+	// static double m_startingSpeed = Options.velocities.get("item"); 
 
-	public Item(Model model, int x, int y) {
-		super(model, x, y, false, m_spriteFile, m_startingSpeed);
+	public Item(Model model, int x, int y, String spriteFile, Tile t) {
+		super(model, x, y, true, spriteFile, 0, t);
+		m_layer = Options.layers.get("character");
 	}
-
 }

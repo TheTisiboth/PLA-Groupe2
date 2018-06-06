@@ -41,11 +41,12 @@ public class View extends GameView {
   Background m_back;
   Room m_room;
 
+
   public View(Model m, Controller c) {
     m_model = m;
     m_ctr = c;
     m_back = new Background();
-    m_room = new Room(new Level(2, 5, m), 0);
+    m_room = m.getRoom();
   }
 
 
@@ -66,12 +67,6 @@ private void computeFPS() {
 
     m_back.paint(g);
     m_room.paint(g);
-    // paint everybody
-
-
-      m_model.get_perso().paint(g);
-
-        //perso.paint(g);
 
   }
 

@@ -24,9 +24,9 @@ import java.util.HashMap;
 public class Options {
 	public static final boolean USE_DOUBLE_BUFFERING = true;
 
-	public static final boolean ECHO_MOUSE = true;
-	public static final boolean ECHO_MOUSE_MOTION = true;
-	public static final boolean ECHO_KEYBOARD = true;
+	public static final boolean ECHO_MOUSE = false;
+	public static final boolean ECHO_MOUSE_MOTION = false;
+	public static final boolean ECHO_KEYBOARD = false;
 
 	public static final int LARGEUR = 32;
 	public static final int HAUTEUR = 22;
@@ -39,6 +39,13 @@ public class Options {
 
 	public static final HashMap<Color,TileObject> tileColorMap = new HashMap<Color,TileObject>();
 
+	public static final int LAYER_OBJECT = 0;
+	//Player Pet Ennemy Wall
+	public static final int LAYER_PPEW = 1;
+	public static final int LAYER_ATTACK = 2;
+	public static final int LAYER_PORTAL = 3;
+	
+	
 	static{
 		tileColorMap.put(Color.red,TileObject.ENEMY); //RED
 		tileColorMap.put(Color.green,TileObject.ITEM); //GREEN
@@ -72,6 +79,15 @@ public class Options {
 		sprites.put("item","assets/sprites/item.png");
 	}
 
+	public static final HashMap<String,Integer> layers = new HashMap<String,Integer>();
+
+	static{
+		layers.put("wall",1);
+		layers.put("character",1);
+		layers.put("item",0);
+		layers.put("projectile",2);
+	}
+
 	public static final HashMap<String,Double> velocities = new HashMap<String,Double>();
 
 	static{
@@ -82,7 +98,5 @@ public class Options {
 		velocities.put("item",0.0);
 	}
 
-	public enum Directions {
-		RIGHT,LEFT,UP,DOWN;
-	}
+
 }

@@ -1,7 +1,5 @@
-package model;
+package main;
 
 public enum Directions {
-
 	RIGHT,LEFT,UP,DOWN;
-	
 }
