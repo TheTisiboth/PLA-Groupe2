@@ -22,6 +22,9 @@ public class Entity{
 	Directions m_orientation;
 	int m_pixelDone;
 	double m_speed;
+	LifeBar m_lifeBar;
+	int m_life;
+	int m_lifeMax;
 
 	long m_lastTime;
 	long m_updatePhysics;
@@ -35,7 +38,7 @@ public class Entity{
 
 	List<Portal> m_portals;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t,int life) {
 		super();
 		m_model = model;
 		m_pixelX = posX;
@@ -48,6 +51,9 @@ public class Entity{
 		m_state = "default";
 		m_portals = new ArrayList<Portal>();
 		m_tile = t;
+		m_lifeBar = new LifeBar(this);
+		m_life = life;
+		m_lifeMax =life;
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
@@ -121,7 +127,7 @@ public class Entity{
 		}
 
 		Tile new_tile = m_model.getRoom().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
-		Portal portal = new Portal(m_model, newPosX, newPosY, newDir);
+		Portal portal = new Portal(m_model, newPosX, newPosY, newDir,m_tile,-1);
 		
 		if(m_portals.size() >= 1) {
 			Portal.setPortalPair(portal, m_portals.get(0));
@@ -143,6 +149,7 @@ public class Entity{
 		  ex.printStackTrace();
 		  System.exit(-1);
 		}
+		
 	}
 
 	public void step(long now) {
@@ -208,6 +215,7 @@ public class Entity{
 		while(it.hasNext()) {
 			it.next().paint(g);
 		}
+		m_lifeBar.paint(g);
 	}
 
 	public Directions getOrientation() {
@@ -243,6 +251,9 @@ public class Entity{
 		return m_pixelY;
 	}
 
+	public int getLife() {
+		return m_life;
+	}
 
 	public void setTile(Tile t){
 		m_tile = t;

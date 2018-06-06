@@ -15,8 +15,8 @@ public class Portal extends Entity {
 	Portal m_destPortal;
 	EnumMap<Directions, BufferedImage> m_sprites;
 	
-	public Portal(Model model, int posX, int posY, Directions orientation/*, Tile t*/) {
-		super(model, posX, posY, false, "assets/sprites/portal_down.png", 0.0, null);
+	public Portal(Model model, int posX, int posY, Directions orientation, Tile t,int life) {
+		super(model, posX, posY, false, "assets/sprites/portal_down.png", 0.0, t,life);
 		m_orientation = orientation;
 		m_destPortal = null;
 		m_pixelX = posX;

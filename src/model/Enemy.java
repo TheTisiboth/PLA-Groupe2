@@ -6,8 +6,8 @@ public class Enemy extends Entity {
 	
 	// static int m_layer = 1;
 
-	public Enemy(Model model, int x, int y, String spriteFile, double speed, Tile t) {
-		super(model, x, y, true, spriteFile, speed, t);
+	public Enemy(Model model, int x, int y, String spriteFile, double speed, Tile t, int life) {
+		super(model, x, y, true, spriteFile, speed, t, life);
 		m_layer = Options.layers.get("character");
 	}
 
