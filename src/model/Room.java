@@ -40,7 +40,7 @@ public class Room{
 						break;
 					case SPAWN:
 						m_spawn = m_tiles[j][i];
-						m_model.getPlayer().setPos(j*Options.TAILLE_CASE, i*Options.TAILLE_CASE);
+						m_model.getPlayer().setPosition(j*Options.TAILLE_CASE, i*Options.TAILLE_CASE);
 						m_spawn.putEntity(m_model.getPlayer().getLayer(), m_model.getPlayer());
 						break;
 					default:
@@ -58,6 +58,10 @@ public class Room{
 				}
 			}
 		}
+	}
+	
+	public Tile getTile(int x, int y) {
+		return m_tiles[x][y];
 	}
 
 	public Tile[][] getTiles(){

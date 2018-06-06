@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/java,eclipse
  
 ### Eclipse ###
@@ -68,7 +67,6 @@ local.properties
 .mtj.tmp/
  
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
