@@ -270,7 +270,7 @@ public class Entity{
 	}
 
 	public boolean changeTile(int newX, int newY){
-		if(newX > Options.LARGEUR || newY > Options.HAUTEUR || newX < 0 || newY < 0)
+		if(newX > Options.LARGEUR -1 || newY > Options.HAUTEUR - 1|| newX < 0 || newY < 0)
 			return false;
 		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
 		if(newTile.getEntityOnLayer(m_layer)==null){
