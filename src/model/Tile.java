@@ -25,7 +25,7 @@ public class Tile {
         m_entities.add(null);
         switch (to) {
         case WALL:
-            putEntity(Options.layers.get("wall"), new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+            putEntity(Options.layers.get("wall"), new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this, -1));
             break;
         case ENEMY:
             putEntity(Options.layers.get("character"),

@@ -113,7 +113,8 @@ public class Level {
 		String speedTxt = (String) enemiesList.get("speed");
 		double speed = Double.parseDouble(speedTxt);
 
-		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile);
+		//TODO mettre la vraie vie
+		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, 10);
 		return returnEnemy;
 	}
 
@@ -128,7 +129,8 @@ public class Level {
 		String speedTxt = (String) petsList.get("speed");
 		double speed = Double.parseDouble(speedTxt);
 
-		Pet returnPet = new Pet(m, x, y, petSprite, speed, tile);
+		//TODO mettre la vraie vie
+		Pet returnPet = new Pet(m, x, y, petSprite, speed, tile, 10);
 		return returnPet;
 	}
 
@@ -140,7 +142,8 @@ public class Level {
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
 
-		Item returnItem = new Item(m, x, y, itemSprite, tile);
+		//TODO mettre la vraie vie
+		Item returnItem = new Item(m, x, y, itemSprite, tile, -1);
 		return returnItem;
 	}
 
@@ -155,8 +158,9 @@ public class Level {
 		String bossSprite = (String) bossList.get("sprite");
 
 		Double speed = (Double) bossList.get("speed");
-
-		Boss returnBoss = new Boss(m, x, y, bossSprite, speed, tile);
+		
+		//TODO mettre la vraie vie
+		Boss returnBoss = new Boss(m, x, y, bossSprite, speed, tile, 10);
 		return returnBoss;
 	}
 	
