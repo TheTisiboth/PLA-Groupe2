@@ -22,6 +22,7 @@ public class Tile {
 		m_entities.add(null);
 		m_entities.add(null);
 		m_entities.add(null);
+		m_entities.add(null);
 		switch (to) {
 		case WALL:
 			putEntity(Wall.m_layer, new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));

@@ -57,7 +57,7 @@ public class Level {
 
 	public Level(String str, Model m) {
 		m_model = m;
-		m_currentRoom = new Room(this, 0);
+		
 		
 		JSONParser parser = new JSONParser();
 		try {
@@ -96,6 +96,10 @@ public class Level {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void loadLevel() {
+		m_currentRoom = new Room(this, 0);
 	}
 
 	public Enemy getRandomEnemy(Model m, int x, int y, Tile tile) {
