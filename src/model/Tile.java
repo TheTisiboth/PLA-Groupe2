@@ -25,20 +25,20 @@ public class Tile {
         m_entities.add(null);
         switch (to) {
         case WALL:
-            putEntity(Wall.m_layer, new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+            putEntity(Options.layers.get("wall"), new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
             break;
         case ENEMY:
-            putEntity(Boss.m_layer,
+            putEntity(Options.layers.get("character"),
                     m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
             break;
         case BOSS:
-            putEntity(Boss.m_layer, m.m_level.getBoss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+            putEntity(Options.layers.get("character"), m.m_level.getBoss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
             break;
         case PET:
-            putEntity(Pet.m_layer, m.m_level.getRandomPet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+            putEntity(Options.layers.get("character"), m.m_level.getRandomPet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
             break;
         case ITEM:
-            putEntity(Item.m_layer, m.m_level.getRandomItem(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+            putEntity(Options.layers.get("item"), m.m_level.getRandomItem(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
             break;
         default:
             break;

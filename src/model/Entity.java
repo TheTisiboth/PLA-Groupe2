@@ -54,29 +54,35 @@ public class Entity{
 	}
 
 	public void move(Directions moving) {
+		int newX = m_tile.m_x;
+		int newY = m_tile.m_y;
 		if(m_moving == null){
 			switch (moving) {
 				case RIGHT:
 					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE){
-						if(changeTile(1, 0))
+						newX++;
+						if(changeTile(newX, newY))
 							m_moving = Directions.RIGHT;
 					}
 					break;
 				case LEFT:
 					if (m_pixelX > 0){
-						if(changeTile(-1, 0))
+						newX--;
+						if(changeTile(newX, newY))
 							m_moving = Directions.LEFT;				
 						}
 					break;
 				case UP:
 					if (m_pixelY > 0){
-						if(changeTile(0, -1))
+						newY--;
+						if(changeTile(newX, newY))
 							m_moving = Directions.UP;
 					}
 					break;
 				case DOWN:
 					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE){
-						if(changeTile(0, 1))
+						newY++;
+						if(changeTile(newX, newY))
 							m_moving = Directions.DOWN;
 					}
 					break;
@@ -114,7 +120,7 @@ public class Entity{
 			newPosY += Options.TAILLE_CASE;
 		}
 
-		Tile new_tile = m_model.get_room().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
+		Tile new_tile = m_model.getRoom().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
 		Portal portal = new Portal(m_model, newPosX, newPosY, newDir, new_tile);
 		
 		if(m_portals.size() >= 1) {
@@ -201,7 +207,7 @@ public class Entity{
 					m_pixelDone = 0;
 					
 					//Passage dans un portail
-					Tile new_tile = m_model.get_room().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
+					Tile new_tile = m_model.getRoom().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
 					if(new_tile.hasPortal()){
 						new_tile.getPortal().GoThrough(this);
 					}
@@ -263,10 +269,10 @@ public class Entity{
 		return m_tile;
 	}
 
-	public boolean changeTile(int incX, int incY){
-		if(m_tile.m_x+incX > Options.LARGEUR || m_tile.m_y+incY > Options.HAUTEUR || m_tile.m_x+incX < 0 || m_tile.m_y+incY < 0)
+	public boolean changeTile(int newX, int newY){
+		if(newX > Options.LARGEUR || newY > Options.HAUTEUR || newX < 0 || newY < 0)
 			return false;
-		Tile newTile = m_model.getRoom().getTiles()[m_tile.m_x+incX][m_tile.m_y+incY];
+		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
 		if(newTile.getEntityOnLayer(m_layer)==null){
 			getTile().delEntity(this);
 			newTile.putEntity(m_layer, this);
