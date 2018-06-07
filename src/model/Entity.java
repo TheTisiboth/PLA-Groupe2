@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -37,6 +38,7 @@ public class Entity{
 		m_updatePhysics = 30;
 		m_state = "default";
 		m_tile = t;
+		m_orientation = Directions.DOWN;
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
@@ -161,6 +163,30 @@ public class Entity{
 			return true;
 		}
 		return false;
+	}
+
+	public List<Entity> checkTile(Directions d){
+		int x = m_tile.m_x;
+		int y = m_tile.m_y;
+		switch (d) {
+			case RIGHT:
+				x += 1;
+				break;
+			case LEFT:
+				x += -1;
+				break;
+			case UP:
+				y += -1;
+				break;
+			case DOWN:
+				y += 1;
+				break;
+			default:
+				break;
+		}
+		if(x > Options.LARGEUR -1 || y > Options.HAUTEUR - 1|| x < 0 || y < 0)
+			return null;
+		return m_model.getRoom().getTiles()[x][y].m_entities;
 	}
 	
 }

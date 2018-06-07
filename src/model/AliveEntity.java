@@ -14,6 +14,8 @@ public abstract class AliveEntity extends Entity {
 	LifeBar m_lifeBar;
 	List<Portal> m_portals;
 
+	Inventory m_inventory;
+
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
 			int life) {
 		super(model, posX, posY, true, filename, t);
@@ -22,6 +24,7 @@ public abstract class AliveEntity extends Entity {
 		m_lifeMax = life;
 		m_speed = speed; 
 		m_portals = new ArrayList<Portal>();
+		m_inventory = new Inventory();
 	}
 	
 	@Override
@@ -174,6 +177,15 @@ public abstract class AliveEntity extends Entity {
 		m_lifeBar.paint(g);
 	}
 
+	public boolean pick(){
+		List<Entity> nEnt= checkTile(m_orientation);
+		if (nEnt.get(0) instanceof Item){
+			m_inventory.switchItem( (Item) nEnt.get(0));
+			return true;
+		}
+		return false;
+	}
+
 
 	public int getLife() {
 		return m_life;
@@ -190,6 +202,5 @@ public abstract class AliveEntity extends Entity {
 	public double getLifePercentage() {
 		return (double) ((double)m_life / (double)m_lifeMax);
 	}
-
 
 }
