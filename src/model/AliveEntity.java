@@ -194,7 +194,6 @@ public abstract class AliveEntity extends Entity {
 
 	public void attack() {
 		Directions dir = this.m_orientation;
-		
 		return;
 	}
 }
