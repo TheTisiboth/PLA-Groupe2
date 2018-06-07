@@ -25,6 +25,8 @@ public class Menu extends JFrame {
 	public Menu() {
 		this.setSize(1024,704);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setTitle("PLA - Groupe2 - Bandol Party");
 		
 		m_playButton = new JButton();
 		m_playButton.setBounds(362,400,300,80);
