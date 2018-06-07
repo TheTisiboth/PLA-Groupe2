@@ -10,7 +10,7 @@ public class Item extends Entity {
 
 
 	public Item(Model model, int x, int y, String spriteFile, Tile t, int life) {
-		super(model, x, y, true, spriteFile, 0, t, life);
+		super(model, x, y, false, spriteFile, t);
 		m_layer = Options.layers.get("character");
 	}
 }
