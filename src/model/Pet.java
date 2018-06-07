@@ -4,12 +4,13 @@ import controller.Options;
 
 public class Pet extends Entity {
 
-	static String m_spriteFile = Options.sprites.get("pet");
-	static int m_layer = 1;
-	static double m_startingSpeed = Options.velocities.get("pet"); 
+	// static String m_spriteFile = Options.sprites.get("pet");
+	// static int m_layer = 1;
+	// static double m_startingSpeed = Options.velocities.get("pet"); 
 
-	public Pet(Model model, int x, int y, String spriteFile, double speed, Tile t) {
-		super(model, x, y, true, spriteFile, speed, t);
+	public Pet(Model model, int x, int y, String spriteFile, double startingSpeed, Tile t, int life) {
+		super(model, x, y, true, spriteFile, startingSpeed, t, life);
+		m_layer = Options.layers.get("character");
 	}
 
 }

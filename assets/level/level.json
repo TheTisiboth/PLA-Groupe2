@@ -1,17 +1,12 @@
 {
   "enemies": [
-    "wolf",
     "bear",
-    "scorpion",
     "hornet",
     "shark"
   ],
   "items": [
     "potion",
-    "big_potion",
-    "revival",
-    "rifle",
-    "bomb"
+    "big_potion"
   ],
   "rooms": [
     0,
@@ -23,10 +18,7 @@
   ],
   "pets": [
     "dog",
-    "cat",
-    "rabbit",
-    "dolphin",
-    "chicken"
+    "cat"
   ],
   "boss": "elephant"
 }

@@ -22,6 +22,9 @@ public class Entity{
 	Directions m_orientation;
 	int m_pixelDone;
 	double m_speed;
+	LifeBar m_lifeBar;
+	int m_life;
+	int m_lifeMax;
 
 	long m_lastTime;
 	long m_updatePhysics;
@@ -29,14 +32,13 @@ public class Entity{
 	String m_state;
 	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
-	static int m_layer = 0;
-
 	Model m_model;
 	Tile m_tile;
+	int m_layer;
 
 	List<Portal> m_portals;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, double speed, Tile t,int life) {
 		super();
 		m_model = model;
 		m_pixelX = posX;
@@ -49,14 +51,50 @@ public class Entity{
 		m_state = "default";
 		m_portals = new ArrayList<Portal>();
 		m_tile = t;
+		m_lifeBar = new LifeBar(this);
+		m_life = life;
+		m_lifeMax =life;
 
 		m_spritesList = new HashMap<String,BufferedImage>();
 		loadSprites(filename, m_spritesList);
 	}
 
 	public void move(Directions moving) {
+		int newX = m_tile.m_x;
+		int newY = m_tile.m_y;
 		if(m_moving == null){
-			m_moving = moving;
+			switch (moving) {
+				case RIGHT:
+					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE){
+						newX++;
+						if(changeTile(newX, newY))
+							m_moving = Directions.RIGHT;
+					}
+					break;
+				case LEFT:
+					if (m_pixelX > 0){
+						newX--;
+						if(changeTile(newX, newY))
+							m_moving = Directions.LEFT;				
+						}
+					break;
+				case UP:
+					if (m_pixelY > 0){
+						newY--;
+						if(changeTile(newX, newY))
+							m_moving = Directions.UP;
+					}
+					break;
+				case DOWN:
+					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE){
+						newY++;
+						if(changeTile(newX, newY))
+							m_moving = Directions.DOWN;
+					}
+					break;
+				default:
+					break;
+			}
 			m_orientation = moving;
 		}
 	}
@@ -88,14 +126,16 @@ public class Entity{
 			newPosY += Options.TAILLE_CASE;
 		}
 
-		Tile new_tile = m_model.get_room().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
-		Portal portal = new Portal(m_model, newPosX, newPosY, newDir, new_tile);
+		Tile new_tile = m_model.getRoom().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
+		Portal portal = new Portal(m_model, newPosX, newPosY, newDir,m_tile,-1);
 		
 		if(m_portals.size() >= 1) {
 			Portal.setPortalPair(portal, m_portals.get(0));
 		}
 		
-		new_tile.setPortal(portal);
+		
+		//new_tile.setPortal(portal);
+		new_tile.putEntity(Options.LAYER_PORTAL, portal);
 		m_portals.add(portal);
 	}
 
@@ -109,6 +149,7 @@ public class Entity{
 		  ex.printStackTrace();
 		  System.exit(-1);
 		}
+		
 	}
 
 	public void step(long now) {
@@ -127,22 +168,18 @@ public class Entity{
 
 				switch (this.m_moving) {
 				case RIGHT :
-					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE )
-						this.m_pixelX += deplacement;
+					this.m_pixelX += deplacement;
 					break;
 
 				case LEFT :
-					if (m_pixelX > 0)
-						this.m_pixelX -= deplacement;
+					this.m_pixelX -= deplacement;
 					break;
 
 				case UP :
-					if (m_pixelY > 0)
-						this.m_pixelY -= deplacement;
+					this.m_pixelY -= deplacement;
 					break;
 
 				case DOWN :
-					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE)
 					this.m_pixelY += deplacement;
 					break;
 
@@ -179,7 +216,7 @@ public class Entity{
 					m_pixelDone = 0;
 					
 					//Passage dans un portail
-					Tile new_tile = m_model.get_room().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
+					Tile new_tile = m_model.getRoom().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
 					if(new_tile.hasPortal()){
 						new_tile.getPortal().GoThrough(this);
 					}
@@ -197,6 +234,7 @@ public class Entity{
 		while(it.hasNext()) {
 			it.next().paint(g);
 		}
+		m_lifeBar.paint(g);
 	}
 
 	public Directions getOrientation() {
@@ -215,7 +253,7 @@ public class Entity{
 	/**
 	 * @return the m_layer
 	 */
-	public static int getLayer() {
+	public int getLayer() {
 		return m_layer;
 	}
 
@@ -231,9 +269,29 @@ public class Entity{
 	public int getPositionY() {
 		return m_pixelY;
 	}
+
+	public int getLife() {
+		return m_life;
+	}
+
+	public void setTile(Tile t){
+		m_tile = t;
+	}
+
+	public Tile getTile(){
+		return m_tile;
+	}
+
+	public boolean changeTile(int newX, int newY){
+		if(newX > Options.LARGEUR -1 || newY > Options.HAUTEUR - 1|| newX < 0 || newY < 0)
+			return false;
+		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
+		if(newTile.getEntityOnLayer(m_layer)==null){
+			getTile().delEntity(this);
+			newTile.putEntity(m_layer, this);
+			setTile(newTile);
+			return true;
+		}
+		return false;
+	}
 }
-
-
-
-
-

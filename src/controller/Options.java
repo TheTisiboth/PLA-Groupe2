@@ -79,6 +79,15 @@ public class Options {
 		sprites.put("item","assets/sprites/item.png");
 	}
 
+	public static final HashMap<String,Integer> layers = new HashMap<String,Integer>();
+
+	static{
+		layers.put("wall",1);
+		layers.put("character",1);
+		layers.put("item",0);
+		layers.put("projectile",2);
+	}
+
 	public static final HashMap<String,Double> velocities = new HashMap<String,Double>();
 
 	static{
