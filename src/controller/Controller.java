@@ -90,9 +90,13 @@ public class Controller extends GameController implements ActionListener {
 		m_keys.put(Directions.RIGHT, true);
 	if(e.getKeyCode() == 40)
 		m_keys.put(Directions.DOWN, true);
-	if(e.getKeyCode() == 32){
-		m_model.getPlayer().pick();
-}
+	if(e.getKeyCode() == 32)
+	//	m_model.getPlayer().pick();
+	if(e.getKeyCode() == 32)
+		//m_model.getPlayer().wizz();
+	if(e.getKeyCode() == 65)
+		m_model.getPlayer().attack();
+
     if (Options.ECHO_KEYBOARD)
     	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
   }
@@ -107,7 +111,6 @@ public class Controller extends GameController implements ActionListener {
 		m_keys.put(Directions.RIGHT, false);
 	if(e.getKeyCode() == 40)
 		m_keys.put(Directions.DOWN, false);
-
 
     if (Options.ECHO_KEYBOARD)
       System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
