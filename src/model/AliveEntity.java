@@ -10,6 +10,7 @@ public abstract class AliveEntity extends Entity {
 
 	int m_life;
 	int m_lifeMax;
+	int m_damage;
 	double m_speed;
 	LifeBar m_lifeBar;
 	List<Portal> m_portals;
@@ -17,7 +18,7 @@ public abstract class AliveEntity extends Entity {
 	Inventory m_inventory;
 
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
-			int life) {
+			int life, int damage) {
 		super(model, posX, posY, true, filename, t);
 		m_lifeBar = new LifeBar(this);
 		m_life = life;
@@ -25,6 +26,7 @@ public abstract class AliveEntity extends Entity {
 		m_speed = speed; 
 		m_portals = new ArrayList<Portal>();
 		m_inventory = new Inventory();
+		m_damage = damage;
 	}
 	
 	@Override
@@ -203,4 +205,13 @@ public abstract class AliveEntity extends Entity {
 		return (double) ((double)m_life / (double)m_lifeMax);
 	}
 
+	public void attack() {
+		Directions dir = m_model.getPlayer().m_orientation;
+		List<Entity> list = this.checkTile(dir);
+		if(list.get(1) instanceof Enemy) {
+			Enemy enemy = (Enemy) list.get(1);
+			enemy.m_life = enemy.m_life - this.m_damage;
+		}
+		return;
+	}
 }

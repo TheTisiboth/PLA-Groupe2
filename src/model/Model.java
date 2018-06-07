@@ -25,7 +25,7 @@ public class Model extends GameModel {
   Room m_room;
 
   public Model() {
-    m_player = new Player(this, 0, 0, null, 20);
+    m_player = new Player(this, 0, 0, null, 20, 2);
     m_level = new Level("assets/level/level.json",this);
     m_level.loadLevel();
     m_room = m_level.getCurrentRoom();
