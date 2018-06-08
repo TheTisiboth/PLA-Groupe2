@@ -114,7 +114,7 @@ public class Level {
 		double speed = Double.parseDouble(speedTxt);
 
 		//TODO mettre la vraie vie
-		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, 10);
+		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, 10, 2);
 		return returnEnemy;
 	}
 
@@ -130,7 +130,7 @@ public class Level {
 		double speed = Double.parseDouble(speedTxt);
 
 		//TODO mettre la vraie vie
-		Pet returnPet = new Pet(m, x, y, petSprite, speed, tile, 10);
+		Pet returnPet = new Pet(m, x, y, petSprite, speed, tile, 10, 2);
 		return returnPet;
 	}
 
@@ -160,7 +160,7 @@ public class Level {
 		Double speed = (Double) bossList.get("speed");
 		
 		//TODO mettre la vraie vie
-		Boss returnBoss = new Boss(m, x, y, bossSprite, speed, tile, 10);
+		Boss returnBoss = new Boss(m, x, y, bossSprite, speed, tile, 10, 4);
 		return returnBoss;
 	}
 	
