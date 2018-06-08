@@ -2,36 +2,37 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class AutomataWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String [] AUTOMATON = {"Guerrier", "Chien", "Dragon", "Elfe"};
+	private static final String [] AUTOMATON = {"Guerrier", "Chien", "Dragon", "Elfe", "Test1", "Test2", "Test3", "Test4", "Test5", "Test6", "Test7", "Test8", "Test9", "Test10", "Test11", "Test12", "Test13", "Test14", "Test15"};
 	private JButton m_returnButton;
 	private JButton m_chooseButton;
+	private List<JCheckBox> m_checkBoxes = new ArrayList<JCheckBox>();
 
 	public AutomataWindow() {
 		this.setSize(680,704);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		
-		/*JLabel background = new JLabel(new ImageIcon(new ImageIcon("assets/sprites/AutomataBg.png").getImage().getScaledInstance(680,704,Image.SCALE_DEFAULT)));
-		background.setBounds(0,0,680,704);
-		*/JPanel bgPane = new BackgroundPanel();/*
-		bgPane.add(background);*/
+		JPanel bgPane = new BackgroundPanel();
 		
 		
 		bgPane.setBackground(Color.RED);
@@ -40,6 +41,9 @@ public class AutomataWindow extends JFrame {
 		automaton.setOpaque(false);
 		JScrollPane scroll = new JScrollPane(automaton, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setOpaque(false);
+		scroll.setBorder(BorderFactory.createEmptyBorder(90,0,0,0));
+		scroll.setPreferredSize(new Dimension(150,590));
+		scroll.getViewport().setOpaque(false);
 		
 		JCheckBox checkAuto;
 		for(String auto : AUTOMATON) {
@@ -48,9 +52,12 @@ public class AutomataWindow extends JFrame {
 			checkAuto.setSelectedIcon(new ImageIcon("assets/sprites/checkBox.png"));
 			checkAuto.setDisabledIcon(new ImageIcon());
 			checkAuto.setOpaque(false);
+			checkAuto.setContentAreaFilled(false);
 			checkAuto.setFocusPainted(false);
 			automaton.add(checkAuto);
+			m_checkBoxes.add(checkAuto);
 		}
+		
 		bgPane.add(scroll, BorderLayout.CENTER);
 		
 		JPanel panelSouth = new JPanel();
@@ -63,7 +70,7 @@ public class AutomataWindow extends JFrame {
 		m_chooseButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				saveAutomaton();
+				Menu.retrieveChoosenAutomaton(returnChoosenAutomaton());
 				dispose();
 			}
 		});
@@ -90,11 +97,11 @@ public class AutomataWindow extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public void saveAutomaton() {
-		
-	}
-	
-	class BackgroundPanel extends JPanel{
+	private class BackgroundPanel extends JPanel{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		Image image;
 		
 		public BackgroundPanel() {
@@ -106,5 +113,16 @@ public class AutomataWindow extends JFrame {
 			super.paintComponent(g);
 			g.drawImage(image, 0,0,680,704, this);		
 		}
+	}
+	
+	public List<String> returnChoosenAutomaton() {
+		List<String> automatons = new ArrayList<String>();
+		for (JCheckBox check : m_checkBoxes) {
+			if (check.isSelected()) {
+				automatons.add(check.getText());
+			}
+		}
+		
+		return automatons;
 	}
 }

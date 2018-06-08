@@ -1,19 +1,16 @@
 package view;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import controller.Controller;
-import controller.Options;
-import edu.ricm3.game.GameUI;
-import model.Model;
+import main.GameMain;
 
 public class Menu extends JFrame {
 
@@ -37,7 +34,7 @@ public class Menu extends JFrame {
 		m_playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				createShowGame();
+				GameMain.createShowGame();
 			}
 		});
 		this.add(m_playButton);
@@ -78,15 +75,10 @@ public class Menu extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private void createShowGame() {
-		// construct the game elements: model, controller, and view.
-	    Model model = new Model();
-	    Controller controller = new Controller(model);
-	    View view = new View(model,controller);
-
-	    Dimension d = new Dimension(Options.LARGEUR_PX, Options.HAUTEUR_PX);
-	    new GameUI(model,view,controller,d);
-	    this.setVisible(false);
+	public static void retrieveChoosenAutomaton(List<String> automaton) {
+		for(String auto : automaton) {
+			System.out.println(auto);
+		}
 	}
 	
 }
