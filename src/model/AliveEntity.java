@@ -16,6 +16,7 @@ public abstract class AliveEntity extends Entity {
 	List<Portal> m_portals;
 
 	Inventory m_inventory;
+	Projectile projectile;
 
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
 			int life, int damage) {
@@ -118,7 +119,9 @@ public abstract class AliveEntity extends Entity {
 
 		if(timeElapsed >= m_updatePhysics) {
 			this.m_lastTime = now;
-
+			
+			// Checking if entity is dead
+			this.tryToKill();
 
 			//Movement
 			if(m_moveable && m_moving != null) {
@@ -213,6 +216,14 @@ public abstract class AliveEntity extends Entity {
 			enemy.m_life = enemy.m_life - this.m_damage;
 		}
 		return;
+	}
+	
+	public void throwProjectile() {
+		Directions dir = this.getOrientation();
+		Tile spawningTile = this.getLookingTile(dir);
+		Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 200, 3);
+		spawningTile.putEntity(Options.layers.get("projectile"),proj);
+		proj.m_orientation=dir;
 	}
 	
 	public void tryToKill() {

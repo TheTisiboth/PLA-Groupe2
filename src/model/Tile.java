@@ -81,10 +81,11 @@ public class Tile {
 		}
 	}
 
-	public void update() {
-		if (m_entities.get(1) instanceof AliveEntity) {
-			AliveEntity entity = (AliveEntity) m_entities.get(1);
-			entity.tryToKill();
+	public void update(long now) {
+		for (int i = 0; i < 4; i++) {
+			if (m_entities.get(i) != null) {
+				m_entities.get(i).step(now);
+			}
 		}
 	}
 

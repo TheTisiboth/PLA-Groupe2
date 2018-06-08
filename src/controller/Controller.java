@@ -55,6 +55,8 @@ public class Controller extends GameController implements ActionListener {
     m_keys.put(Directions.UP, false);
     m_keys.put(Directions.RIGHT, false);
     m_keys.put(Directions.LEFT, false);
+    m_keys.put(Directions.HIT, false);
+    m_keys.put(Directions.PROJECTILE, false);
   }
 
   /**
@@ -73,6 +75,10 @@ public class Controller extends GameController implements ActionListener {
 		  m_model.getPlayer().move(Directions.LEFT);
 	  if(m_keys.get(Directions.RIGHT))
 		  m_model.getPlayer().move(Directions.RIGHT);
+	  if(m_keys.get(Directions.HIT))
+		  m_model.getPlayer().attack();
+	  if(m_keys.get(Directions.PROJECTILE))
+		  m_model.getPlayer().throwProjectile();
   }
 
   @Override
@@ -93,7 +99,9 @@ public class Controller extends GameController implements ActionListener {
 	if(e.getKeyCode() == 32)
 		m_model.getPlayer().pick();
 	if(e.getKeyCode() == 65)
-		m_model.getPlayer().attack();
+		m_keys.put(Directions.HIT, true);
+	if(e.getKeyCode() == 70)
+		m_keys.put(Directions.PROJECTILE, true);
     if (Options.ECHO_KEYBOARD)
     	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
   }
@@ -108,6 +116,10 @@ public class Controller extends GameController implements ActionListener {
 		m_keys.put(Directions.RIGHT, false);
 	if(e.getKeyCode() == 40)
 		m_keys.put(Directions.DOWN, false);
+	if(e.getKeyCode() == 65)
+		m_keys.put(Directions.HIT, false);
+	if(e.getKeyCode() == 70)
+		m_keys.put(Directions.PROJECTILE, false);
 
 
     if (Options.ECHO_KEYBOARD)

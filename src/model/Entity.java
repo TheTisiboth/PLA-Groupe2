@@ -189,4 +189,26 @@ public class Entity{
 		return m_model.getRoom().getTiles()[x][y].m_entities;
 	}
 	
+	public Tile getLookingTile(Directions d){
+		int x = m_tile.m_x;
+		int y = m_tile.m_y;
+		switch (d) {
+			case RIGHT:
+				x += 1;
+				break;
+			case LEFT:
+				x += -1;
+				break;
+			case UP:
+				y += -1;
+				break;
+			case DOWN:
+				y += 1;
+				break;
+			default:
+				break;
+		}
+		return m_model.getRoom().getTile(x, y);
+	}
+	
 }

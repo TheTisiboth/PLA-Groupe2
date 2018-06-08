@@ -45,8 +45,7 @@ public class Model extends GameModel {
    */
   @Override
   public void step(long now) {
-	  m_player.step(now);
-	  m_room.update();
+	  m_room.update(now);
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
