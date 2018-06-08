@@ -211,12 +211,11 @@ public abstract class AliveEntity extends Entity {
 		if(list.get(1) instanceof Enemy) {
 			Enemy enemy = (Enemy) list.get(1);
 			enemy.m_life = enemy.m_life - this.m_damage;
-			enemy.kill();
 		}
 		return;
 	}
 	
-	public void kill() {
+	public void tryToKill() {
 		if(this.m_life <= 0) {
 			m_tile.delEntity(this);
 		}
