@@ -3,6 +3,12 @@ package view;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -75,10 +81,33 @@ public class Menu extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public static void retrieveChoosenAutomaton(List<String> automaton) {
-		for(String auto : automaton) {
-			System.out.println(auto);
+	public static List<String> retrieveChoosenAutomata() {
+		List<String> names = new ArrayList<String>();
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File("assets/automata/choosenAutomata.txt")));
+			
+			String nameAutomaton;
+			try {
+				nameAutomaton = br.readLine();
+				
+				while (nameAutomaton != null) {
+					names.add(nameAutomaton);
+					nameAutomaton = br.readLine();
+				}
+				
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Can't read file : choosenAutomata.txt");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Can't open file : choosenAutomata.txt");
 		}
+		
+		return names;
+		
 	}
 	
 }
