@@ -1,10 +1,14 @@
 package model;
 
 import java.awt.Graphics;
-import java.util.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import controller.Options;
 import main.Directions;
+import utils.Animation;
 
 public abstract class AliveEntity extends Entity {
 
@@ -17,6 +21,16 @@ public abstract class AliveEntity extends Entity {
 
 	Inventory m_inventory;
 
+	Animation m_walkingLeft;
+	Animation m_walkingRight;
+	Animation m_walkingUp;
+	Animation m_walkingDown;
+
+	Animation m_defaultLeft;
+	Animation m_defaultRight;
+	Animation m_defaultUp;
+	Animation m_defaultDown;
+
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
 			int life, int damage) {
 		super(model, posX, posY, true, filename, t);
@@ -27,10 +41,32 @@ public abstract class AliveEntity extends Entity {
 		m_portals = new ArrayList<Portal>();
 		m_inventory = new Inventory();
 		m_damage = damage;
+
+		BufferedImage[] m_walkingLeftIm = {m_sprite.getSprite(0, 1), m_sprite.getSprite(2, 1)}; 
+		BufferedImage[] m_defaultLeftIm = {m_sprite.getSprite(1, 1)};
+		BufferedImage[] m_walkingRightIm = {m_sprite.getSprite(0, 2), m_sprite.getSprite(2, 2)};
+		BufferedImage[] m_defaultRightIm = {m_sprite.getSprite(1, 2)};
+		BufferedImage[] m_walkingUpIm = {m_sprite.getSprite(0, 3), m_sprite.getSprite(2, 3)};
+		BufferedImage[] m_defaultUpIm = {m_sprite.getSprite(1, 3)};
+		BufferedImage[] m_walkingDownIm = {m_sprite.getSprite(0, 0), m_sprite.getSprite(2, 0)};
+		BufferedImage[] m_defaultDownIm = {m_sprite.getSprite(1, 0)};
+
+		m_walkingLeft = new Animation(m_walkingLeftIm, 10);
+		m_walkingRight = new Animation(m_walkingRightIm, 10);
+		m_walkingUp = new Animation(m_walkingUpIm, 10);
+		m_walkingDown = new Animation(m_walkingDownIm, 10);
+		m_defaultLeft = new Animation(m_defaultLeftIm, 10);
+		m_defaultRight = new Animation(m_defaultRightIm, 10);
+		m_defaultUp = new Animation(m_defaultUpIm, 10);
+		m_defaultDown = new Animation(m_defaultDownIm, 10);
+
+		m_animation = m_defaultDown;
+
 	}
 	
 	@Override
 	public void move(Directions moving) {
+		
 		int newX = m_tile.m_x;
 		int newY = m_tile.m_y;
 		if(m_moving == null){
@@ -114,15 +150,15 @@ public abstract class AliveEntity extends Entity {
 
 	@Override
 	public void step(long now) {
+
 		long timeElapsed = now-this.m_lastTime;
 
 		if(timeElapsed >= m_updatePhysics) {
 			this.m_lastTime = now;
 
-
 			//Movement
 			if(m_moveable && m_moving != null) {
-				int deplacement = (int)(m_speed * timeElapsed);
+				int deplacement = (int)(m_speed * timeElapsed * 0.5);
 				m_pixelDone += deplacement;
 
 				System.out.print("Deplacement " + deplacement + " time elapsed: " + timeElapsed + "\n");
@@ -155,6 +191,8 @@ public abstract class AliveEntity extends Entity {
 					m_pixelY = m_tile.m_y * Options.TAILLE_CASE;
 
 					m_moving = null;
+					m_animation.reset();
+					// m_animation.reset();
 					m_pixelDone = 0;
 					
 					//Passage dans un portail
@@ -171,6 +209,7 @@ public abstract class AliveEntity extends Entity {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		updateAnimation();
 
 		Iterator<Portal> it = m_portals.iterator();
 		while(it.hasNext()) {
@@ -219,5 +258,46 @@ public abstract class AliveEntity extends Entity {
 		if(this.m_life <= 0) {
 			m_tile.delEntity(this);
 		}
+	}
+
+	private void updateAnimation(){
+
+		if(m_moving != null){
+			switch (m_moving) {
+				case RIGHT:
+					m_animation = m_walkingRight;
+					break;
+				case LEFT:
+					m_animation = m_walkingLeft;
+					break;	
+				case UP:
+					m_animation = m_walkingUp;
+					break;
+				case DOWN:
+					m_animation = m_walkingDown;
+					break;
+				default:
+					break;
+			}
+			m_animation.start();
+		}
+		else
+			switch (m_orientation) {
+				case RIGHT:
+					m_animation = m_defaultRight;
+					break;
+				case LEFT:
+					m_animation = m_defaultLeft;
+					break;	
+				case UP:
+					m_animation = m_defaultUp;
+					break;
+				case DOWN:
+					m_animation = m_defaultDown;
+					break;
+				default:
+					m_animation = m_defaultDown;
+					break;
+			}
 	}
 }

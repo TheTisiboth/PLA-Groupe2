@@ -43,18 +43,21 @@ import model.Model;
 public class Controller extends GameController implements ActionListener {
 
   Model m_model;
-  EnumMap<Directions, Boolean> m_keys;
+  EnumMap<Directions, Boolean> m_directions;
+  EnumMap<Directions, Boolean> m_orientations;
 
 
   public Controller(Model m) {
     m_model = m;
 
-    m_keys = new EnumMap<Directions, Boolean>(Directions.class);
+    m_directions = new EnumMap<Directions, Boolean>(Directions.class);
 
-    m_keys.put(Directions.DOWN, false);
-    m_keys.put(Directions.UP, false);
-    m_keys.put(Directions.RIGHT, false);
-    m_keys.put(Directions.LEFT, false);
+    m_directions.put(Directions.DOWN, false);
+    m_directions.put(Directions.UP, false);
+    m_directions.put(Directions.RIGHT, false);
+    m_directions.put(Directions.LEFT, false);
+
+    m_orientations = new EnumMap<Directions,Boolean>(m_directions);
   }
 
   /**
@@ -65,49 +68,47 @@ public class Controller extends GameController implements ActionListener {
    */
   @Override
   public void step(long now) {
-	  if(m_keys.get(Directions.UP))
+	  if(m_directions.get(Directions.UP))
 		  m_model.getPlayer().move(Directions.UP);
-	  if(m_keys.get(Directions.DOWN))
+	  if(m_directions.get(Directions.DOWN))
 		  m_model.getPlayer().move(Directions.DOWN);
-	  if(m_keys.get(Directions.LEFT))
+	  if(m_directions.get(Directions.LEFT))
 		  m_model.getPlayer().move(Directions.LEFT);
-	  if(m_keys.get(Directions.RIGHT))
+	  if(m_directions.get(Directions.RIGHT))
 		  m_model.getPlayer().move(Directions.RIGHT);
   }
 
   @Override
   public void keyTyped(KeyEvent e) {
-    //if (e.getKeyChar() == '+') {œ
+    if(e.getKeyCode() == 65) // 'a'
+		  m_model.getPlayer().attack();
   }
 
   @Override
   public void keyPressed(KeyEvent e) {
 	if(e.getKeyCode() == 37)
-		m_keys.put(Directions.LEFT, true);
+		m_directions.put(Directions.LEFT, true);
 	if(e.getKeyCode() == 38)
-		m_keys.put(Directions.UP, true);
+		m_directions.put(Directions.UP, true);
 	if(e.getKeyCode() == 39)
-		m_keys.put(Directions.RIGHT, true);
+		m_directions.put(Directions.RIGHT, true);
 	if(e.getKeyCode() == 40)
-		m_keys.put(Directions.DOWN, true);
+		m_directions.put(Directions.DOWN, true);
 	if(e.getKeyCode() == 32)
 		m_model.getPlayer().pick();
-	if(e.getKeyCode() == 65)
-		m_model.getPlayer().attack();
-    if (Options.ECHO_KEYBOARD)
-    	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
+	
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
 	if(e.getKeyCode() == 37)
-		m_keys.put(Directions.LEFT, false);
+		m_directions.put(Directions.LEFT, false);
 	if(e.getKeyCode() == 38)
-		m_keys.put(Directions.UP, false);
+		m_directions.put(Directions.UP, false);
 	if(e.getKeyCode() == 39)
-		m_keys.put(Directions.RIGHT, false);
+		m_directions.put(Directions.RIGHT, false);
 	if(e.getKeyCode() == 40)
-		m_keys.put(Directions.DOWN, false);
+		m_directions.put(Directions.DOWN, false);
 
 
     if (Options.ECHO_KEYBOARD)
