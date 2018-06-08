@@ -1,8 +1,8 @@
 {
-  "potion": {
+  "life": {
     "sprite": "assets/sprites/potion.png"
   },
-  "big_potion": {
+  "poison": {
     "sprite": "assets/sprites/big_potion.png"
   },
   "revival": {

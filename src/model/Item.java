@@ -10,19 +10,34 @@ public class Item extends Entity {
 
 	enum ItemType{
 		WEAPON,
-		CONSUMABLE,
+		LIFE,
+		POISON,
 		TRAP
 	}
 
 	ItemType m_type;
 
-	public Item(Model model, int x, int y, String spriteFile, Tile t, int life) {
+	public Item(Model model, int x, int y, String spriteFile, Tile t, int life,String type) {
 		super(model, x, y, false, spriteFile, t);
 		m_layer = Options.layers.get("character");
-		m_type = ItemType.WEAPON;
+		setItemType(type);
 	}
 
 	public ItemType getType(){
 		return m_type;
+	}
+	
+	private void setItemType(String type) {
+		
+		if(type.equals("life")){
+			m_type = ItemType.LIFE;
+		}
+		else if(type.equals("poison")) {
+			m_type = ItemType.POISON;			
+		}
+		else {
+			m_type = ItemType.WEAPON;
+		}
+		
 	}
 }

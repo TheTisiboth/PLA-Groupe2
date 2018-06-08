@@ -138,12 +138,14 @@ public class Level {
 		int size = m_items.size();
 		int rd_value = (int) (Math.random() * size);
 		String str = m_items.get(rd_value);
+		
+		System.out.print(str);
 
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
-
+		
 		//TODO mettre la vraie vie
-		Item returnItem = new Item(m, x, y, itemSprite, tile, -1);
+		Item returnItem = new Item(m, x, y, itemSprite, tile, -1,str);
 		return returnItem;
 	}
 

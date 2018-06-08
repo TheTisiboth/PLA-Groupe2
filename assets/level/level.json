@@ -5,8 +5,8 @@
     "shark"
   ],
   "items": [
-    "potion",
-    "big_potion"
+    "life",
+    "poison"
   ],
   "rooms": [
     0,
