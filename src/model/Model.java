@@ -25,7 +25,7 @@ public class Model extends GameModel {
   Room m_room;
 
   public Model() {
-    m_player = new Player(this, 0, 0, null);
+    m_player = new Player(this, 0, 0, null, 20, 2);
     m_level = new Level("assets/level/level.json",this);
     m_level.loadLevel();
     m_room = m_level.getCurrentRoom();
@@ -46,7 +46,7 @@ public class Model extends GameModel {
   @Override
   public void step(long now) {
 	  m_player.step(now);
-
+	  m_room.update();
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
