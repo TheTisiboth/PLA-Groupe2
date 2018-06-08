@@ -19,15 +19,21 @@ public class Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JButton m_playButton;
-	private JButton m_optionsButton;
+	private JButton m_automataButton;
 	private JButton m_quitButton;
 	
 	public Menu() {
 		this.setSize(1024,704);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setTitle("PLA - Groupe2 - Bandol Party");
 		
-		m_playButton = new JButton("Jouer");
-		m_playButton.setBounds(387,400,250,60);
+		m_playButton = new JButton();
+		m_playButton.setBounds(362,400,300,80);
+		m_playButton.setOpaque(false);
+		m_playButton.setContentAreaFilled(false);
+		m_playButton.setBorderPainted(false);
+		m_playButton.setIcon(new ImageIcon("assets/sprites/Play.png"));
 		m_playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -36,12 +42,26 @@ public class Menu extends JFrame {
 		});
 		this.add(m_playButton);
 		
-		m_optionsButton = new JButton("Options");
-		m_optionsButton.setBounds(387,465,250,60);
-		this.add(m_optionsButton);
+		m_automataButton = new JButton();
+		m_automataButton.setBounds(362,490,300,80);
+		m_automataButton.setOpaque(false);
+		m_automataButton.setContentAreaFilled(false);
+		m_automataButton.setBorderPainted(false);
+		m_automataButton.setIcon(new ImageIcon("assets/sprites/Automata.png"));
+		m_automataButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new AutomataWindow();
+			}
+		});
+		this.add(m_automataButton);
 		
-		m_quitButton = new JButton("Quitter");
-		m_quitButton.setBounds(387,530,250,60);
+		m_quitButton = new JButton();
+		m_quitButton.setBounds(362,580,300,80);
+		m_quitButton.setOpaque(false);
+		m_quitButton.setContentAreaFilled(false);
+		m_quitButton.setBorderPainted(false);
+		m_quitButton.setIcon(new ImageIcon("assets/sprites/Quit.png"));
 		m_quitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
