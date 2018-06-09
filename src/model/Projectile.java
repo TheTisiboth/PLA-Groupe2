@@ -38,16 +38,7 @@ public class Projectile extends AliveEntity {
 			if(timeElapsed >= m_updatePhysics) {
 				this.m_lastTime = now;
 	
-				// Checking current tile
-				List<Entity> list = this.m_tile.m_entities;
-				if ( list.get(1)instanceof Wall) {
-					m_tile.delEntity(this);
-					return;
-				}
-				if (list.get(1) instanceof AliveEntity) {
-					AliveEntity entity = (AliveEntity) list.get(1);
-					entity.m_life = entity.m_life - this.m_damage;
-					m_tile.delEntity(this);
+				if(this.testCollision()) {
 					return;
 				}
 				// Déplacement du projectile
@@ -101,5 +92,20 @@ public class Projectile extends AliveEntity {
 				}
 			}
 		}
+	}
+	public boolean testCollision() {
+		// Checking current tile
+		List<Entity> list = this.m_tile.m_entities;
+		if ( list.get(1)instanceof Wall) {
+			m_tile.delEntity(this);
+			return true;
+		}
+		if (list.get(1) instanceof AliveEntity) {
+			AliveEntity entity = (AliveEntity) list.get(1);
+			entity.m_life = entity.m_life - this.m_damage;
+			m_tile.delEntity(this);
+			return true;
+		}
+		return false;
 	}
 }

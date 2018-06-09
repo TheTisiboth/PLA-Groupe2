@@ -17,6 +17,7 @@ public abstract class AliveEntity extends Entity {
 
 	Inventory m_inventory;
 	Projectile projectile;
+	int projectileCooldown;
 
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
 			int life, int damage) {
@@ -28,6 +29,7 @@ public abstract class AliveEntity extends Entity {
 		m_portals = new ArrayList<Portal>();
 		m_inventory = new Inventory();
 		m_damage = damage;
+		projectileCooldown = 500;
 	}
 	
 	@Override
@@ -116,6 +118,7 @@ public abstract class AliveEntity extends Entity {
 	@Override
 	public void step(long now) {
 		long timeElapsed = now-this.m_lastTime;
+		projectileCooldown--;
 
 		if(timeElapsed >= m_updatePhysics) {
 			this.m_lastTime = now;
@@ -219,11 +222,21 @@ public abstract class AliveEntity extends Entity {
 	}
 	
 	public void throwProjectile() {
-		Directions dir = this.getOrientation();
-		Tile spawningTile = this.getLookingTile(dir);
-		Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 200, 3);
-		spawningTile.putEntity(Options.layers.get("projectile"),proj);
-		proj.m_orientation=dir;
+		if (projectileCooldown <= 0) {
+			Directions dir = this.getOrientation();
+			Tile spawningTile = this.getLookingTile(dir);
+			Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 200, 3);
+			spawningTile.putEntity(Options.layers.get("projectile"),proj);
+			proj.m_orientation=dir;
+			projectileCooldown = 500;
+			
+			//First action of the projectile
+			if(proj.testCollision()) {
+				return;
+			}
+			proj.move(dir);
+		}
+		return;
 	}
 	
 	public void tryToKill() {
