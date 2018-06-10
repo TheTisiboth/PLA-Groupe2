@@ -1,7 +1,6 @@
 package model;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 import java.util.List;
 
 import controller.Options;
@@ -96,6 +95,7 @@ public class Entity{
 	}
 
 	public void paint(Graphics g){
+		m_animation.update();
 		// m_currentSprite = m_spritesList.get(m_state);
 		g.drawImage(m_animation.getSprite(), m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
 

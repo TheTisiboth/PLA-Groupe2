@@ -7,13 +7,12 @@ import java.util.List;
 
 public class Animation {
 
-    private int m_frameCount;                 // Counts ticks for change
-    private int m_frameDelay;                 // frame delay 1-12 (You will have to play around with 
-    private int m_currentFrame;               // animations current frame
-    private int m_animationDirection;         // animation direction (i.e counting forward or backward)
-    private int m_totalFrames;                // total amount of frames for your animation
+    private int m_frameCount;                  
+    private int m_frameDelay;                 
+    private int m_currentFrame;               
+    private int m_totalFrames;                 
 
-    private boolean m_stopped;                // has animations stopped
+    private boolean m_stopped;                
 
     List<BufferedImage> m_frames;
 
@@ -29,17 +28,17 @@ public class Animation {
         m_frames = new ArrayList<BufferedImage>();
 
         for (int i = 0; i < frames.length; i++) {
-            addFrame(frames[i]);
+            m_frames.add(frames[i]);
         }
 
         m_frameCount = 0;
-        m_frameDelay = frameDelay;
         m_currentFrame = 0;
         m_totalFrames = m_frames.size();
 
     }
 
     public void start() {
+        System.out.println("start");
         if (!m_stopped) {
             return;
         }
@@ -49,6 +48,9 @@ public class Animation {
         }
 
         m_stopped = false;
+        m_frameCount = 0;
+        m_currentFrame = 0;
+
     }
 
     public void stop() {
@@ -57,26 +59,6 @@ public class Animation {
         }
 
         m_stopped = true;
-    }
-
-    public void restart() {
-        if (m_frames.size() == 0) {
-            return;
-        }
-
-        m_stopped = false;
-        m_currentFrame = 0;
-    }
-
-    public void reset() {
-        m_stopped = true;
-        m_frameCount = 0;
-        m_currentFrame = 0;
-    }
-
-    private void addFrame(BufferedImage frame) {
-        m_frames.add(frame);
-        m_currentFrame = 0;
     }
 
     public BufferedImage getSprite() {
@@ -88,14 +70,12 @@ public class Animation {
             m_frameCount++;
 
             if (m_frameCount > m_frameDelay) {
+                System.out.println("current frame : "+ m_currentFrame);
                 m_frameCount = 0;
-                m_currentFrame += m_animationDirection;
+                m_currentFrame ++;
 
                 if (m_currentFrame > m_totalFrames - 1) {
                     m_currentFrame = 0;
-                }
-                else if (m_currentFrame < 0) {
-                    m_currentFrame = m_totalFrames - 1;
                 }
             }
         }

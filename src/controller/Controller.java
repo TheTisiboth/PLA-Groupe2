@@ -23,6 +23,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.EnumMap;
 
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import edu.ricm3.game.GameController;
 import main.Directions;
 import controller.Options;
@@ -70,12 +72,12 @@ public class Controller extends GameController implements ActionListener {
   public void step(long now) {
 	  if(m_directions.get(Directions.UP))
 		  m_model.getPlayer().move(Directions.UP);
-	  if(m_directions.get(Directions.DOWN))
+	  else if(m_directions.get(Directions.DOWN))
 		  m_model.getPlayer().move(Directions.DOWN);
-	  if(m_directions.get(Directions.LEFT))
+	  else if(m_directions.get(Directions.LEFT))
 		  m_model.getPlayer().move(Directions.LEFT);
-	  if(m_directions.get(Directions.RIGHT))
-		  m_model.getPlayer().move(Directions.RIGHT);
+	  else if(m_directions.get(Directions.RIGHT))
+      m_model.getPlayer().move(Directions.RIGHT);
   }
 
   @Override

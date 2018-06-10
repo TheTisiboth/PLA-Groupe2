@@ -158,7 +158,7 @@ public abstract class AliveEntity extends Entity {
 
 			//Movement
 			if(m_moveable && m_moving != null) {
-				int deplacement = (int)(m_speed * timeElapsed * 0.5);
+				int deplacement = (int)(m_speed * timeElapsed);
 				m_pixelDone += deplacement;
 
 				System.out.print("Deplacement " + deplacement + " time elapsed: " + timeElapsed + "\n");
@@ -191,8 +191,6 @@ public abstract class AliveEntity extends Entity {
 					m_pixelY = m_tile.m_y * Options.TAILLE_CASE;
 
 					m_moving = null;
-					m_animation.reset();
-					// m_animation.reset();
 					m_pixelDone = 0;
 					
 					//Passage dans un portail
@@ -281,7 +279,8 @@ public abstract class AliveEntity extends Entity {
 			}
 			m_animation.start();
 		}
-		else
+		else{
+			m_animation.stop();
 			switch (m_orientation) {
 				case RIGHT:
 					m_animation = m_defaultRight;
@@ -299,5 +298,7 @@ public abstract class AliveEntity extends Entity {
 					m_animation = m_defaultDown;
 					break;
 			}
+		}
 	}
+	
 }
