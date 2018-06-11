@@ -66,6 +66,7 @@ public class Controller extends GameController implements ActionListener {
     m_actions.put(Actions.HIT, false);
     m_actions.put(Actions.PROJECTILE, false);
     m_actions.put(Actions.PORTAL, false);
+    m_actions.put(Actions.PICK, false);
 
   }
 
@@ -108,6 +109,10 @@ public class Controller extends GameController implements ActionListener {
       m_model.getPlayer().throwProjectile();
       m_actions.put(Actions.PROJECTILE, false);
     }
+	  if(m_actions.get(Actions.PICK)){
+      m_model.getPlayer().pick();
+      m_actions.put(Actions.PICK, false);
+    }
   }
 
   @Override
@@ -134,10 +139,13 @@ public class Controller extends GameController implements ActionListener {
 	if(e.getKeyCode() == 40)
 		m_orientations.put(Directions.DOWN, true);
 
-	if(e.getKeyCode() == 65)
+	if(e.getKeyCode() == 65) //a
 		m_actions.put(Actions.HIT, true);
-	if(e.getKeyCode() == 70)
+	if(e.getKeyCode() == 70) //f
 		m_actions.put(Actions.PROJECTILE, true);
+	if(e.getKeyCode() == 69) //e
+    m_actions.put(Actions.PICK, true);
+  
     if (Options.ECHO_KEYBOARD)
     	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
   }
@@ -165,7 +173,9 @@ public class Controller extends GameController implements ActionListener {
 	if(e.getKeyCode() == 65)
 		m_actions.put(Actions.HIT, false);
 	if(e.getKeyCode() == 70)
-		m_actions.put(Actions.PROJECTILE, false);
+    m_actions.put(Actions.PROJECTILE, false);
+  if(e.getKeyCode() == 69) //e
+		m_actions.put(Actions.PICK, false);
 
 
     if (Options.ECHO_KEYBOARD)
