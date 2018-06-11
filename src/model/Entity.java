@@ -35,7 +35,7 @@ public class Entity{
 		m_moveable = moveable;
 		m_moving = null;
 		m_pixelDone = 0;
-		m_updatePhysics = 30;
+		m_updatePhysics = 10;
 		m_state = "default";
 		m_tile = t;
 		m_orientation = Directions.DOWN;

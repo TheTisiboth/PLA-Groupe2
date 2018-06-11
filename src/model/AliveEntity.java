@@ -16,7 +16,6 @@ public abstract class AliveEntity extends Entity {
 	int m_lifeMax;
 	int m_damage;
 	double m_speed;
-	LifeBar m_lifeBar;
 	List<Portal> m_portals;
 
 	Inventory m_inventory;
@@ -31,10 +30,12 @@ public abstract class AliveEntity extends Entity {
 	Animation m_defaultUp;
 	Animation m_defaultDown;
 
+	int m_animationSpeed;
+
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
 			int life, int damage) {
 		super(model, posX, posY, true, filename, t);
-		m_lifeBar = new LifeBar(this);
+		
 		m_life = life;
 		m_lifeMax = life;
 		m_speed = speed; 
@@ -42,25 +43,20 @@ public abstract class AliveEntity extends Entity {
 		m_inventory = new Inventory();
 		m_damage = damage;
 
-		BufferedImage[] m_walkingLeftIm = {m_sprite.getSprite(0, 1), m_sprite.getSprite(2, 1)}; 
-		BufferedImage[] m_defaultLeftIm = {m_sprite.getSprite(1, 1)};
-		BufferedImage[] m_walkingRightIm = {m_sprite.getSprite(0, 2), m_sprite.getSprite(2, 2)};
-		BufferedImage[] m_defaultRightIm = {m_sprite.getSprite(1, 2)};
-		BufferedImage[] m_walkingUpIm = {m_sprite.getSprite(0, 3), m_sprite.getSprite(2, 3)};
-		BufferedImage[] m_defaultUpIm = {m_sprite.getSprite(1, 3)};
-		BufferedImage[] m_walkingDownIm = {m_sprite.getSprite(0, 0), m_sprite.getSprite(2, 0)};
-		BufferedImage[] m_defaultDownIm = {m_sprite.getSprite(1, 0)};
+		m_model.addLifeBar(this);
 
-		m_walkingLeft = new Animation(m_walkingLeftIm, 10);
-		m_walkingRight = new Animation(m_walkingRightIm, 10);
-		m_walkingUp = new Animation(m_walkingUpIm, 10);
-		m_walkingDown = new Animation(m_walkingDownIm, 10);
-		m_defaultLeft = new Animation(m_defaultLeftIm, 10);
-		m_defaultRight = new Animation(m_defaultRightIm, 10);
-		m_defaultUp = new Animation(m_defaultUpIm, 10);
-		m_defaultDown = new Animation(m_defaultDownIm, 10);
+		m_animationSpeed = (int) (m_speed * 30);
 
-		m_animation = m_defaultDown;
+		BufferedImage[] bIm = {m_sprite.getSprite(0, 0)};
+
+		m_walkingLeft = new Animation(bIm, 10);
+		m_walkingRight = new Animation(bIm, 10);
+		m_walkingUp = new Animation(bIm, 10);
+		m_walkingDown = new Animation(bIm, 10);
+		m_defaultLeft = new Animation(bIm, 10);
+		m_defaultRight = new Animation(bIm, 10);
+		m_defaultUp = new Animation(bIm, 10);
+		m_defaultDown = new Animation(bIm, 10);
 
 	}
 	
@@ -213,7 +209,6 @@ public abstract class AliveEntity extends Entity {
 		while(it.hasNext()) {
 			it.next().paint(g);
 		}
-		m_lifeBar.paint(g);
 	}
 
 	public boolean pick(){
@@ -261,7 +256,7 @@ public abstract class AliveEntity extends Entity {
 	private void updateAnimation(){
 
 		if(m_moving != null){
-			switch (m_moving) {
+			switch (m_orientation) {
 				case RIGHT:
 					m_animation = m_walkingRight;
 					break;

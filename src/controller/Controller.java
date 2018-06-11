@@ -23,8 +23,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.EnumMap;
 
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
-
 import edu.ricm3.game.GameController;
 import main.Directions;
 import controller.Options;
@@ -70,6 +68,9 @@ public class Controller extends GameController implements ActionListener {
    */
   @Override
   public void step(long now) {
+
+    //movement
+
 	  if(m_directions.get(Directions.UP))
 		  m_model.getPlayer().move(Directions.UP);
 	  else if(m_directions.get(Directions.DOWN))
@@ -78,6 +79,17 @@ public class Controller extends GameController implements ActionListener {
 		  m_model.getPlayer().move(Directions.LEFT);
 	  else if(m_directions.get(Directions.RIGHT))
       m_model.getPlayer().move(Directions.RIGHT);
+
+    //orientation
+
+	  if(m_orientations.get(Directions.UP))
+		  m_model.getPlayer().setOrientation(Directions.UP);
+	  else if(m_orientations.get(Directions.DOWN))
+		  m_model.getPlayer().setOrientation(Directions.DOWN);
+	  else if(m_orientations.get(Directions.LEFT))
+		  m_model.getPlayer().setOrientation(Directions.LEFT);
+	  else if(m_orientations.get(Directions.RIGHT))
+      m_model.getPlayer().setOrientation(Directions.RIGHT);
   }
 
   @Override
@@ -88,14 +100,23 @@ public class Controller extends GameController implements ActionListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-	if(e.getKeyCode() == 37)
+	if(e.getKeyCode() == 81) //q
 		m_directions.put(Directions.LEFT, true);
-	if(e.getKeyCode() == 38)
+	if(e.getKeyCode() == 90) //z
 		m_directions.put(Directions.UP, true);
-	if(e.getKeyCode() == 39)
+	if(e.getKeyCode() == 68) //d
 		m_directions.put(Directions.RIGHT, true);
+	if(e.getKeyCode() == 83) //s
+    m_directions.put(Directions.DOWN, true);  
+  if(e.getKeyCode() == 37)
+		m_orientations.put(Directions.LEFT, true);
+	if(e.getKeyCode() == 38)
+		m_orientations.put(Directions.UP, true);
+	if(e.getKeyCode() == 39)
+		m_orientations.put(Directions.RIGHT, true);
 	if(e.getKeyCode() == 40)
-		m_directions.put(Directions.DOWN, true);
+		m_orientations.put(Directions.DOWN, true);
+
 	if(e.getKeyCode() == 32)
 		m_model.getPlayer().pick();
 	
@@ -104,13 +125,22 @@ public class Controller extends GameController implements ActionListener {
   @Override
   public void keyReleased(KeyEvent e) {
 	if(e.getKeyCode() == 37)
-		m_directions.put(Directions.LEFT, false);
+		m_orientations.put(Directions.LEFT, false);
 	if(e.getKeyCode() == 38)
-		m_directions.put(Directions.UP, false);
+		m_orientations.put(Directions.UP, false);
 	if(e.getKeyCode() == 39)
-		m_directions.put(Directions.RIGHT, false);
+		m_orientations.put(Directions.RIGHT, false);
 	if(e.getKeyCode() == 40)
-		m_directions.put(Directions.DOWN, false);
+    m_orientations.put(Directions.DOWN, false);
+    
+  	if(e.getKeyCode() == 81) //q
+		m_directions.put(Directions.LEFT, false);
+	if(e.getKeyCode() == 90) //z
+		m_directions.put(Directions.UP, false);
+	if(e.getKeyCode() == 68) //d
+		m_directions.put(Directions.RIGHT, false);
+	if(e.getKeyCode() == 83) //s
+    m_directions.put(Directions.DOWN, false);  
 
 
     if (Options.ECHO_KEYBOARD)

@@ -1,8 +1,10 @@
-package model;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import model.AliveEntity;
 
 public class LifeBar {
 	
