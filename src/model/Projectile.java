@@ -81,18 +81,53 @@ public class Projectile extends AliveEntity {
 	
 						m_moving = null;
 						m_pixelDone = 0;
-						
-						//Passage dans un portail
-						Tile new_tile = m_model.getRoom().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
-						if(new_tile.hasPortal()){
-							new_tile.getPortal().GoThrough(this);
-						}
 					}
 	
 				}
 			}
 		}
 	}
+	
+	@Override
+	public void move(Directions moving) {
+		int newX = m_tile.m_x;
+		int newY = m_tile.m_y;
+		if(m_moving == null){
+			switch (moving) {
+				case RIGHT:
+					if (m_pixelX < Options.LARGEUR_PX - Options.TAILLE_CASE){
+						newX++;
+						if(changeTile(newX, newY))
+							m_moving = m_orientation;
+					}
+					break;
+				case LEFT:
+					if (m_pixelX > 0){
+						newX--;
+						if(changeTile(newX, newY))
+							m_moving = m_orientation;				
+						}
+					break;
+				case UP:
+					if (m_pixelY > 0){
+						newY--;
+						if(changeTile(newX, newY))
+							m_moving = m_orientation;
+					}
+					break;
+				case DOWN:
+					if (m_pixelY < Options.HAUTEUR_PX - Options.TAILLE_CASE){
+						newY++;
+						if(changeTile(newX, newY))
+							m_moving = m_orientation;
+					}
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	
 	public boolean testCollision() {
 		// Checking current tile
 		List<Entity> list = this.m_tile.m_entities;

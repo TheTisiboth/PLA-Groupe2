@@ -68,10 +68,6 @@ public class Entity{
 		}
 	}
 
-	public void wizz() {
-
-	}
-
 	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
 		File imageFile = new File(spriteFile);
 		try {
@@ -85,24 +81,6 @@ public class Entity{
 	}
 
 	public void step(long now) {
-		long timeElapsed = now-this.m_lastTime;
-
-		if(timeElapsed >= m_updatePhysics) {
-			this.m_lastTime = now;
-
-			m_pixelX = m_tile.m_x * Options.TAILLE_CASE;
-			m_pixelY = m_tile.m_y * Options.TAILLE_CASE;
-
-			m_moving = null;
-			m_pixelDone = 0;
-			
-			//Passage dans un portail
-			Tile new_tile = m_model.getRoom().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
-			if(new_tile.hasPortal()){
-				new_tile.getPortal().GoThrough(this);
-			}
-				
-		}
 	}
 
 	public void paint(Graphics g){
@@ -156,8 +134,13 @@ public class Entity{
 		if(newX > Options.LARGEUR -1 || newY > Options.HAUTEUR - 1|| newX < 0 || newY < 0)
 			return false;
 		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
-		if(newTile.getEntityOnLayer(m_layer)==null){
+		Portal portal = (Portal)newTile.getEntityOnLayer(Options.LAYER_PORTAL);
+		if(newTile.getEntityOnLayer(m_layer)==null || ( portal!=null && portal.Active() ) ){
 			getTile().delEntity(this);
+			if(portal !=null && portal.Active()) {
+				newTile = portal.m_destPortal.m_exitTile;
+				this.m_orientation = portal.m_destPortal.m_exitDir;
+			}
 			newTile.putEntity(m_layer, this);
 			setTile(newTile);
 			return true;

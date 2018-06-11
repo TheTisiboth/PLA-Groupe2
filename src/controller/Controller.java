@@ -97,7 +97,7 @@ public class Controller extends GameController implements ActionListener {
 	if(e.getKeyCode() == 40)
 		m_keys.put(Directions.DOWN, true);
 	if(e.getKeyCode() == 32)
-		m_model.getPlayer().pick();
+		m_model.getPlayer().wizz();
 	if(e.getKeyCode() == 65)
 		m_keys.put(Directions.HIT, true);
 	if(e.getKeyCode() == 70)

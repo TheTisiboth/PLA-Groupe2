@@ -99,10 +99,6 @@ public class Tile {
 		return true;
 	}
 
-	public void deletePortal() {
-		m_entities.set(Options.LAYER_PORTAL, null);
-	}
-
 	public void setPortal(Portal portal) {
 		m_entities.set(Options.LAYER_PORTAL, portal);
 
