@@ -27,5 +27,9 @@ public class LifeBar {
 		}
 
 	}
+
+	public AliveEntity getEntity(){
+		return m_entity;
+	}
 	
 }

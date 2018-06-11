@@ -52,8 +52,11 @@ public class Model extends GameModel {
    */
   @Override
   public void step(long now) {
-	  m_player.step(now);
-	  m_room.update();
+    m_room.update(now);
+    for (int i = 0; i < m_lbList.size(); i++) {
+      if(m_lbList.get(i) != null && m_lbList.get(i).getEntity().getLife()<=0)
+        m_lbList.set(i, null);
+    }
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)

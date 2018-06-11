@@ -25,6 +25,7 @@ import java.util.EnumMap;
 
 import edu.ricm3.game.GameController;
 import main.Directions;
+import main.Actions;
 import controller.Options;
 import model.Model;
 
@@ -45,6 +46,7 @@ public class Controller extends GameController implements ActionListener {
   Model m_model;
   EnumMap<Directions, Boolean> m_directions;
   EnumMap<Directions, Boolean> m_orientations;
+  EnumMap<Actions, Boolean> m_actions;
 
 
   public Controller(Model m) {
@@ -58,6 +60,13 @@ public class Controller extends GameController implements ActionListener {
     m_directions.put(Directions.LEFT, false);
 
     m_orientations = new EnumMap<Directions,Boolean>(m_directions);
+
+    m_actions = new EnumMap<Actions,Boolean>(Actions.class);
+
+    m_actions.put(Actions.HIT, false);
+    m_actions.put(Actions.PROJECTILE, false);
+    m_actions.put(Actions.PORTAL, false);
+
   }
 
   /**
@@ -90,12 +99,20 @@ public class Controller extends GameController implements ActionListener {
 		  m_model.getPlayer().setOrientation(Directions.LEFT);
 	  else if(m_orientations.get(Directions.RIGHT))
       m_model.getPlayer().setOrientation(Directions.RIGHT);
+
+	  if(m_actions.get(Actions.HIT)){
+      m_model.getPlayer().attack();
+      m_actions.put(Actions.HIT, false);
+    }
+	  if(m_actions.get(Actions.PROJECTILE)){
+      m_model.getPlayer().throwProjectile();
+      m_actions.put(Actions.PROJECTILE, false);
+    }
   }
 
   @Override
   public void keyTyped(KeyEvent e) {
-    if(e.getKeyCode() == 65) // 'a'
-		  m_model.getPlayer().attack();
+
   }
 
   @Override
@@ -117,9 +134,12 @@ public class Controller extends GameController implements ActionListener {
 	if(e.getKeyCode() == 40)
 		m_orientations.put(Directions.DOWN, true);
 
-	if(e.getKeyCode() == 32)
-		m_model.getPlayer().pick();
-	
+	if(e.getKeyCode() == 65)
+		m_actions.put(Actions.HIT, true);
+	if(e.getKeyCode() == 70)
+		m_actions.put(Actions.PROJECTILE, true);
+    if (Options.ECHO_KEYBOARD)
+    	System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
   }
 
   @Override
@@ -141,6 +161,11 @@ public class Controller extends GameController implements ActionListener {
 		m_directions.put(Directions.RIGHT, false);
 	if(e.getKeyCode() == 83) //s
     m_directions.put(Directions.DOWN, false);  
+
+	if(e.getKeyCode() == 65)
+		m_actions.put(Actions.HIT, false);
+	if(e.getKeyCode() == 70)
+		m_actions.put(Actions.PROJECTILE, false);
 
 
     if (Options.ECHO_KEYBOARD)

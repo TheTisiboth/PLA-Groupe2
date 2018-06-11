@@ -70,7 +70,8 @@ private void computeFPS() {
     m_back.paint(g);
     m_room.paint(g);
     for (LifeBar lb : m_model.getLifeBar()) {
-      lb.paint(g);
+      if(lb != null)
+        lb.paint(g);
     }
 
   }

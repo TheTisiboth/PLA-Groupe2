@@ -8,6 +8,12 @@ import main.Directions;
 
 import utils.*;
 
+enum Team{
+	ALLIED,
+	ENEMY,
+	NEUTRAL
+}
+
 public class Entity{
 	int m_pixelX,m_pixelY;
 	boolean m_moveable;
@@ -23,6 +29,8 @@ public class Entity{
 	Model m_model;
 	Tile m_tile;
 	int m_layer;
+	
+	Team m_team;
 
 	Sprite m_sprite;
 
@@ -36,13 +44,14 @@ public class Entity{
 		m_moving = null;
 		m_pixelDone = 0;
 		m_updatePhysics = 10;
-		m_state = "default";
 		m_tile = t;
 		m_orientation = Directions.DOWN;
 
 		m_sprite = new Sprite(filename);
 
 		m_animation = new Animation(new BufferedImage[]{m_sprite.getSprite(0, 0)}, 10);
+
+		m_team = Team.NEUTRAL;
 	}
 
 	public void move(Directions moving) {
@@ -96,9 +105,12 @@ public class Entity{
 
 	public void paint(Graphics g){
 		m_animation.update();
-		// m_currentSprite = m_spritesList.get(m_state);
 		g.drawImage(m_animation.getSprite(), m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
 
+	}
+	
+	public void kill(){
+		m_tile.delEntity(this);
 	}
 
 	public Directions getOrientation() {
@@ -111,6 +123,10 @@ public class Entity{
 
 	public Directions getMoving() {
 		return m_moving;
+	}
+
+	public Team getTeam(){
+		return m_team;
 	}
 
 
@@ -177,6 +193,28 @@ public class Entity{
 		if(x > Options.LARGEUR -1 || y > Options.HAUTEUR - 1|| x < 0 || y < 0)
 			return null;
 		return m_model.getRoom().getTiles()[x][y].m_entities;
+	}
+	
+	public Tile getLookingTile(Directions d){
+		int x = m_tile.m_x;
+		int y = m_tile.m_y;
+		switch (d) {
+			case RIGHT:
+				x += 1;
+				break;
+			case LEFT:
+				x += -1;
+				break;
+			case UP:
+				y += -1;
+				break;
+			case DOWN:
+				y += 1;
+				break;
+			default:
+				break;
+		}
+		return m_model.getRoom().getTile(x, y);
 	}
 	
 }

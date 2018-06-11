@@ -38,7 +38,6 @@ public class Animation {
     }
 
     public void start() {
-        System.out.println("start");
         if (!m_stopped) {
             return;
         }

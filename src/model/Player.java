@@ -32,6 +32,8 @@ public class Player extends AliveEntity {
 		m_defaultUp = new Animation(m_defaultUpIm, m_animationSpeed);
 		m_defaultDown = new Animation(m_defaultDownIm, m_animationSpeed);
 
+		m_team = Team.ALLIED;
+
 	}
 
 }

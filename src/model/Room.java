@@ -60,11 +60,11 @@ public class Room {
 		}
 	}
 
-	public void update () {
+	public void update (long now) {
 		for (int i = 0; i < 4; i++) {
 			for (int x = 0; x < Options.LARGEUR; x++) {
 				for (int y = 0; y < Options.HAUTEUR; y++) {
-					m_tiles[x][y].update();
+					m_tiles[x][y].update(now);
 				}
 			}
 		}
