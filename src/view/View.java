@@ -23,8 +23,6 @@ import java.awt.Graphics;
 import controller.Controller;
 import edu.ricm3.game.GameView;
 import model.Background;
-import model.Entity;
-import model.Level;
 import model.Model;
 import model.Room;
 
