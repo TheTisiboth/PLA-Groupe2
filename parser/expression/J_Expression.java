@@ -14,6 +14,6 @@ public abstract class J_Expression {
 	}
 	
 	public boolean eval() {
-
-	
+		return false;
+	}
 }
