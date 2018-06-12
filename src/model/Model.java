@@ -17,14 +17,21 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.ricm3.game.GameModel;
+import view.LifeBar;
 
 public class Model extends GameModel {
   Player m_player;
   Level m_level;
   Room m_room;
+  List<LifeBar> m_lbList;
+
 
   public Model() {
+    m_lbList = new ArrayList<LifeBar>();
     m_player = new Player(this, 0, 0, null, 20, 2);
     m_level = new Level("assets/level/level.json",this);
     m_level.loadLevel();
@@ -45,8 +52,11 @@ public class Model extends GameModel {
    */
   @Override
   public void step(long now) {
-	  m_player.step(now);
-	  m_room.update();
+    m_room.update(now);
+    for (int i = 0; i < m_lbList.size(); i++) {
+      if(m_lbList.get(i) != null && m_lbList.get(i).getEntity().getLife()<=0)
+        m_lbList.set(i, null);
+    }
     //appeler step sur toutes les entites
 	/*
     for (int i = 0; i < m_cowboys.length; i++)
@@ -59,6 +69,14 @@ public class Model extends GameModel {
   
   public Room getRoom(){
     return m_room;
+  }
+
+  public void addLifeBar(AliveEntity e){
+    m_lbList.add(new LifeBar(e));
+  }
+
+  public List<LifeBar> getLifeBar(){
+    return m_lbList;
   }
 
 }
