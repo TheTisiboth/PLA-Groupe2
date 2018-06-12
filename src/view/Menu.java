@@ -36,7 +36,7 @@ public class Menu extends JFrame {
 		m_playButton.setOpaque(false);
 		m_playButton.setContentAreaFilled(false);
 		m_playButton.setBorderPainted(false);
-		m_playButton.setIcon(new ImageIcon("assets/sprites/Play.png"));
+		m_playButton.setIcon(new ImageIcon("assets/view/Play.png"));
 		m_playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -50,7 +50,7 @@ public class Menu extends JFrame {
 		m_automataButton.setOpaque(false);
 		m_automataButton.setContentAreaFilled(false);
 		m_automataButton.setBorderPainted(false);
-		m_automataButton.setIcon(new ImageIcon("assets/sprites/Automata.png"));
+		m_automataButton.setIcon(new ImageIcon("assets/view/Automata.png"));
 		m_automataButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -64,7 +64,7 @@ public class Menu extends JFrame {
 		m_quitButton.setOpaque(false);
 		m_quitButton.setContentAreaFilled(false);
 		m_quitButton.setBorderPainted(false);
-		m_quitButton.setIcon(new ImageIcon("assets/sprites/Quit.png"));
+		m_quitButton.setIcon(new ImageIcon("assets/view/Quit.png"));
 		m_quitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -74,7 +74,7 @@ public class Menu extends JFrame {
 		this.add(m_quitButton);
 		
 		
-		JLabel background = new JLabel(new ImageIcon(new ImageIcon("assets/sprites/MainMenu.png").getImage().getScaledInstance(1024,704,Image.SCALE_DEFAULT)));
+		JLabel background = new JLabel(new ImageIcon(new ImageIcon("assets/view/MainMenu.png").getImage().getScaledInstance(1024,704,Image.SCALE_DEFAULT)));
 		background.setBounds(0,0,1024,704);
 		this.add(background);
 		

@@ -19,8 +19,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
 
 import controller.Controller;
 import edu.ricm3.game.GameView;
