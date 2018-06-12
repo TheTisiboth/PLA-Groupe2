@@ -6,7 +6,8 @@
   ],
   "items": [
     "life",
-    "poison"
+    "poison",
+	"rifle"
   ],
   "rooms": [
     0,

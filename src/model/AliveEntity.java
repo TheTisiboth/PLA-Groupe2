@@ -220,4 +220,10 @@ public abstract class AliveEntity extends Entity {
 			m_tile.delEntity(this);
 		}
 	}
+
+	public Inventory getInventory() {
+		return m_inventory;
+	}
+	
+	
 }

@@ -43,7 +43,7 @@ public class GameMain {
 
 		    Dimension d = new Dimension(Options.LARGEUR_PX + 150, Options.HAUTEUR_PX + 15);
 		    GameUI game = new GameUI(model,view,controller,d);
-		    game.addEast(new RightPanel());
+		    game.addEast(new RightPanel(model));
 		    m_menu.setVisible(false);
 	  }
 }

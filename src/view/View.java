@@ -40,6 +40,7 @@ public class View extends GameView {
   Controller m_ctr;
   Background m_back;
   Room m_room;
+  HUD m_hud;
 
 
   public View(Model m, Controller c) {
@@ -47,6 +48,7 @@ public class View extends GameView {
     m_ctr = c;
     m_back = new Background();
     m_room = m.getRoom();
+    
   }
 
 
@@ -67,6 +69,8 @@ private void computeFPS() {
 
     m_back.paint(g);
     m_room.paint(g);
+    
+    
 
   }
 

@@ -22,5 +22,7 @@ public class Player extends AliveEntity {
 		super(model, x, y, m_spriteFile, m_startingSpeed, t, life, damage);
 		m_layer = Options.layers.get("character");
 	}
+	
+	
 
 }

@@ -47,6 +47,36 @@ public class Inventory {
 			}
 			
 		}
+		
+		for (Map.Entry mapentry : m_consumable.entrySet()) {
+	           System.out.println("clé: "+mapentry.getKey() 
+	                              + " | valeur: " + mapentry.getValue());
+	        }
+		
+	}
+	
+	public int getNumberLife() {
+		
+		if(m_consumable.get(ItemType.LIFE) != null)
+		return m_consumable.get(ItemType.LIFE);
+		
+		else return 0;
+			
+	}
+	
+	public int getNumberPoison() {
+		
+		if(m_consumable.get(ItemType.POISON) != null)
+		return m_consumable.get(ItemType.POISON);
+		
+		else return 0;
+			
+	}
+	
+	public Item getWeapon() {
+		
+		return m_weapon;
+			
 	}
 
 }
