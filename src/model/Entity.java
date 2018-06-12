@@ -54,6 +54,43 @@ public class Entity{
 		m_team = Team.NEUTRAL;
 	}
 
+	public Directions RelativeToRealDir(Directions dir) {
+		switch(dir) {
+		case OnMyLeft:
+			if(m_orientation == Directions.DOWN)
+				return Directions.RIGHT;
+			else if(m_orientation == Directions.RIGHT)
+				return Directions.UP;
+			else if(m_orientation == Directions.UP)
+				return Directions.LEFT;
+			else if(m_orientation == Directions.LEFT)
+				return Directions.DOWN;
+			break;
+		case OnMyRight:
+			if(m_orientation == Directions.UP)
+				return Directions.RIGHT;
+			else if(m_orientation == Directions.RIGHT)
+				return Directions.DOWN;
+			else if(m_orientation == Directions.DOWN)
+				return Directions.LEFT;
+			else if(m_orientation == Directions.LEFT)
+				return Directions.UP;
+		case FRONT:
+			return m_orientation;
+		case BACK:
+			if(m_orientation == Directions.UP)
+				return Directions.DOWN;
+			else if(m_orientation == Directions.DOWN)
+				return Directions.UP;
+			else if(m_orientation == Directions.RIGHT)
+				return Directions.LEFT;
+			else if(m_orientation == Directions.LEFT)
+				return Directions.RIGHT;
+		}
+		return null;
+		
+	}
+	
 	public void move(Directions moving) {
 		if(m_moving == null){
 			switch (moving) {

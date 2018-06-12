@@ -1,6 +1,6 @@
 Turner(Turn_0){
-  * (Turn_0): True ? Move(N) :(Turn_1)
+  * (Turn_0): True ? Turn(N) :(Turn_1)
   * (Turn_1): True ? Move(E) :(Turn_2)
-  * (Turn_2): True ? Move(S) :(Turn_3)
-  * (Turn_3): True ? Move(O) :(Turn_0)
+  * (Turn_2): True ? Turn(S) :(Turn_3)
+  * (Turn_3): True ? Turn(O) :(Turn_0)
 }
