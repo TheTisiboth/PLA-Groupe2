@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Graphics;
 import java.util.List;
+
+import controller.Options;
 import main.Directions;
 
 public class Projectile extends MovableEntity {
@@ -46,6 +48,7 @@ public class Projectile extends MovableEntity {
 
 		}
 	}
+	
 	public boolean testCollision() {
 		// Checking current tile
 		List<Entity> list = m_tile.m_entities;

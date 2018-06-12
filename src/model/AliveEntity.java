@@ -58,55 +58,18 @@ public abstract class AliveEntity extends MovableEntity {
 	}
 
 	@Override
-	public void wizz() {
-		super.wizz();
-		if(m_portals.size() >= 2) {
-			m_portals.get(0).delete();
-			m_portals.remove(0);
-		}
-
-		int newPosX = m_pixelX;
-		int newPosY = m_pixelY;
-		Directions newDir = null;
-		
-		if(m_orientation == Directions.LEFT) {
-			newPosX -= Options.TAILLE_CASE;
-			newDir = Directions.RIGHT;
-		}
-		if(m_orientation == Directions.RIGHT) {
-			newDir = Directions.LEFT;
-			newPosX += Options.TAILLE_CASE;
-		}
-		if(m_orientation == Directions.UP) {
-			newPosY -= Options.TAILLE_CASE;
-			newDir = Directions.DOWN;
-		}
-		if(m_orientation == Directions.DOWN) {
-			newDir = Directions.UP;
-			newPosY += Options.TAILLE_CASE;
-		}
-
-		Tile new_tile = m_model.getRoom().getTile(newPosX / Options.TAILLE_CASE, newPosY / Options.TAILLE_CASE);
-		Portal portal = new Portal(m_model, newPosX, newPosY, newDir,m_tile,-1);
-		
-		if(m_portals.size() >= 1) {
-			Portal.setPortalPair(portal, m_portals.get(0));
-		}
-		
-		
-		//new_tile.setPortal(portal);
-		new_tile.putEntity(Options.LAYER_PORTAL, portal);
-		m_portals.add(portal);
-	}
-
-	@Override
 	public void step(long now) {
-
+	
 		super.step(now);
 		projectileCooldown--;
 		if(m_life<=0)
 			kill();
+	}
 
+	@Override
+	public void move(Directions moving) {
+		super.move(moving);
+		m_orientation = moving;
 	}
 
 	@Override
@@ -145,6 +108,41 @@ public abstract class AliveEntity extends MovableEntity {
 	public double getLifePercentage() {
 		return (double) ((double)m_life / (double)m_lifeMax);
 	}
+	
+	public void wizz() {
+		Directions dir = this.getOrientation();
+		Tile spawningTile = this.getLookingTile(dir);
+		List<Entity> list = spawningTile.m_entities;
+		while( ! (list.get(1) instanceof Wall) ) {
+			spawningTile = spawningTile.nextTile(dir);
+			list = spawningTile.m_entities;
+		}
+		if(list.get(1)instanceof Wall && !(list.get(3) instanceof Portal)) {
+			Directions exitDir = null;
+			if(m_orientation==Directions.UP) {exitDir=Directions.DOWN;}
+			if(m_orientation==Directions.DOWN) {exitDir=Directions.UP;}
+			if(m_orientation==Directions.LEFT) {exitDir=Directions.RIGHT;}
+			if(m_orientation==Directions.RIGHT) {exitDir=Directions.LEFT;}
+			Tile exitTile = spawningTile.nextTile(exitDir);
+			Portal portal = new Portal(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, dir,spawningTile,exitTile,exitDir);
+			
+			if(m_portals.size() >= 2) {
+				m_portals.get(0).delete();
+				m_portals.remove(0);
+			}
+			
+			if(m_portals.size() >= 1) {
+				Portal.setPortalPair(portal, m_portals.get(0));
+			}
+			
+			spawningTile.putEntity(Options.LAYER_PORTAL, portal);
+			m_portals.add(portal);
+		}
+	}
+	
+	public void pop() {
+		return;
+	}
 
 	public void attack() {
 		Directions dir = m_model.getPlayer().m_orientation;
@@ -160,9 +158,18 @@ public abstract class AliveEntity extends MovableEntity {
 		if (projectileCooldown <= 0) {
 			Directions dir = this.getOrientation();
 			Tile spawningTile = this.getLookingTile(dir);
-			new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 3, dir, m_team);
-			projectileCooldown = 500;
-
+			if (spawningTile.m_entities.get(Options.layers.get("projectile")) == null){
+				Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 3,dir,m_team);
+				spawningTile.putEntity(Options.layers.get("projectile"),proj);
+				proj.m_orientation=dir;
+				projectileCooldown = 500;
+				
+				//First action of the projectile
+				if(proj.testCollision()) {
+					return;
+				}
+				proj.move(dir);
+			}
 		}
 		return;
 	}
@@ -210,5 +217,10 @@ public abstract class AliveEntity extends MovableEntity {
 		}
 	}
 
+	public void tryToKill() {
+		if(this.m_life <= 0) {
+			m_tile.delEntity(this);
+		}
+	}
 	
 }
