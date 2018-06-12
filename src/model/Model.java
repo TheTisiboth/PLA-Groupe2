@@ -20,6 +20,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.Options;
 import edu.ricm3.game.GameModel;
 import view.LifeBar;
 
@@ -29,12 +30,20 @@ public class Model extends GameModel {
   Room m_room;
   List<LifeBar> m_lbList;
 
+  List<Level> m_lvlList;
+
+  int m_lvlID;
 
   public Model() {
     m_lbList = new ArrayList<LifeBar>();
     m_player = new Player(this, 0, 0, null, 20, 2);
-    m_level = new Level("assets/level/level.json",this);
-    m_level.loadLevel();
+    m_lvlList = new ArrayList<Level>();
+    for (int i = 0; i < Options.lvlNb; i++) {
+      m_lvlList.add(i, new Level(i,this));
+    }
+    m_lvlID = 0;
+    m_level = m_lvlList.get(m_lvlID);
+    m_level.nextRoom();
     m_room = m_level.getCurrentRoom();
 
   }
@@ -77,6 +86,22 @@ public class Model extends GameModel {
 
   public List<LifeBar> getLifeBar(){
     return m_lbList;
+  }
+
+  public void nextRoom(){
+    flush();
+    m_level.nextRoom();
+    m_room = m_level.getCurrentRoom();
+  }
+
+  public void nextLevel(){
+
+  }
+
+  private void flush(){
+    m_lbList = new ArrayList<LifeBar>();
+    addLifeBar(m_player);
+    m_player.flushPortals();
   }
 
 }

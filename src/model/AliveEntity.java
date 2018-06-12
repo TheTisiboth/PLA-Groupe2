@@ -222,5 +222,11 @@ public abstract class AliveEntity extends MovableEntity {
 			m_tile.delEntity(this);
 		}
 	}
+
+	public void flushPortals(){
+		for(int i = 0; i<m_portals.size(); i++) {
+			m_portals.remove(i);			
+		}
+	}
 	
 }

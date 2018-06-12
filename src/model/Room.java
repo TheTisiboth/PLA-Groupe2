@@ -1,17 +1,12 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics;
-
-import java.util.*;
 
 import controller.Options;
 import controller.Options.TileObject;
 import utils.MapParser;
 
-// import java.util.List;
-
-// import controller.Options;
-// import utils.MapParser;
 
 public class Room {
 
@@ -28,6 +23,8 @@ public class Room {
 		m_startingEntities = MapParser.getMap(mapID + "");
 		m_tiles = new Tile[Options.LARGEUR][Options.HAUTEUR];
 		tileConstructor(m_startingEntities);
+		if(m_exit == null || m_spawn == null)
+			throw new Error("Le spawn ou la sortie n'est pas définie sur la map "+mapID);
 	}
 
 	private void tileConstructor(TileObject[][] to) {
@@ -58,6 +55,8 @@ public class Room {
 				}
 			}
 		}
+		g.setColor(Color.red);
+		g.drawRect((m_exit.m_x * Options.TAILLE_CASE) + 3, (m_exit.m_y * Options.TAILLE_CASE)  + 3, Options.TAILLE_CASE - 6, Options.TAILLE_CASE - 6);
 	}
 
 	public void update (long now) {
@@ -68,6 +67,8 @@ public class Room {
 				}
 			}
 		}
+		if(m_exit.getEntityOnLayer(1) instanceof Player)
+			m_model.nextRoom();
 	}
 
 	public Tile getTile(int x, int y) {
@@ -77,5 +78,4 @@ public class Room {
 	public Tile[][] getTiles() {
 		return m_tiles;
 	}
-
 }

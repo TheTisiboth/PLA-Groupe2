@@ -3,7 +3,6 @@ package model;
 import java.awt.Graphics;
 import java.util.List;
 
-import controller.Options;
 import main.Directions;
 
 public class Projectile extends MovableEntity {
@@ -13,7 +12,6 @@ public class Projectile extends MovableEntity {
 	
 	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Team team) {
 		super(model, posX, posY, speed, filename, tile);
-		// TODO Auto-generated constructor stub
 		m_team = team;
 		m_layer = 2;
 		tile.putEntity(m_layer,this);
