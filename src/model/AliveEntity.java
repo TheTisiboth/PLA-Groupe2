@@ -203,16 +203,18 @@ public abstract class AliveEntity extends Entity {
 		if (projectileCooldown <= 0) {
 			Directions dir = this.getOrientation();
 			Tile spawningTile = this.getLookingTile(dir);
-			Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 200, 3);
-			spawningTile.putEntity(Options.layers.get("projectile"),proj);
-			proj.m_orientation=dir;
-			projectileCooldown = 500;
-			
-			//First action of the projectile
-			if(proj.testCollision()) {
-				return;
+			if (spawningTile.m_entities.get(Options.layers.get("projectile")) == null){
+				Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 200, 3);
+				spawningTile.putEntity(Options.layers.get("projectile"),proj);
+				proj.m_orientation=dir;
+				projectileCooldown = 500;
+				
+				//First action of the projectile
+				if(proj.testCollision()) {
+					return;
+				}
+				proj.move(dir);
 			}
-			proj.move(dir);
 		}
 		return;
 	}
