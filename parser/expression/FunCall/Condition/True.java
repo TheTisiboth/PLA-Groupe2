@@ -3,6 +3,7 @@ package expression.FunCall.Condition;
 import java.util.List;
 
 import j.J_Parameters;
+import model.Entity;
 
 public class True extends J_Condition {
 
@@ -11,7 +12,7 @@ public class True extends J_Condition {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public boolean eval() {
+	public boolean eval(Entity e) {
 		return true;
 	}
 
