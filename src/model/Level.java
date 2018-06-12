@@ -143,6 +143,11 @@ public class Level {
 
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
+		if(str.equals("sword")) {
+			String damage = (String) itemsList.get("damage");
+			Item returnItem = new Sword(m, x, y, itemSprite, tile, -1,str,Integer.parseInt(damage));
+			return returnItem;
+		}
 		
 		//TODO mettre la vraie vie
 		Item returnItem = new Item(m, x, y, itemSprite, tile, -1,str);

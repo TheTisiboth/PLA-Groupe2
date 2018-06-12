@@ -11,6 +11,7 @@ public abstract class AliveEntity extends Entity {
 	int m_life;
 	int m_lifeMax;
 	int m_damage;
+	int m_weaponDamage;
 	double m_speed;
 	LifeBar m_lifeBar;
 	List<Portal> m_portals;
@@ -210,7 +211,12 @@ public abstract class AliveEntity extends Entity {
 		List<Entity> list = this.checkTile(dir);
 		if(list.get(1) instanceof Enemy) {
 			Enemy enemy = (Enemy) list.get(1);
-			enemy.m_life = enemy.m_life - this.m_damage;
+			if(m_inventory.m_weapon != null) {
+				enemy.m_life = enemy.m_life - m_inventory.m_weapon.m_damage;
+			}
+			else {
+				enemy.m_life = enemy.m_life - this.m_damage;
+			}
 		}
 		return;
 	}

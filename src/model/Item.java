@@ -16,6 +16,7 @@ public class Item extends Entity {
 	}
 
 	ItemType m_type;
+	int m_damage;
 
 	public Item(Model model, int x, int y, String spriteFile, Tile t, int life,String type) {
 		super(model, x, y, false, spriteFile, t);

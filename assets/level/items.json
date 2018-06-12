@@ -8,8 +8,9 @@
   "revival": {
     "sprite": "assets/sprites/revival.png"
   },
-  "rifle": {
-    "sprite": "assets/sprites/rifle.png"
+  "sword": {
+    "sprite": "assets/sprites/EpeeD.png"
+	"damage" : "8"
   },
   "bomb": {
     "sprite": "assets/sprites/bomb.png"
