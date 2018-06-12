@@ -6,6 +6,7 @@ import java.util.*;
 
 import controller.Options;
 import controller.Options.TileObject;
+import main.Directions;
 
 public class Tile {
 
@@ -102,6 +103,28 @@ public class Tile {
 	public void setPortal(Portal portal) {
 		m_entities.set(Options.LAYER_PORTAL, portal);
 
+	}
+	
+	public Tile nextTile(Directions dir) {
+		int x = m_x;
+		int y = m_y;
+		switch (dir) {
+			case RIGHT:
+				x += 1;
+				break;
+			case LEFT:
+				x += -1;
+				break;
+			case UP:
+				y += -1;
+				break;
+			case DOWN:
+				y += 1;
+				break;
+			default:
+				break;
+		}
+		return m_model.getRoom().getTile(x, y);
 	}
 
 }

@@ -167,13 +167,18 @@ public abstract class AliveEntity extends Entity {
 		Directions dir = this.getOrientation();
 		Tile spawningTile = this.getLookingTile(dir);
 		List<Entity> list = spawningTile.m_entities;
+		while( ! (list.get(1) instanceof Wall) ) {
+			spawningTile = spawningTile.nextTile(dir);
+			list = spawningTile.m_entities;
+		}
 		if(list.get(1)instanceof Wall && !(list.get(3) instanceof Portal)) {
 			Directions exitDir = null;
 			if(m_orientation==Directions.UP) {exitDir=Directions.DOWN;}
 			if(m_orientation==Directions.DOWN) {exitDir=Directions.UP;}
 			if(m_orientation==Directions.LEFT) {exitDir=Directions.RIGHT;}
 			if(m_orientation==Directions.RIGHT) {exitDir=Directions.LEFT;}
-			Portal portal = new Portal(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, dir,spawningTile,m_tile,exitDir);
+			Tile exitTile = spawningTile.nextTile(exitDir);
+			Portal portal = new Portal(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, dir,spawningTile,exitTile,exitDir);
 			
 			if(m_portals.size() >= 2) {
 				m_portals.get(0).delete();
@@ -187,6 +192,10 @@ public abstract class AliveEntity extends Entity {
 			spawningTile.putEntity(Options.LAYER_PORTAL, portal);
 			m_portals.add(portal);
 		}
+	}
+	
+	public void pop() {
+		return;
 	}
 
 	public void attack() {
