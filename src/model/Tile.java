@@ -6,6 +6,7 @@ import java.util.*;
 
 import controller.Options;
 import controller.Options.TileObject;
+import j.J_AI_Definition;
 import j.J_Automaton;
 
 public class Tile {
@@ -17,7 +18,7 @@ public class Tile {
 
 	Automate m_automate;
 	
-	public Tile(TileObject to, int x, int y, Model m, J_Automaton j_Automaton) {
+	public Tile(TileObject to, int x, int y, Model m, J_AI_Definition j_ast) {
 		m_x = x;
 		m_y = y;
 		m_model = m;
@@ -34,7 +35,8 @@ public class Tile {
 		case ENEMY:
 			Entity enn = m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
 			putEntity(Options.layers.get("character"), enn);
-			m_automate = new Automate(enn, j_Automaton.getCopy());
+			J_Automaton auto = j_ast.randomAutomaton();
+			m_automate = new Automate(enn, auto.getCopy());
 			
 			break;
 		case BOSS:

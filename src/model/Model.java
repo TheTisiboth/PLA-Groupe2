@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ricm3.game.GameModel;
+import j.J_AI_Definition;
 import view.LifeBar;
 
 public class Model extends GameModel {
@@ -28,9 +29,10 @@ public class Model extends GameModel {
   Level m_level;
   Room m_room;
   List<LifeBar> m_lbList;
+  J_AI_Definition m_ast;
 
-
-  public Model() {
+  public Model(J_AI_Definition ast) {  
+	m_ast = ast;
     m_lbList = new ArrayList<LifeBar>();
     m_player = new Player(this, 0, 0, null, 20, 2);
     m_level = new Level("assets/level/level.json",this);
@@ -79,4 +81,8 @@ public class Model extends GameModel {
     return m_lbList;
   }
 
-}
+  public J_AI_Definition getAst() {
+	  return m_ast;
+  }
+  
+  }

@@ -1,13 +1,12 @@
 package j;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 import model.Entity;
 
 public class J_Automaton {
-	String name;
+	public String name;
 	J_State entry;
 	List<J_Behaviour> behaviours;
 	
