@@ -3,6 +3,7 @@ package expression.FunCall.Actions;
 import java.util.List;
 
 import j.J_Parameters;
+import model.Entity;
 
 public class Move extends J_Action {
 
@@ -11,10 +12,10 @@ public class Move extends J_Action {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void exec() {
+	public void exec(Entity entite) {
 		System.out.print("Move(");
 		if(parameters.size() > 0)
-			System.out.print(parameters.get(0).toString() + ")\n");
+			entite.move(parameters.get(0).toDirection());
 		else
 			System.out.print("F)\n");
 	}

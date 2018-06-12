@@ -2,13 +2,23 @@ package model;
 
 import j.*;
 
-public class Automate extends Entity{
+public class Automate {
 	J_Automaton comportement;
+	Entity entite;
 	
-	public Automate(Model model, int posX, int posY, boolean moveable, String filename, Tile t) {
-		super(model, posX, posY, moveable, filename, t);
-		// TODO Auto-generated constructor stub
+	long last;
+	long cooldown = 1000;
+	
+	public Automate(Entity entite, J_Automaton comportement) {
+		this.entite = entite;
+		this.comportement = comportement;
 	}
 	
 
+	public void step(long now) {
+		if(now - last > cooldown) {
+			comportement.step(entite);
+			last = now;
+		}
+	}
 }
