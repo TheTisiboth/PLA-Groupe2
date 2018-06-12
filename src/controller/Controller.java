@@ -24,8 +24,9 @@ import java.awt.event.MouseEvent;
 import java.util.EnumMap;
 
 import edu.ricm3.game.GameController;
-import main.Directions;
 import main.Actions;
+import main.Directions;
+
 import controller.Options;
 import model.Model;
 

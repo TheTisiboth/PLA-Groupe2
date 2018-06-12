@@ -31,6 +31,7 @@ public class J_Parameters {
 			return Directions.OnMyRight;
 		case OnMyLeft:
 			return Directions.OnMyLeft;
+
 		}
 		return null;
 	}
