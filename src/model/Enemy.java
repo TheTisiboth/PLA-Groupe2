@@ -3,6 +3,7 @@ package model;
 import java.awt.image.BufferedImage;
 
 import controller.Options;
+import main.Teams;
 import utils.Animation;
 
 public class Enemy extends AliveEntity {
@@ -10,7 +11,7 @@ public class Enemy extends AliveEntity {
 	// static int m_layer = 1;
 
 	public Enemy(Model model, int x, int y, String filename, double speed, Tile t, int life, int damage) {
-		super(model, x, y, filename, speed, t, life,damage);
+		super(model, x, y, filename, speed, t, life,damage, Teams.Adversaire);
 		m_layer = Options.layers.get("character");
 		
 		BufferedImage[] m_walkingUpIm = {m_sprite.getSprite(0, 3), m_sprite.getSprite(2, 3)};

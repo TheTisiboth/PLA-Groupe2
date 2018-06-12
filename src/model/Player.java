@@ -3,6 +3,7 @@ package model;
 import java.awt.image.BufferedImage;
 
 import controller.Options;
+import main.Teams;
 import utils.Animation;
 
 public class Player extends AliveEntity {
@@ -11,7 +12,7 @@ public class Player extends AliveEntity {
 	static double m_startingSpeed = Options.velocities.get("player"); 
 
 	public Player(Model model, int x, int y, Tile t, int life, int damage) {
-		super(model, x, y, m_spriteFile, m_startingSpeed, t, life, damage);
+		super(model, x, y, m_spriteFile, m_startingSpeed, t, life, damage, Teams.Team);
 		m_layer = Options.layers.get("character");
 
 		BufferedImage[] m_walkingUpIm = {m_sprite.getSprite(0, 0), m_sprite.getSprite(2, 0)};
@@ -32,7 +33,6 @@ public class Player extends AliveEntity {
 		m_defaultUp = new Animation(m_defaultUpIm, m_animationSpeed);
 		m_defaultDown = new Animation(m_defaultDownIm, m_animationSpeed);
 
-		m_team = Team.ALLIED;
 
 	}
 

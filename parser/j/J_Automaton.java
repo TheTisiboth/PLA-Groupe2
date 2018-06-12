@@ -28,7 +28,7 @@ public class J_Automaton {
 				while(iter_trans.hasNext()) {
 					J_Transition transition = iter_trans.next();
 
-					if(transition.eval()) {
+					if(transition.eval(entite)) {
 						transition.exec(entite);
 						entry = transition.target;
 						

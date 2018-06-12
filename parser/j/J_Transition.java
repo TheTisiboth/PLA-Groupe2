@@ -17,12 +17,11 @@ public class J_Transition {
 		this.target = state;
 	}
 	
-	public boolean eval() {
-		return condition.eval();
+	public boolean eval(Entity e) {
+		return condition.eval(e);
 	}
 
 	public void exec(Entity entite) {
-		//TODO executer cette merde
 		action.exec(entite);
 	}
 
