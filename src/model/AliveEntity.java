@@ -104,7 +104,7 @@ public abstract class AliveEntity extends MovableEntity {
 
 		super.step(now);
 		projectileCooldown--;
-		if(m_life<0)
+		if(m_life<=0)
 			kill();
 
 	}
