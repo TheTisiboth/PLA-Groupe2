@@ -162,7 +162,7 @@ public abstract class AliveEntity extends MovableEntity {
 			if(m_orientation==Directions.LEFT) {exitDir=Directions.RIGHT;}
 			if(m_orientation==Directions.RIGHT) {exitDir=Directions.LEFT;}
 			Tile exitTile = spawningTile.nextTile(exitDir);
-			Portal portal = new Portal(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, dir,spawningTile,exitTile,exitDir);
+			Portal portal = new Portal(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, dir,spawningTile,exitTile,exitDir, this);
 			
 			if(m_portals.size() >= 2) {
 				m_portals.get(0).delete();
@@ -179,6 +179,27 @@ public abstract class AliveEntity extends MovableEntity {
 	}
 	
 	public void pop() {
+		Directions dir = this.getOrientation();
+		Tile spawningTile = this.getLookingTile(dir);
+		List<Entity> list = spawningTile.m_entities;
+		while( ! (list.get(1) instanceof Wall) ) {
+			spawningTile = spawningTile.nextTile(dir);
+			list = spawningTile.m_entities;
+		}
+		if (list.get(3) != null) {
+			Portal portal = (Portal) list.get(3);
+			if(portal.m_owner.m_portals.get(0) == portal) {
+				if(portal.m_owner.m_portals.get(0).m_destPortal != null)
+					portal.m_owner.m_portals.get(1).m_destPortal= null;
+				portal.m_owner.m_portals.get(0).delete();
+				portal.m_owner.m_portals.remove(0);
+			}
+			else {
+				portal.m_owner.m_portals.get(0).m_destPortal= null;
+				portal.m_owner.m_portals.get(1).delete();
+				portal.m_owner.m_portals.remove(1);
+			}
+		}
 		return;
 	}
 

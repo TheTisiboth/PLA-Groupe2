@@ -15,9 +15,10 @@ public class Portal extends Entity {
 	Portal m_destPortal;
 	Tile m_exitTile;
 	Directions m_exitDir;
+	AliveEntity m_owner;
 	EnumMap<Directions, BufferedImage> m_sprites;
 	
-	public Portal(Model model, int posX, int posY, Directions orientation, Tile t, Tile t_exit, Directions exit_dir) {
+	public Portal(Model model, int posX, int posY, Directions orientation, Tile t, Tile t_exit, Directions exit_dir, AliveEntity owner) {
 		super(model, posX, posY, false, "assets/sprites/portal_down.png", t);
 		m_orientation = orientation;
 		m_destPortal = null;
@@ -25,6 +26,7 @@ public class Portal extends Entity {
 		m_pixelY = posY;
 		m_exitTile = t_exit;
 		m_exitDir = exit_dir;
+		m_owner = owner;
 		
 		m_sprites = new EnumMap<Directions, BufferedImage>(Directions.class);
 		try {
