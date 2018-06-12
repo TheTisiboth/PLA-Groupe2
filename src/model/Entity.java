@@ -1,15 +1,18 @@
 package model;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 import controller.Options;
 import main.Directions;
+
+import utils.*;
+
+enum Team{
+	ALLIED,
+	ENEMY,
+	NEUTRAL
+}
 
 public class Entity{
 	int m_pixelX,m_pixelY;
@@ -22,11 +25,16 @@ public class Entity{
 	long m_updatePhysics;
 
 	String m_state;
-	HashMap<String, BufferedImage> m_spritesList;
 	BufferedImage m_currentSprite;
 	Model m_model;
 	Tile m_tile;
 	int m_layer;
+	
+	Team m_team;
+
+	Sprite m_sprite;
+
+	Animation m_animation;
 
 	public Entity(Model model, int posX, int posY, boolean moveable, String filename, Tile t) {
 		m_model = model;
@@ -35,13 +43,15 @@ public class Entity{
 		m_moveable = moveable;
 		m_moving = null;
 		m_pixelDone = 0;
-		m_updatePhysics = 30;
-		m_state = "default";
+		m_updatePhysics = 10;
 		m_tile = t;
 		m_orientation = Directions.DOWN;
 
-		m_spritesList = new HashMap<String,BufferedImage>();
-		loadSprites(filename, m_spritesList);
+		m_sprite = new Sprite(filename);
+
+		m_animation = new Animation(new BufferedImage[]{m_sprite.getSprite(0, 0)}, 10);
+
+		m_team = Team.NEUTRAL;
 	}
 
 	public void move(Directions moving) {
@@ -68,25 +78,21 @@ public class Entity{
 		}
 	}
 
-	public void loadSprites(String spriteFile, HashMap<String, BufferedImage> list){
-		File imageFile = new File(spriteFile);
-		try {
-			BufferedImage img = ImageIO.read(imageFile);
+	public void wizz() {
 
-			list.put(m_state, img);
-		} catch (IOException ex) {
-		  ex.printStackTrace();
-		  System.exit(-1);
-		}
 	}
 
 	public void step(long now) {
 	}
 
 	public void paint(Graphics g){
-		m_currentSprite = m_spritesList.get(m_state);
-		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
+		m_animation.update();
+		g.drawImage(m_animation.getSprite(), m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
 
+	}
+	
+	public void kill(){
+		m_tile.delEntity(this);
 	}
 
 	public Directions getOrientation() {
@@ -99,6 +105,10 @@ public class Entity{
 
 	public Directions getMoving() {
 		return m_moving;
+	}
+
+	public Team getTeam(){
+		return m_team;
 	}
 
 

@@ -1,33 +1,35 @@
 package model;
 
 import java.awt.Graphics;
-import java.util.Iterator;
 import java.util.List;
 
 import controller.Options;
 import main.Directions;
 
-public class Projectile extends AliveEntity {
+public class Projectile extends MovableEntity {
 
 	private boolean isMoving;
+	private int m_damage;
 	
-	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile t, int life, int damage) {
-		super(model, posX, posY, filename, speed, t, life, damage);
+	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Team team) {
+		super(model, posX, posY, speed, filename, tile);
 		// TODO Auto-generated constructor stub
+		m_team = team;
 		m_layer = 2;
+		tile.putEntity(m_layer,this);
+		m_damage = damage;
 		isMoving=false;
+		m_moving = d;
+		m_orientation = m_moving;
+		testCollision();
+		move(d);
 	}
-	
-	public void tryToKill(Directions moving) {
-		return;
-	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		if(isMoving==false)
 			isMoving=true;
-		m_currentSprite = m_spritesList.get(m_state);
-		g.drawImage(m_currentSprite, m_pixelX, m_pixelY, Options.TAILLE_CASE, Options.TAILLE_CASE, null);
+		super.paint(g);
 	}
 	
 	@Override
@@ -130,16 +132,18 @@ public class Projectile extends AliveEntity {
 	
 	public boolean testCollision() {
 		// Checking current tile
-		List<Entity> list = this.m_tile.m_entities;
-		if ( list.get(1)instanceof Wall) {
-			m_tile.delEntity(this);
-			return true;
-		}
-		if (list.get(1) instanceof AliveEntity) {
-			AliveEntity entity = (AliveEntity) list.get(1);
-			entity.m_life = entity.m_life - this.m_damage;
-			m_tile.delEntity(this);
-			return true;
+		List<Entity> list = m_tile.m_entities;
+
+		for (Entity e : list) {
+			if(e instanceof Wall){
+				kill();
+				return true;
+			}
+			if(e instanceof AliveEntity && e.getTeam() != m_team){
+				kill();
+				((AliveEntity)e).setLife(((AliveEntity)e).getLife()-m_damage);
+				return true;
+			}
 		}
 		return false;
 	}

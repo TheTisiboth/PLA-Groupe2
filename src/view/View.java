@@ -22,6 +22,7 @@ import java.awt.Graphics;
 
 import controller.Controller;
 import edu.ricm3.game.GameView;
+import model.AliveEntity;
 import model.Background;
 import model.Model;
 import model.Room;
@@ -38,6 +39,7 @@ public class View extends GameView {
   Controller m_ctr;
   Background m_back;
   Room m_room;
+  
 
 
   public View(Model m, Controller c) {
@@ -65,6 +67,10 @@ private void computeFPS() {
 
     m_back.paint(g);
     m_room.paint(g);
+    for (LifeBar lb : m_model.getLifeBar()) {
+      if(lb != null)
+        lb.paint(g);
+    }
 
   }
 
