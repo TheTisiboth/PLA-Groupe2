@@ -129,6 +129,30 @@ public class Projectile extends MovableEntity {
 			}
 		}
 	}
+	@Override
+	public boolean changeTile(int newX, int newY){
+		if(newX > Options.LARGEUR -1 || newY > Options.HAUTEUR - 1|| newX < 0 || newY < 0)
+			return false;
+		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
+		if(newTile.m_entities.get(2) != null) {
+			Entity e = newTile.m_entities.get(2);
+			newTile.delEntity(e);
+			kill();
+			return false;
+		}
+		Portal portal = (Portal)newTile.getEntityOnLayer(Options.LAYER_PORTAL);
+		if(newTile.getEntityOnLayer(m_layer)==null || ( portal!=null && portal.Active() && portal.m_orientation==this.m_orientation) ){
+			getTile().delEntity(this);
+			if(portal !=null && portal.Active() && portal.m_orientation==this.m_orientation) {
+				newTile = portal.m_destPortal.m_exitTile;
+				this.m_orientation = portal.m_destPortal.m_exitDir;
+			}
+			newTile.putEntity(m_layer, this);
+			setTile(newTile);
+			return true;
+		}
+		return false;
+	}
 	
 	public boolean testCollision() {
 		// Checking current tile
