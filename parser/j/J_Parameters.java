@@ -1,5 +1,7 @@
 package j;
 
+import main.Directions;
+
 public class J_Parameters {
 	EnumCons value;
 	
@@ -11,4 +13,17 @@ public class J_Parameters {
 		return value.toString();
 	}
 
+	public Directions toDirection() {
+		switch(value) {
+		case Ouest:
+			return Directions.LEFT;
+		case East:
+			return Directions.RIGHT;
+		case South:
+			return Directions.DOWN;
+		case North: 
+			return Directions.UP;
+		}
+		return null;
+	}
 }

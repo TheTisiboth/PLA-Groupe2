@@ -6,6 +6,7 @@ import java.util.*;
 
 import controller.Options;
 import controller.Options.TileObject;
+import j.J_Automaton;
 
 public class Tile {
 
@@ -14,7 +15,9 @@ public class Tile {
 	ArrayList<Entity> m_entities;
 	Model m_model;
 
-	public Tile(TileObject to, int x, int y, Model m) {
+	Automate m_automate;
+	
+	public Tile(TileObject to, int x, int y, Model m, J_Automaton j_Automaton) {
 		m_x = x;
 		m_y = y;
 		m_model = m;
@@ -29,8 +32,10 @@ public class Tile {
 					new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this, -1));
 			break;
 		case ENEMY:
-			putEntity(Options.layers.get("character"),
-					m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+			Entity enn = m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
+			putEntity(Options.layers.get("character"), enn);
+			m_automate = new Automate(enn, j_Automaton.getCopy());
+			
 			break;
 		case BOSS:
 			putEntity(Options.layers.get("character"),
@@ -106,6 +111,10 @@ public class Tile {
 	public void setPortal(Portal portal) {
 		m_entities.set(Options.LAYER_PORTAL, portal);
 
+	}
+	
+	public Automate getAutomate() {
+		return m_automate;
 	}
 
 }

@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import model.Entity;
+
 public class J_Automaton {
 	String name;
 	J_State entry;
@@ -16,7 +18,7 @@ public class J_Automaton {
 		this.behaviours = behaviours;
 	}
 	
-	public void step() {
+	public void step(Entity entite) {
 		ListIterator<J_Behaviour> iter = behaviours.listIterator();
 		while(iter.hasNext()) {
 			J_Behaviour behav = iter.next();
@@ -28,7 +30,7 @@ public class J_Automaton {
 					J_Transition transition = iter_trans.next();
 
 					if(transition.eval()) {
-						transition.exec();
+						transition.exec(entite);
 						entry = transition.target;
 						
 						System.out.println("Transition, nouvelle etat: " + entry.name.value);
@@ -39,4 +41,7 @@ public class J_Automaton {
 		}
 	}
 
+	public J_Automaton getCopy() {
+		return new J_Automaton(name, entry, behaviours);
+	}
 }

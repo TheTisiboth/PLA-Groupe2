@@ -4,6 +4,7 @@ import java.util.List;
 
 import expression.FunCall.J_FunCall;
 import j.J_Parameters;
+import model.Entity;
 
 public class J_Action extends J_FunCall{
 
@@ -13,7 +14,7 @@ public class J_Action extends J_FunCall{
 	}
 	
 	
-	public void exec() {
+	public void exec(Entity entite) {
 		System.out.println("NYI action");
 	}
 }

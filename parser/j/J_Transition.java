@@ -3,6 +3,7 @@ package j;
 import expression.J_Expression;
 import expression.FunCall.Actions.J_Action;
 import expression.FunCall.Condition.J_Condition;
+import model.Entity;
 
 public class J_Transition {
 	J_Expression condition;
@@ -20,9 +21,9 @@ public class J_Transition {
 		return condition.eval();
 	}
 
-	public void exec() {
+	public void exec(Entity entite) {
 		//TODO executer cette merde
-		action.exec();
+		action.exec(entite);
 	}
 
 }
