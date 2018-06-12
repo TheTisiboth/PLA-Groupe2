@@ -1,6 +1,7 @@
 package j;
 
 import main.Directions;
+import model.Entity;
 
 public class J_Parameters {
 	EnumCons value;
@@ -33,6 +34,12 @@ public class J_Parameters {
 			return Directions.OnMyLeft;
 
 		}
+		return null;
+	}
+
+	public Entity toTeam() {
+		// TODO Auto-generated method stub
+		System.out.println("entite");
 		return null;
 	}
 }
