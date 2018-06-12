@@ -10,13 +10,14 @@ import javax.imageio.ImageIO;
 
 import controller.Options;
 import main.Directions;
+import main.Teams;
 
 public class Portal extends Entity {
 	Portal m_destPortal;
 	EnumMap<Directions, BufferedImage> m_sprites;
 	
 	public Portal(Model model, int posX, int posY, Directions orientation, Tile t,int life) {
-		super(model, posX, posY, false, "assets/sprites/portal_down.png", t);
+		super(model, posX, posY, false, "assets/sprites/portal_down.png", t, Teams.Gate);
 		m_orientation = orientation;
 		m_destPortal = null;
 		m_pixelX = posX;

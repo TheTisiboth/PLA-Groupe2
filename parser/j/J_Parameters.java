@@ -1,6 +1,7 @@
 package j;
 
 import main.Directions;
+import main.Teams;
 
 public class J_Parameters {
 	EnumCons value;
@@ -31,6 +32,28 @@ public class J_Parameters {
 			return Directions.FRONT;
 		case Back:
 			return Directions.BACK;
+		}
+		return null;
+	}
+	
+	public Teams toEntite() {
+		switch(value) {
+		case Void:
+			return Teams.Void;
+		case Team:
+			return Teams.Team;
+		case Adversaire:
+			return Teams.Adversaire;
+		case Danger:
+			return Teams.Danger;
+		case Pickable:
+			return Teams.Pickable;
+		case Jumpable:
+			return Teams.Wall;
+		case Gate:
+			return Teams.Gate;
+		case Missile:
+			return Teams.Missile;
 		}
 		return null;
 	}

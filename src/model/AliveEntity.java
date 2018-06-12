@@ -8,6 +8,7 @@ import java.util.List;
 
 import controller.Options;
 import main.Directions;
+import main.Teams;
 import utils.Animation;
 
 public abstract class AliveEntity extends MovableEntity {
@@ -32,8 +33,8 @@ public abstract class AliveEntity extends MovableEntity {
 	Animation m_defaultDown;
 	
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
-			int life, int damage) {
-		super(model, posX, posY, speed, filename, t);
+			int life, int damage, Teams team) {
+		super(model, posX, posY, speed, filename, t, team);
 		
 		m_life = life;
 		m_lifeMax = life;
@@ -56,6 +57,16 @@ public abstract class AliveEntity extends MovableEntity {
 
 		projectileCooldown = 500;
 	}
+	
+	public void protect() {
+		protect(this.RelativeToRealDir(Directions.FRONT));
+	}
+	
+	public void protect(Directions dir) {
+		dir = this.RelativeToRealDir(dir);
+		throwProjectile(dir);
+	}
+	
 
 	@Override
 	public void wizz() {
@@ -147,20 +158,31 @@ public abstract class AliveEntity extends MovableEntity {
 	}
 
 	public void attack() {
-		Directions dir = m_model.getPlayer().m_orientation;
+		attack(Directions.FRONT);
+	}
+	
+	public void attack(Directions dir) {
+		dir = this.RelativeToRealDir(dir);
+		setOrientation(dir);
+		
+		//Directions dir = m_model.getPlayer().m_orientation;
 		List<Entity> list = this.checkTile(dir);
-		if(list.get(1) instanceof Enemy) {
-			Enemy enemy = (Enemy) list.get(1);
+		if(list.get(1) instanceof AliveEntity) {
+			AliveEntity enemy = (AliveEntity) list.get(1);
 			enemy.m_life = enemy.m_life - this.m_damage;
 		}
 		return;
 	}
 	
 	public void throwProjectile() {
+		throwProjectile(Directions.FRONT);
+	}
+	
+	public void throwProjectile(Directions dir) {
 		if (projectileCooldown <= 0) {
-			Directions dir = this.getOrientation();
+			setOrientation(dir);
 			Tile spawningTile = this.getLookingTile(dir);
-			new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 3, dir, m_team);
+			new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 0.6, spawningTile, 3, dir, Teams.Missile);
 			projectileCooldown = 500;
 
 		}

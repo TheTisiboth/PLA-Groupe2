@@ -2,15 +2,17 @@ package model;
 
 import java.awt.Graphics;
 import java.util.List;
+
 import main.Directions;
+import main.Teams;
 
 public class Projectile extends MovableEntity {
 
 	private boolean isMoving;
 	private int m_damage;
 	
-	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Team team) {
-		super(model, posX, posY, speed, filename, tile);
+	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Teams team) {
+		super(model, posX, posY, speed, filename, tile, team);
 		// TODO Auto-generated constructor stub
 		m_team = team;
 		m_layer = 2;

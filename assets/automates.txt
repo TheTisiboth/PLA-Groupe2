@@ -1,6 +1,4 @@
 Turner(Turn_0){
-  * (Turn_0): True ? Turn(F) :(Turn_1)
-  * (Turn_1): True ? Turn(R) :(Turn_2)
-  * (Turn_2): True ? Turn(L) :(Turn_3)
-  * (Turn_3): True ? Turn(B) :(Turn_0)
+  * (Turn_0): True ? Move(E) :(Turn_1)
+  * (Turn_1): True ? Protect(B) : (Turn_0)
 }
