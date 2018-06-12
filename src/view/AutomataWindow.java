@@ -57,8 +57,8 @@ public class AutomataWindow extends JFrame {
 			if(names.contains(auto)) {
 				checkAuto.setSelected(true);
 			}
-			checkAuto.setIcon(new ImageIcon("assets/sprites/emptyCheckBox.png"));
-			checkAuto.setSelectedIcon(new ImageIcon("assets/sprites/checkBox.png"));
+			checkAuto.setIcon(new ImageIcon("assets/view/emptyCheckBox.png"));
+			checkAuto.setSelectedIcon(new ImageIcon("assets/view/checkBox.png"));
 			checkAuto.setDisabledIcon(new ImageIcon());
 			checkAuto.setOpaque(false);
 			checkAuto.setContentAreaFilled(false);
@@ -76,7 +76,7 @@ public class AutomataWindow extends JFrame {
 		m_chooseButton.setContentAreaFilled(false);
 		m_chooseButton.setBorderPainted(false);
 		m_chooseButton.setFocusPainted(false);
-		m_chooseButton.setIcon(new ImageIcon("assets/sprites/Choose.png"));
+		m_chooseButton.setIcon(new ImageIcon("assets/view/Choose.png"));
 		m_chooseButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -91,7 +91,7 @@ public class AutomataWindow extends JFrame {
 		m_returnButton.setContentAreaFilled(false);
 		m_returnButton.setBorderPainted(false);
 		m_returnButton.setFocusPainted(false);
-		m_returnButton.setIcon(new ImageIcon("assets/sprites/Return.png"));
+		m_returnButton.setIcon(new ImageIcon("assets/view/Return.png"));
 		m_returnButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -114,7 +114,7 @@ public class AutomataWindow extends JFrame {
 		Image image;
 		
 		public BackgroundPanel() {
-			image = new ImageIcon("assets/sprites/AutomataBg.png").getImage().getScaledInstance(680,704,Image.SCALE_DEFAULT);
+			image = new ImageIcon("assets/view/AutomataBg.png").getImage().getScaledInstance(680,704,Image.SCALE_DEFAULT);
 		}
 		
 		@Override
