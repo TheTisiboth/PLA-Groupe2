@@ -135,9 +135,9 @@ public class Entity{
 			return false;
 		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
 		Portal portal = (Portal)newTile.getEntityOnLayer(Options.LAYER_PORTAL);
-		if(newTile.getEntityOnLayer(m_layer)==null || ( portal!=null && portal.Active() ) ){
+		if(newTile.getEntityOnLayer(m_layer)==null || ( portal!=null && portal.Active() && portal.m_orientation==this.m_orientation) ){
 			getTile().delEntity(this);
-			if(portal !=null && portal.Active()) {
+			if(portal !=null && portal.Active() && portal.m_orientation==this.m_orientation) {
 				newTile = portal.m_destPortal.m_exitTile;
 				this.m_orientation = portal.m_destPortal.m_exitDir;
 			}
