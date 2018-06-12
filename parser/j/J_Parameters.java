@@ -1,15 +1,15 @@
 package j;
 
 import main.Directions;
-import model.Entity;
+import main.Teams;
 
 public class J_Parameters {
 	EnumCons value;
-	
+
 	public J_Parameters(EnumCons value) {
 		this.value = value;
 	}
-	
+
 	public String toString() {
 		return value.toString();
 	}
@@ -22,12 +22,12 @@ public class J_Parameters {
 			return Directions.RIGHT;
 		case South:
 			return Directions.DOWN;
-		case North: 
+		case North:
 			return Directions.UP;
 		case Front:
 			return Directions.FRONT;
 		case Back:
-			return Directions.BACK;	
+			return Directions.BACK;
 		case OnMyRight:
 			return Directions.OnMyRight;
 		case OnMyLeft:
@@ -37,9 +37,27 @@ public class J_Parameters {
 		return null;
 	}
 
-	public Entity toTeam() {
-		// TODO Auto-generated method stub
-		System.out.println("entite");
+
+	public Teams toEntite() {
+		switch(value) {
+		case Void:
+			return Teams.Void;
+		case Team:
+			return Teams.Team;
+		case Adversaire:
+			return Teams.Adversaire;
+		case Danger:
+			return Teams.Danger;
+		case Pickable:
+			return Teams.Pickable;
+		case Jumpable:
+			return Teams.Wall;
+		case Gate:
+			return Teams.Gate;
+		case Missile:
+			return Teams.Missile;
+		}
+
 		return null;
 	}
 }

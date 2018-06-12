@@ -1,6 +1,7 @@
 package model;
 
 import controller.Options;
+import main.Teams;
 
 public class Pet extends AliveEntity {
 
@@ -9,7 +10,7 @@ public class Pet extends AliveEntity {
 	// static double m_startingSpeed = Options.velocities.get("pet"); 
 
 	public Pet(Model model, int x, int y, String spriteFile, double startingSpeed, Tile t, int life, int damage) {
-		super(model, x, y, spriteFile, startingSpeed, t, life, damage);
+		super(model, x, y, spriteFile, startingSpeed, t, life, damage, Teams.Team);
 		m_layer = Options.layers.get("character");
 	}
 

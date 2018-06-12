@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 import expression.J_Expression;
+import expression.FunCall.Actions.Hit;
 import expression.FunCall.Actions.J_Action;
 import expression.FunCall.Actions.Move;
 import expression.FunCall.Actions.Power;
+import expression.FunCall.Actions.Protect;
 import expression.FunCall.Actions.Turn;
 import expression.FunCall.Condition.Cell;
 import expression.FunCall.Condition.MyDir;
@@ -362,8 +364,15 @@ public class Ast {
 				return new Move(j_params);
 			case "Power":
 				return new Power(j_params);
+<<<<<<< HEAD
+			case "Hit":
+				return new Hit(j_params);
+			case "Protect":
+				return new Protect(j_params);
+=======
 			case "MyDir" :
 				return new MyDir(j_params);
+>>>>>>> a2129fb2ae87944790bdd7ed99f404949227df46
 
 			}
 

@@ -5,14 +5,9 @@ import java.util.List;
 
 import controller.Options;
 import main.Directions;
-
-import utils.*;
-
-enum Team{
-	ALLIED,
-	ENEMY,
-	NEUTRAL
-}
+import main.Teams;
+import utils.Animation;
+import utils.Sprite;
 
 public class Entity{
 	int m_pixelX,m_pixelY;
@@ -30,13 +25,13 @@ public class Entity{
 	Tile m_tile;
 	int m_layer;
 	
-	Team m_team;
+	Teams m_team;
 
 	Sprite m_sprite;
 
 	Animation m_animation;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, Tile t) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, Tile t, Teams team) {
 		m_model = model;
 		m_pixelX = posX;
 		m_pixelY = posY;
@@ -51,7 +46,7 @@ public class Entity{
 
 		m_animation = new Animation(new BufferedImage[]{m_sprite.getSprite(0, 0)}, 10);
 
-		m_team = Team.NEUTRAL;
+		m_team = team;
 	}
 
 	public Directions RelativeToRealDir(Directions dir) {
@@ -161,7 +156,7 @@ public class Entity{
 		return m_moving;
 	}
 
-	public Team getTeam(){
+	public Teams getTeam(){
 		return m_team;
 	}
 
