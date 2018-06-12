@@ -32,7 +32,7 @@ public class Menu extends JFrame {
 		this.setTitle("PLA - Groupe2 - Bandol Party");
 		
 		m_playButton = new JButton();
-		m_playButton.setBounds(362,400,300,80);
+		m_playButton.setBounds(362,350,300,80);
 		m_playButton.setOpaque(false);
 		m_playButton.setContentAreaFilled(false);
 		m_playButton.setBorderPainted(false);
@@ -46,7 +46,7 @@ public class Menu extends JFrame {
 		this.add(m_playButton);
 		
 		m_automataButton = new JButton();
-		m_automataButton.setBounds(362,490,300,80);
+		m_automataButton.setBounds(362,440,300,80);
 		m_automataButton.setOpaque(false);
 		m_automataButton.setContentAreaFilled(false);
 		m_automataButton.setBorderPainted(false);
@@ -60,7 +60,7 @@ public class Menu extends JFrame {
 		this.add(m_automataButton);
 		
 		m_quitButton = new JButton();
-		m_quitButton.setBounds(362,580,300,80);
+		m_quitButton.setBounds(362,530,300,80);
 		m_quitButton.setOpaque(false);
 		m_quitButton.setContentAreaFilled(false);
 		m_quitButton.setBorderPainted(false);
@@ -74,7 +74,7 @@ public class Menu extends JFrame {
 		this.add(m_quitButton);
 		
 		
-		JLabel background = new JLabel(new ImageIcon(new ImageIcon("assets/img/MainMenu.png").getImage().getScaledInstance(1024,704,Image.SCALE_DEFAULT)));
+		JLabel background = new JLabel(new ImageIcon(new ImageIcon("assets/sprites/MainMenu.png").getImage().getScaledInstance(1024,704,Image.SCALE_DEFAULT)));
 		background.setBounds(0,0,1024,704);
 		this.add(background);
 		
