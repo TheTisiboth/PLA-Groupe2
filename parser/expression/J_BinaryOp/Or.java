@@ -2,6 +2,7 @@ package expression.J_BinaryOp;
 
 import expression.J_Expression;
 import expression.FunCall.Condition.J_Condition;
+import model.Entity;
 
 public class Or extends J_BinaryOp {
 

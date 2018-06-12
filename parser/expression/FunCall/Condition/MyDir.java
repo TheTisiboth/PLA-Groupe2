@@ -3,7 +3,9 @@ package expression.FunCall.Condition;
 import java.util.List;
 
 import j.J_Parameters;
+import main.Directions;
 import model.Entity;
+import ricm3.parser.Ast.Direction;
 
 public class MyDir extends J_Condition {
 	
@@ -11,7 +13,9 @@ public class MyDir extends J_Condition {
 		super(params);
 	}
 	
-	public boolean eval (List<J_Parameters> p, Entity e ) {
-		return (e.getOrientation()).equals(p.get(0).toDirection());
+	public boolean eval(Entity e ) {
+		J_Parameters d = parameters.get(0);
+		Directions f = d.toDirection();
+		return (e.getOrientation().equals(e.RelativeToRealDir(f)));
 	}
 }

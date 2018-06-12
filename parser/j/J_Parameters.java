@@ -23,6 +23,14 @@ public class J_Parameters {
 			return Directions.DOWN;
 		case North: 
 			return Directions.UP;
+		case Front:
+			return Directions.FRONT;
+		case Back:
+			return Directions.BACK;	
+		case OnMyRight:
+			return Directions.OnMyRight;
+		case OnMyLeft:
+			return Directions.OnMyLeft;
 		}
 		return null;
 	}

@@ -87,7 +87,7 @@ public class Entity{
 			else if(m_orientation == Directions.LEFT)
 				return Directions.RIGHT;
 		}
-		return null;
+		return m_orientation;
 		
 	}
 	
