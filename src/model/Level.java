@@ -10,6 +10,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import model.Item.ItemType;
+
 public class Level {
 
 	public ArrayList<String> m_enemies;
@@ -126,10 +128,12 @@ public class Level {
 		
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
+		int itemDamage = Integer.parseInt((String)itemsList.get("damage"));
 		
-		//TODO mettre la vraie vie
-		Item returnItem = new Item(m, x, y, itemSprite, tile, -1);
-		return returnItem;
+		if((String)itemsList.get("type") == "consumable")
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.CONSUMABLE);
+		else
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.WEAPON);
 	}
 	
 	public String getRandomRoom() {

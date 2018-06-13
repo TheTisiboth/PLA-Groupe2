@@ -1,32 +1,44 @@
 package model;
 
-import java.util.*;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
-import controller.Options;
-import model.Item.ItemType;
+import model.Weapons.WeaponsInv;
 
 public class Inventory {
-	
+	AliveEntity m_owner;
 	List<Item> m_consumable;
-	Item m_weapon;
+	WeaponsInv m_weapon;
 
-	public Inventory() {
+	public Inventory(AliveEntity owner) {
+		this(owner, new WeaponsInv(owner, "assets/sprites/pet.png", 1));
+	}
+
+	public Inventory(AliveEntity owner, WeaponsInv weapon) {		
+		m_owner = owner;
 		m_consumable = new ArrayList<Item>();
+		m_weapon = weapon;
 	}
 
-	public Inventory(Item w, ArrayList<Item> c){
-		m_weapon = w;
-		m_consumable = c;
+	public WeaponsInv getWeapon() {
+		return m_weapon;
+	}
+	
+	public void switchWeapon(WeaponsInv weapon) {
+		m_weapon = weapon;
+	}
+	
+	public void step() {
+		m_weapon.step();
 	}
 
-	public boolean hasWeapon(){
-		if (m_weapon == null) {
-			return false;
-		}
-		return true;
+	public void paint(Graphics g) {
+		m_weapon.paint(g);
 	}
-
+	
 	public void switchItem(Item i){
+		/*
 		Tile itemTile = i.getTile();
 		if(i.getType() == ItemType.WEAPON){
 			itemTile.delEntity(i);
@@ -35,7 +47,7 @@ public class Inventory {
 				m_weapon.setPosition(itemTile.m_x*Options.TAILLE_CASE, itemTile.m_y*Options.TAILLE_CASE);
 			}
 			m_weapon = i;
-		}
+		}*/
 	}
 
 }

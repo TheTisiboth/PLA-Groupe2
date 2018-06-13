@@ -43,7 +43,7 @@ public class Projectile extends MovableEntity {
 			long timeElapsed = now-this.m_lastTime;
 			super.step(now);
 			if(timeElapsed >= m_updatePhysics) {
-	
+
 				if(this.testCollision()) {
 					return;
 				}
