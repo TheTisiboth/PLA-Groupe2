@@ -5,14 +5,9 @@ import java.util.List;
 
 import controller.Options;
 import main.Directions;
-
-import utils.*;
-
-enum Team{
-	ALLIED,
-	ENEMY,
-	NEUTRAL
-}
+import main.Teams;
+import utils.Animation;
+import utils.Sprite;
 
 public class Entity{
 	int m_pixelX,m_pixelY;
@@ -26,17 +21,17 @@ public class Entity{
 
 	String m_state;
 	BufferedImage m_currentSprite;
-	Model m_model;
+	public Model m_model;
 	Tile m_tile;
 	int m_layer;
 	
-	Team m_team;
+	Teams m_team;
 
 	Sprite m_sprite;
 
 	Animation m_animation;
 
-	public Entity(Model model, int posX, int posY, boolean moveable, String filename, Tile t) {
+	public Entity(Model model, int posX, int posY, boolean moveable, String filename, Tile t, Teams team) {
 		m_model = model;
 		m_pixelX = posX;
 		m_pixelY = posY;
@@ -51,9 +46,45 @@ public class Entity{
 
 		m_animation = new Animation(new BufferedImage[]{m_sprite.getSprite(0, 0)}, 10);
 
-		m_team = Team.NEUTRAL;
+		m_team = team;
 	}
 
+	public Directions RelativeToRealDir(Directions dir) {
+		switch(dir) {
+		case OnMyLeft:
+			if(m_orientation == Directions.DOWN)
+				return Directions.RIGHT;
+			else if(m_orientation  == Directions.RIGHT)
+				return Directions.UP;
+			else if(m_orientation == Directions.UP)
+				return Directions.LEFT;
+			else if(m_orientation == Directions.LEFT)
+				return Directions.DOWN;
+			break;
+		case OnMyRight:
+			if(m_orientation== Directions.UP)
+				return Directions.RIGHT;
+			else if(m_orientation== Directions.RIGHT)
+				return Directions.DOWN;
+			else if(m_orientation== Directions.DOWN)
+				return Directions.LEFT;
+			else if(m_orientation== Directions.LEFT)
+				return Directions.UP;
+		case FRONT:
+			return m_orientation;
+		case BACK:
+			if(m_orientation == Directions.UP)
+				return Directions.DOWN;
+			else if(m_orientation == Directions.DOWN)
+				return Directions.UP;
+			else if(m_orientation == Directions.RIGHT)
+				return Directions.LEFT;
+			else if(m_orientation == Directions.LEFT)
+				return Directions.RIGHT;
+		}
+		return dir;
+	}
+	
 	public void move(Directions moving) {
 		if(m_moving == null){
 			switch (moving) {
@@ -107,7 +138,7 @@ public class Entity{
 		return m_moving;
 	}
 
-	public Team getTeam(){
+	public Teams getTeam(){
 		return m_team;
 	}
 

@@ -1,6 +1,7 @@
 package model;
 
 import controller.Options;
+import main.Teams;
 
 public class Wall extends Entity {
 
@@ -9,7 +10,7 @@ public class Wall extends Entity {
 	static int m_layer = 0;
 
 	public Wall(Model model, int x, int y, Tile t, int life) {
-		super(model, x, y, false, m_spriteFile, t);
+		super(model, x, y, false, m_spriteFile, t, Teams.Wall);
 		m_layer = Options.layers.get("wall");
 	}
 

@@ -3,6 +3,8 @@ package model;
 import controller.Options;
 import main.Directions;
 
+import main.Teams;
+
 public abstract class MovableEntity extends Entity {
 
 
@@ -10,8 +12,8 @@ public abstract class MovableEntity extends Entity {
 	int m_animationSpeed;
 
 
-	public MovableEntity(Model model, int posX, int posY, double speed, String filename, Tile t) {
-		super(model, posX, posY, true, filename, t);
+	public MovableEntity(Model model, int posX, int posY, double speed, String filename, Tile t, Teams team) {
+		super(model, posX, posY, true, filename, t, team);
 		m_speed = speed; 
 		m_animationSpeed = (int) (m_speed * 30);
 
@@ -68,8 +70,6 @@ public abstract class MovableEntity extends Entity {
 			if(m_moveable && m_moving != null) {
 				int deplacement = (int)(m_speed * timeElapsed);
 				m_pixelDone += deplacement;
-
-				System.out.print("Deplacement " + deplacement + " time elapsed: " + timeElapsed + "\n");
 
 				switch (this.m_moving) {
 				case RIGHT :
