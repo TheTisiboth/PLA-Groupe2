@@ -3,7 +3,6 @@ package model;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import controller.Options;
@@ -98,11 +97,6 @@ public abstract class AliveEntity extends MovableEntity {
 	public void paint(Graphics g) {
 		super.paint(g);
 		updateAnimation();
-
-		Iterator<Portal> it = m_portals.iterator();
-		while(it.hasNext()) {
-			it.next().paint(g);
-		}
 
 		m_inventory.paint(g);
 	}
@@ -297,7 +291,10 @@ public abstract class AliveEntity extends MovableEntity {
 
 	public void flushPortals(){
 		for(int i = 0; i<m_portals.size(); i++) {
-			m_portals.remove(i);
+			m_portals.get(i).kill();
+			if(m_portals.get(i).m_destPortal != null)
+				m_portals.get(i).m_destPortal.kill();
+			m_portals.get(i).delete();
 		}
 	}
 
