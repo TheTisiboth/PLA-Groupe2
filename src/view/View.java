@@ -24,6 +24,7 @@ import controller.Controller;
 import edu.ricm3.game.GameView;
 import model.Model;
 import model.Room;
+import view.LifeBar;
 
 public class View extends GameView {
 
@@ -37,7 +38,6 @@ public class View extends GameView {
   Controller m_ctr;
   Background m_back;
   Room m_room;
-  
 
 
   public View(Model m, Controller c) {
@@ -46,6 +46,7 @@ public class View extends GameView {
     m_back = new Background();
     setBG();
     m_room = m.getRoom();
+    
   }
 
 
@@ -68,9 +69,11 @@ private void computeFPS() {
 
     m_back.paint(g);
     m_room.paint(g);
+    
     for (LifeBar lb : m_model.getLifeBar()) {
-      if(lb != null)
+      if(lb != null) {
         lb.paint(g);
+      }
     }
   }
 

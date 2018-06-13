@@ -104,15 +104,19 @@ public abstract class AliveEntity extends MovableEntity {
 	public boolean pick(){
 		List<Entity> nEnt= checkTile(m_orientation);
 		if (nEnt.get(0) instanceof Item){
+			m_inventory.pick((Item)nEnt.get(0));
 			//m_inventory.switchItem( (Item) nEnt.get(0));
-			m_inventory.switchWeapon((WeaponsInv)((Item)nEnt.get(0)).getItemInv(this));
+			//m_inventory.switchWeapon((WeaponsInv)((Item)nEnt.get(0)).getItemInv(this));
 			System.out.println("Changement d'arme");
 			return true;
 		}
 		return false;
 	}
 
-
+	public void usePotion() {
+		m_inventory.usePotion();
+	}
+	
 	public int getLife() {
 		return m_life;
 	}
@@ -122,7 +126,10 @@ public abstract class AliveEntity extends MovableEntity {
 	}
 
 	public void setLife(int l){
-		m_life = l;
+		if(l > getLifeMax())
+			m_life = getLifeMax();
+		else
+			m_life = l;
 	}
 
 	public double getLifePercentage() {
@@ -276,6 +283,10 @@ public abstract class AliveEntity extends MovableEntity {
 		if(this.m_life <= 0) {
 			m_tile.delEntity(this);
 		}
+	}
+
+	public Inventory getInventory() {
+		return m_inventory;
 	}
 
 	public void flushPortals(){

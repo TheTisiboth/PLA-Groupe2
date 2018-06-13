@@ -9,7 +9,7 @@ import utils.Animation;
 public class Player extends AliveEntity {
 
 	static String m_spriteFile = Options.sprites.get("player");
-	static double m_startingSpeed = Options.velocities.get("player"); 
+	static double m_startingSpeed = Options.velocities.get("player");
 
 	public Player(Model model, int x, int y, Tile t, int life, int damage) {
 		super(model, x, y, m_spriteFile, m_startingSpeed, t, life, damage, Teams.Team);
@@ -21,7 +21,7 @@ public class Player extends AliveEntity {
 		BufferedImage[] m_defaultDownIm = {m_sprite.getSprite(1, 1)};
 		BufferedImage[] m_walkingLeftIm = {m_sprite.getSprite(0, 2), m_sprite.getSprite(2, 2)};
 		BufferedImage[] m_defaultLeftIm = {m_sprite.getSprite(1, 2)};
-		BufferedImage[] m_walkingRightIm = {m_sprite.getSprite(0, 3), m_sprite.getSprite(2, 3)}; 
+		BufferedImage[] m_walkingRightIm = {m_sprite.getSprite(0, 3), m_sprite.getSprite(2, 3)};
 		BufferedImage[] m_defaultRightIm = {m_sprite.getSprite(1, 3)};
 
 		m_walkingLeft = new Animation(m_walkingLeftIm, m_animationSpeed);
@@ -35,5 +35,7 @@ public class Player extends AliveEntity {
 
 
 	}
-	
+
+
+
 }

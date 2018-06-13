@@ -24,7 +24,7 @@ public class Level {
 	
 	Room m_currentRoom;
 	Iterator<String> m_roomIt;
-	
+
 	private static JSONObject m_allEnemies;
 	{
 		{
@@ -51,7 +51,7 @@ public class Level {
 
 	public Level(int id, Model m) {
 		m_model = m;
-		
+
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader("assets/level/level"+id+".json"));
@@ -92,16 +92,16 @@ public class Level {
 		}
 		m_roomIt = m_rooms.iterator();
 	}
-	
-	
+
+
 	public Enemy getRandomEnemy(Model m, int x, int y, Tile tile) {
 		int size = m_enemies.size();
 		int rd_value = (int) (Math.random() * size);
 		String str = m_enemies.get(rd_value);
-		
+
 		JSONObject enemiesList = (JSONObject) Level.m_allEnemies.get(str);
 		String enemySprite = (String) enemiesList.get("sprite");
-		
+
 		String speedTxt = (String) enemiesList.get("speed");
 		double speed = Double.parseDouble(speedTxt);
 
@@ -110,55 +110,56 @@ public class Level {
 
 		String dmgTxt = (String) enemiesList.get("dmg");
 		int dmg = Integer.parseInt(dmgTxt);
-		
+
 		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, life, dmg);
 		return returnEnemy;
 	}
-	
+
 	public Pet getRandomPet(Model m, int x, int y, Tile tile) {
 		int size = m_pets.size();
 		int rd_value = (int) (Math.random() * size);
 		String str = m_pets.get(rd_value);
-		
+
 		JSONObject petsList = (JSONObject) Level.m_allPets.get(str);
 		String petSprite = (String) petsList.get("sprite");
-		
+
 		String speedTxt = (String) petsList.get("speed");
 		double speed = Double.parseDouble(speedTxt);
-		
+
 		//TODO mettre la vraie vie
 		Pet returnPet = new Pet(m, x, y, petSprite, speed, tile, 10, 2);
 		return returnPet;
 	}
-	
+
 	public Item getRandomItem(Model m, int x, int y, Tile tile) {
 		int size = m_items.size();
 		int rd_value = (int) (Math.random() * size);
 		String str = m_items.get(rd_value);
-		
+
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
 		int itemDamage = Integer.parseInt((String)itemsList.get("damage"));
-		
-		if((String)itemsList.get("type") == "consumable")
-			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.CONSUMABLE);
+
+		if(str.equals("potion"))
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.smallPotion);
+		else if (str.equals("big_potion"))
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.bigPotion);
 		else
 			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.WEAPON);
 	}
-	
+
 	public String getRandomRoom() {
 		int size = m_rooms.size();
 		int rd_value = (int) (Math.random() * size);
 		return m_rooms.get(rd_value);
 	}
-	
 	/**
 	 * @return the m_currentRoom
 	 */
 	public Room getCurrentRoom() {
 		return m_currentRoom;
 	}
-	
+
 	public boolean nextRoom() {
 		if(m_roomIt.hasNext()){
 			m_currentRoom = new Room(this, Integer.parseInt(m_roomIt.next()));

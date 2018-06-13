@@ -1,5 +1,5 @@
 package main;
 
 public enum Actions {
-	HIT, PROJECTILE, PORTAL, PICK, WIZZ, POP
+	HIT, PROJECTILE, PORTAL, PICK, WIZZ, POP, POTION
 }

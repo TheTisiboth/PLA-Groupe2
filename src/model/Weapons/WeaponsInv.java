@@ -20,6 +20,7 @@ public  class WeaponsInv extends ItemInv{
 	int m_damage;
 	BufferedImage m_sprite;
 	BufferedImage m_origSprite;
+	public String m_fileSprite;
 	
 	boolean m_isAttacking;
 	
@@ -31,6 +32,7 @@ public  class WeaponsInv extends ItemInv{
 		m_entity = entity;
 		m_isAttacking = false;
 		m_damage = damage;
+		m_fileSprite = filePath;
 		
         try {
             m_sprite = ImageIO.read(new File(filePath));
