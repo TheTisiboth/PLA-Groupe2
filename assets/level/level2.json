@@ -1,12 +1,14 @@
 {
   "enemies": [
-    "bear",
-    "hornet",
-    "shark"
+    "outlawBoy",
+    "skeleton"
   ],
   "items": [
     "littlePotion",
-    "bigPotion"
+    "bigPotion",
+    "sword",
+    "hammer",
+    "axe"
   ],
   "rooms": [
     0,
@@ -19,6 +21,5 @@
   "pets": [
     "dog",
     "cat"
-  ],
-  "boss": "elephant"
+  ]
 }

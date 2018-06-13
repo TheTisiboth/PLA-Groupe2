@@ -6,8 +6,9 @@
   "items": [
     "potion",
     "big_potion",
-"axe",
-"sword"
+    "sword",
+    "hammer",
+    "axe"
   ],
   "rooms": [
     0,
@@ -16,6 +17,5 @@
   "pets": [
     "dog",
     "cat"
-  ],
-  "boss": "elephant"
+  ]
 }

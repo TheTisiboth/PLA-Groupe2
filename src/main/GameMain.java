@@ -49,6 +49,10 @@ public class GameMain {
 		    return;
 	  }
 	  
+	  public static void showMenu() {
+		  m_menu.setVisible(true);
+	  }
+	  
 	  public static void createShowGame() {
 		// construct the game elements: model, controller, and view.
 		    Model model = new Model(m_ast);
