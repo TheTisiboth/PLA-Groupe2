@@ -1,5 +1,7 @@
 package j;
 
+import ricm3.parser.Ast.Terminal;
+
 public class J_State {
 	J_Terminal name;
 	
@@ -12,4 +14,7 @@ public class J_State {
 		return state.name.equals(name);
 	}
 
+	public boolean isRandom() {
+		return name.equals(new J_Terminal("_"));
+	}
 }
