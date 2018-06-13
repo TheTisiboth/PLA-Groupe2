@@ -75,7 +75,8 @@ public class Tile {
 	}
 
 	public void delEntity(Entity e) {
-		m_entities.set(m_entities.indexOf(e), null);
+		if(e!=null && m_entities.contains(e))
+			m_entities.set(m_entities.indexOf(e), null);
 	}
 
 	public void paint(Graphics g) {

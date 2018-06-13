@@ -99,9 +99,14 @@ public class Level {
 		
 		String speedTxt = (String) enemiesList.get("speed");
 		double speed = Double.parseDouble(speedTxt);
+
+		String lifeTxt = (String) enemiesList.get("life");
+		int life = Integer.parseInt(lifeTxt);
+
+		String dmgTxt = (String) enemiesList.get("dmg");
+		int dmg = Integer.parseInt(dmgTxt);
 		
-		//TODO mettre la vraie vie
-		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, 10, 2);
+		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, life, dmg);
 		return returnEnemy;
 	}
 	
