@@ -1,4 +1,20 @@
-Turner(Turn_0){
-  * (Turn_0): True ? Move(E) :(Turn_1)
-  * (Turn_1): True ? Protect(B) : (Turn_0)
+Turner(Init_0){
+ *(Init_0) : 
+	| Closest(F,E) ? Hit(F) : (_)
+	| Cell(F,V) ? Move(F) : (_)
+ 	| True ? Turn(R) : (_)
+ *(M_R) : 
+	| Closest(F,E) ? Hit(F) : (_)
+	| Cell(F,V) ? Move(R) : (_)
+	| True ? Turn(B) : (_)
+ *(M_L) :
+	| Closest(F,E) ? Hit(F) : (_)
+	| Cell(L,V) ? Move(L) : (_)
+	| True ? Turn(B) : (_)
+ *(M_B) :
+	| Closest(F,E) ? Hit(F) : (_)
+	| Cell(B,V) ? Move(B) : (_)
+	| True ? Turn(B) : (_)
+
+ *(Hit_1) : True ? Hit(F) : (_)
 }
