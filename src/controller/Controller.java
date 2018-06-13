@@ -68,6 +68,7 @@ public class Controller extends GameController implements ActionListener {
 		m_actions.put(Actions.PICK, false);
 		m_actions.put(Actions.WIZZ, false);
 		m_actions.put(Actions.POP, false);
+		m_actions.put(Actions.POTION, false);
 
 	}
 
@@ -122,6 +123,10 @@ public class Controller extends GameController implements ActionListener {
 			m_model.getPlayer().pop();
 			m_actions.put(Actions.POP, false);
 		}
+		if (m_actions.get(Actions.POTION)) {
+			m_model.getPlayer().usePotion();
+			m_actions.put(Actions.POTION, false);
+		}
 	}
 
 	@Override
@@ -158,6 +163,8 @@ public class Controller extends GameController implements ActionListener {
 			m_actions.put(Actions.WIZZ, true);
 		if (e.getKeyCode() == 17) // ctrl
 			m_actions.put(Actions.POP, true);
+		if(e.getKeyCode() == 82) 
+			m_actions.put(Actions.POTION, true);
 
 		if (Options.ECHO_KEYBOARD)
 			System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
@@ -193,7 +200,9 @@ public class Controller extends GameController implements ActionListener {
 			m_actions.put(Actions.WIZZ, false);
 		if (e.getKeyCode() == 17) // ctrl
 			m_actions.put(Actions.POP, false);
-
+		if(e.getKeyCode() == 83) //r
+			m_actions.put(Actions.POTION, false);
+		
 		if (Options.ECHO_KEYBOARD)
 			System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());
 	}
