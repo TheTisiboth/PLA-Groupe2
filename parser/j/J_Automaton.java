@@ -1,7 +1,9 @@
 package j;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.concurrent.ThreadLocalRandom;
 
 import model.Entity;
 
@@ -30,12 +32,22 @@ public class J_Automaton {
 
 					if(transition.eval(entite)) {
 						transition.exec(entite);
-						entry = transition.target;
+						
+						if(transition.target.isRandom()) {
+							entry = getRandomState();
+						}
+						else {
+							entry = transition.target;							
+						}
 						return;
 					}
 				}
 			}
 		}
+	}
+	
+	private J_State getRandomState(){
+		return behaviours.get(ThreadLocalRandom.current().nextInt(0, behaviours.size())).source;
 	}
 
 	public J_Automaton getCopy() {
