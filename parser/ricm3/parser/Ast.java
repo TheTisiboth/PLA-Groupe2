@@ -364,15 +364,15 @@ public class Ast {
 				return new Move(j_params);
 			case "Power":
 				return new Power(j_params);
-<<<<<<< HEAD
+
 			case "Hit":
 				return new Hit(j_params);
 			case "Protect":
 				return new Protect(j_params);
-=======
+
 			case "MyDir" :
 				return new MyDir(j_params);
->>>>>>> a2129fb2ae87944790bdd7ed99f404949227df46
+
 
 			}
 
