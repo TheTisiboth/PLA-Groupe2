@@ -21,7 +21,7 @@ public class Entity{
 
 	String m_state;
 	BufferedImage m_currentSprite;
-	Model m_model;
+	public Model m_model;
 	Tile m_tile;
 	int m_layer;
 	

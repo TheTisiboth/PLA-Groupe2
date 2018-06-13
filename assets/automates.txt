@@ -1,4 +1,3 @@
 Turner(Turn_0){
-  * (Turn_0): True ? Move(E) :(Turn_1)
-  * (Turn_1): True ? Protect(B) : (Turn_0)
+  * (Turn_0): Closest(V, F) ? Protect(F) :(Turn_0)
 }

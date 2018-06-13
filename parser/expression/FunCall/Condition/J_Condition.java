@@ -6,7 +6,7 @@ import expression.FunCall.J_FunCall;
 import j.J_Parameters;
 import model.Entity;
 
-public class J_Condition extends J_FunCall{
+public abstract class J_Condition extends J_FunCall{
 
 	public J_Condition(List<J_Parameters> params) {
 		super(params);
@@ -14,8 +14,5 @@ public class J_Condition extends J_FunCall{
 	}
 	
 	
-	public boolean eval(Entity e) {
-		System.out.println("NYI");
-		return false;
-	}
+	public abstract boolean eval(Entity e);
 }

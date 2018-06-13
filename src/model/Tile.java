@@ -94,6 +94,14 @@ public class Tile {
 		}
 	}
 
+	public int getCaseX() {
+		return m_x;
+	}
+	
+	public int getCaseY() {
+		return m_y;
+	}
+	
 	public Portal getPortal() {
 		return (Portal) m_entities.get(Options.LAYER_PORTAL);
 	}

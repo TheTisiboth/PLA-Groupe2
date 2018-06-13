@@ -1,5 +1,4 @@
 package ricm3.parser;
-import java.io.Console;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -12,19 +11,19 @@ import expression.FunCall.Actions.Power;
 import expression.FunCall.Actions.Protect;
 import expression.FunCall.Actions.Turn;
 import expression.FunCall.Condition.Cell;
+import expression.FunCall.Condition.Closest;
 import expression.FunCall.Condition.MyDir;
 import expression.FunCall.Condition.True;
 import expression.J_BinaryOp.And;
 import expression.J_BinaryOp.Or;
 import expression.J_UnaryOp.Not;
+import j.EnumCons;
 import j.J_AI_Definition;
 import j.J_Automaton;
 import j.J_Behaviour;
 import j.J_Parameters;
 import j.J_State;
-import j.J_Terminal;
 import j.J_Transition;
-import j.EnumCons;
 
 /* Michael PÉRIN, Verimag / Univ. Grenoble Alpes, june 2018
  *
@@ -356,6 +355,8 @@ public class Ast {
 			switch((String)name.make()) {
 			case "True":
 				return new True(j_params);
+			case "Closest":
+				return new Closest(j_params);
 			case "Turn":
 				return new Turn(j_params);
 			case "Cell":
@@ -364,15 +365,12 @@ public class Ast {
 				return new Move(j_params);
 			case "Power":
 				return new Power(j_params);
-<<<<<<< HEAD
 			case "Hit":
 				return new Hit(j_params);
 			case "Protect":
 				return new Protect(j_params);
-=======
 			case "MyDir" :
 				return new MyDir(j_params);
->>>>>>> a2129fb2ae87944790bdd7ed99f404949227df46
 
 			}
 
