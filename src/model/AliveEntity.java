@@ -157,9 +157,13 @@ public abstract class AliveEntity extends MovableEntity {
 	public double getLifePercentage() {
 		return (double) ((double)m_life / (double)m_lifeMax);
 	}
-
+	
 	public void wizz() {
-		Directions dir = this.getOrientation();
+		wizz(this.RelativeToRealDir(Directions.FRONT));
+	}
+
+	public void wizz(Directions d) {
+		Directions dir = this.RelativeToRealDir(d);
 		Tile spawningTile = this.getLookingTile(dir);
 		List<Entity> list = spawningTile.m_entities;
 		while( ! (list.get(1) instanceof Wall) ) {
@@ -188,9 +192,13 @@ public abstract class AliveEntity extends MovableEntity {
 			m_portals.add(portal);
 		}
 	}
-
+	
 	public void pop() {
-		Directions dir = this.getOrientation();
+		pop(this.RelativeToRealDir(Directions.FRONT));
+	}
+
+	public void pop(Directions d) {
+		Directions dir = this.RelativeToRealDir(d);
 		Tile spawningTile = this.getLookingTile(dir);
 		List<Entity> list = spawningTile.m_entities;
 		while( ! (list.get(1) instanceof Wall) ) {
@@ -254,6 +262,52 @@ public abstract class AliveEntity extends MovableEntity {
 			}
 		}
 		return;
+	}
+	
+	public void throwProjectileEverywhere() {
+		Directions dir = Directions.UP;
+		Tile spawningTile = this.getLookingTile(dir);
+		Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 3,dir,Teams.Missile, m_team);
+		Directions dir1 = Directions.DOWN;
+		Tile spawningTile1 = this.getLookingTile(dir1);
+		Projectile proj1 = new Projectile(m_model, spawningTile1.m_x * Options.TAILLE_CASE, spawningTile1.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile1, 3,dir1,Teams.Missile, m_team);
+		Directions dir2 = Directions.RIGHT;
+		Tile spawningTile2 = this.getLookingTile(dir2);
+		Projectile proj2 = new Projectile(m_model, spawningTile2.m_x * Options.TAILLE_CASE, spawningTile2.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile2, 3,dir2,Teams.Missile, m_team);
+		Directions dir3 = Directions.LEFT;
+		Tile spawningTile3 = this.getLookingTile(dir3);
+		Projectile proj3 = new Projectile(m_model, spawningTile3.m_x * Options.TAILLE_CASE, spawningTile3.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile3, 3,dir3,Teams.Missile, m_team);
+		
+		spawningTile.putEntity(Options.layers.get("projectile"),proj);
+		proj.m_orientation=dir;
+		spawningTile1.putEntity(Options.layers.get("projectile"),proj1);
+		proj1.m_orientation=dir1;
+		spawningTile2.putEntity(Options.layers.get("projectile"),proj2);
+		proj2.m_orientation=dir2;
+		spawningTile3.putEntity(Options.layers.get("projectile"),proj3);
+		proj3.m_orientation=dir3;
+		
+		if(proj.testCollision()) {
+			return;
+		}
+		
+		if(proj1.testCollision()) {
+			return;
+		}
+		
+		if(proj2.testCollision()) {
+			return;
+		}
+		
+		if(proj3.testCollision()) {
+			return;
+		}
+		
+		proj.move(dir);
+		proj1.move(dir1);
+		proj2.move(dir2);
+		proj3.move(dir3);
+		
 	}
 
 	private void updateAnimation(){

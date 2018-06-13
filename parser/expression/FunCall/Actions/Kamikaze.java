@@ -6,20 +6,17 @@ import j.J_Parameters;
 import model.AliveEntity;
 import model.Entity;
 
-public class Wizz extends J_Action {
+public class Kamikaze extends J_Action {
 
-	public Wizz(List<J_Parameters> params) {
+	public Kamikaze(List<J_Parameters> params) {
 		super(params);
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void exec(Entity e) {
 		AliveEntity a = (AliveEntity)e;
-		if(parameters.size()>0) {
-			a.wizz(parameters.get(0).toDirection());
-		}
-		else
-			a.wizz();
+		a.throwProjectileEverywhere();
+		a.kill();
 	}
 
 }

@@ -6,10 +6,13 @@ import java.util.ListIterator;
 import expression.J_Expression;
 import expression.FunCall.Actions.Hit;
 import expression.FunCall.Actions.J_Action;
+import expression.FunCall.Actions.Kamikaze;
 import expression.FunCall.Actions.Move;
+import expression.FunCall.Actions.Pop;
 import expression.FunCall.Actions.Power;
 import expression.FunCall.Actions.Protect;
 import expression.FunCall.Actions.Turn;
+import expression.FunCall.Actions.Wizz;
 import expression.FunCall.Condition.Cell;
 import expression.FunCall.Condition.Closest;
 import expression.FunCall.Condition.GotPower;
@@ -374,6 +377,12 @@ public class Ast {
 				return new MyDir(j_params);
 			case "GotPower" :
 				return new GotPower(j_params);
+			case "Pop" :
+				return new Pop(j_params);
+			case "Wizz":
+				return new Wizz(j_params);
+			case "Kamikaze":
+				return new Kamikaze(j_params);
 			}
 
 			System.out.println("Expression non prise en compte: " + (String)name.make());

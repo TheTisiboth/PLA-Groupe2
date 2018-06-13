@@ -15,7 +15,11 @@ public class Pop extends J_Action{
 	
 	public void exec(Entity e) {
 		AliveEntity a = (AliveEntity)e;
-		a.pop();
+		if(parameters.size() > 0) {
+			a.pop(parameters.get(0).toDirection());
+		}
+		else
+			a.pop();
 	}
 
 }
