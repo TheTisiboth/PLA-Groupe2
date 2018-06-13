@@ -22,6 +22,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -202,6 +203,10 @@ public class GameUI {
   public void setFPS(int fps, String msg) {
     m_fps = fps;
     m_msg = msg;
+  }
+  
+  public void close() {
+	  m_frame.getWindowListeners()[0].windowClosing(new WindowEvent(m_frame, m_fps));
   }
 
 }

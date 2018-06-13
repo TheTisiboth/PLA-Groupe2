@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -24,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import j.J_AI_Definition;
-import model.Model;
 
 public class AutomataWindow extends JFrame {
 
@@ -38,11 +36,8 @@ public class AutomataWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		
-		JPanel bgPane = new BackgroundPanel();
-		
-		
-		bgPane.setBackground(Color.RED);
-		
+		JPanel bgPane = new BackgroundPanel("assets/view/AutomataBg.png",0,0,680,704);
+				
 		Box automata = Box.createVerticalBox();
 		automata.setOpaque(false);
 		JScrollPane scroll = new JScrollPane(automata, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -114,19 +109,24 @@ public class AutomataWindow extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private class BackgroundPanel extends JPanel{
+	public static class BackgroundPanel extends JPanel{
 
 		private static final long serialVersionUID = 1L;
 		Image image;
+		int m_x, m_y, m_width, m_height;
 		
-		public BackgroundPanel() {
-			image = new ImageIcon("assets/view/AutomataBg.png").getImage().getScaledInstance(680,704,Image.SCALE_DEFAULT);
+		public BackgroundPanel(String img, int x, int y, int width, int height) {
+			m_x = x;
+			m_y = y;
+			m_width = width;
+			m_height = height;
+			image = new ImageIcon(img).getImage().getScaledInstance(width,height,Image.SCALE_DEFAULT);
 		}
 		
 		@Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			g.drawImage(image, 0,0,680,704, this);		
+			g.drawImage(image, m_x,m_y,m_width,m_height, this);		
 		}
 	}
 	

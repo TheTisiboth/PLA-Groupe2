@@ -5,9 +5,8 @@
     "snakeWoman"
   ],
   "items": [
-    "life",
-    "poison",
-	"rifle"
+    "littlePotion",
+    "bigPotion"
   ],
   "rooms": [
     0,

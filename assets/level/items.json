@@ -1,17 +1,8 @@
 {
-  "life": {
-    "sprite": "assets/sprites/potion.png"
+  "littlePotion": {
+    "sprite": "assets/sprites/littlePotion.png"
   },
-  "poison": {
-    "sprite": "assets/sprites/big_potion.png"
-  },
-  "revival": {
-    "sprite": "assets/sprites/revival.png"
-  },
-  "rifle": {
-    "sprite": "assets/sprites/rifle.png"
-  },
-  "bomb": {
-    "sprite": "assets/sprites/bomb.png"
+  "bigPotion": {
+    "sprite": "assets/sprites/bigPotion.png"
   }
 }
