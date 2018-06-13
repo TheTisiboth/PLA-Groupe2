@@ -98,7 +98,7 @@ public class Options {
 		velocities.put("item",0.0);
 	}
 
-	public static final int lvlNb = 3;
+	public static final int lvlNb = 1;
 
 
 }

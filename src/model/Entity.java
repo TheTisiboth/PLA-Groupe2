@@ -148,10 +148,8 @@ public class Entity{
 		if(newTile.getEntityOnLayer(m_layer)==null || ( portal!=null && portal.Active() && portal.m_orientation==this.m_orientation) ){
 			getTile().delEntity(this);
 			if(portal !=null && portal.Active() && portal.m_orientation==this.m_orientation) {
-				System.out.println("old orientation : "+ m_orientation);
 				newTile = portal.m_destPortal.m_exitTile;
 				this.m_orientation = portal.m_destPortal.m_exitDir;
-				System.out.println("new orientation : "+ m_orientation);
 			}
 			newTile.putEntity(m_layer, this);
 			setTile(newTile);
