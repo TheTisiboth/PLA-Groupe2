@@ -41,8 +41,10 @@ public class Tile {
 
 			break;
 		case PET:
-			putEntity(Options.layers.get("character"),
-					m.m_level.getRandomPet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+			Entity pet = m.m_level.getRandomPet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
+			putEntity(Options.layers.get("character"),pet);
+			J_Automaton auto2 = j_ast.randomAutomaton();
+			m_automate = new Automate(pet, auto2.getCopy());
 			break;
 		case ITEM:
 			putEntity(Options.layers.get("item"),
