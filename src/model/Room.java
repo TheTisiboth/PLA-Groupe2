@@ -2,15 +2,9 @@ package model;
 
 import java.awt.Graphics;
 
-import java.util.*;
-
 import controller.Options;
 import controller.Options.TileObject;
-import j.J_AI_Definition;
-import ricm3.parser.Ast;
-import ricm3.parser.AutomataParser;
 import utils.MapParser;
-import ricm3.parser.Ast.*;
 
 // import java.util.List;
 
@@ -34,15 +28,10 @@ public class Room {
 		tileConstructor(m_startingEntities);
 	}
 
-	private void tileConstructor(TileObject[][] to) {
-		Ast ast;
-		try {
-			ast = AutomataParser.from_file("assets/automates.txt");
-			J_AI_Definition j_ast = (J_AI_Definition)((AI_Definitions)ast).make();
-			
+	private void tileConstructor(TileObject[][] to) {		
 			for (int i = 0; i < Options.HAUTEUR; i++) {
 				for (int j = 0; j < Options.LARGEUR; j++) {
-					m_tiles[j][i] = new Tile(to[i][j], j, i, m_level.m_model, j_ast.automata.get(0));
+					m_tiles[j][i] = new Tile(to[i][j], j, i, m_level.m_model, m_model.getAst());
 					switch (to[i][j]) {
 					case EXIT:
 						m_exit = m_tiles[j][i];
@@ -57,10 +46,6 @@ public class Room {
 					}
 				}
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void paint(Graphics g) {
@@ -93,5 +78,5 @@ public class Room {
 	public Tile[][] getTiles() {
 		return m_tiles;
 	}
-
+	
 }

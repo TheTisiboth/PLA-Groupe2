@@ -116,7 +116,7 @@ public class Ast {
 		public String tree_edges() {
 			return value.as_tree_son_of(this);
 		}
-		
+
 		public Object make() {
 			switch((String) value.make()) {
 			case "N":
@@ -247,7 +247,7 @@ public class Ast {
 		public String toString() {
 			return value.toString() ;
 		}
-		
+
 		public Object make() {
 			return value.make();
 		}
@@ -272,7 +272,7 @@ public class Ast {
 			case "!":
 				return new Not((J_Expression)operand.make());
 			}
-			
+
 			System.out.println("Operateur unaire non pris en compte: " + (String)operator.make());;
 			return null;
 		}
@@ -307,7 +307,7 @@ public class Ast {
 		public String toString() {
 			return "(" + left_operand + " " + operator + " " + right_operand + ")" ;
 		}
-		
+
 		public Object make() {
 			switch((String)operator.make()) {
 			case "&":
@@ -315,7 +315,7 @@ public class Ast {
 			case "/":
 				return new Or((J_Expression)left_operand.make(), (J_Expression) right_operand.make());
 			}
-			
+
 			System.out.println("Operateur unaire non pris en compte: " + (String)operator.make());;
 			return null;
 		}
@@ -351,8 +351,8 @@ public class Ast {
 				Parameter expr = iter.next();
 				j_params.add((J_Parameters)expr.make());
 			}
-			
-			
+
+
 			switch((String)name.make()) {
 			case "True":
 				return new True(j_params);
@@ -364,20 +364,16 @@ public class Ast {
 				return new Move(j_params);
 			case "Power":
 				return new Power(j_params);
-
 			case "Hit":
 				return new Hit(j_params);
 			case "Protect":
 				return new Protect(j_params);
-
 			case "MyDir" :
 				return new MyDir(j_params);
-
-
 			}
 
 			System.out.println("Expression non prise en compte: " + (String)name.make());
-			
+
 			return null;
 		}
 	}
@@ -615,7 +611,7 @@ public class Ast {
 			J_Expression cond = (J_Expression) condition.make();
 			J_Action act = (J_Action) action.make();
 			J_State stat = (J_State) target.make();
-			
+
 			return new J_Transition(cond, act, stat);
 		}
 
