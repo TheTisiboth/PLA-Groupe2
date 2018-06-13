@@ -5,7 +5,9 @@
   ],
   "items": [
     "potion",
-    "big_potion"
+    "big_potion",
+"axe",
+"sword"
   ],
   "rooms": [
     0,

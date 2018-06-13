@@ -23,10 +23,14 @@ public class Inventory {
 	}
 
 	public void usePotion() {
-		if(m_smallPotionNbr > 0)
+		if(m_smallPotionNbr > 0) {
 			m_owner.setLife(m_owner.getLife() + 1);
-		else if(m_smallPotionNbr > 0)
+			m_smallPotionNbr--;
+		}
+		else if(m_bigPotionNbr > 0) {
 			m_owner.setLife(m_owner.getLife() + 5);
+			System.out.println("grosse");
+		}
 	}
 
 	public void pick(Item item) {
@@ -35,7 +39,7 @@ public class Inventory {
 			m_smallPotionNbr++;
 			break;
 		case bigPotion:
-			m_smallPotionNbr++;
+			m_bigPotionNbr++;
 			break;
 		case WEAPON:
 			switchWeapon(((WeaponsInv)item.getItemInv(m_owner)));

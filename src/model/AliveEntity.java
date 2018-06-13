@@ -119,7 +119,10 @@ public abstract class AliveEntity extends MovableEntity {
 		return false;
 	}
 
-
+	public void usePotion() {
+		m_inventory.usePotion();
+	}
+	
 	public int getLife() {
 		return m_life;
 	}
@@ -129,7 +132,10 @@ public abstract class AliveEntity extends MovableEntity {
 	}
 
 	public void setLife(int l){
-		m_life = l;
+		if(l > getLifeMax())
+			m_life = getLifeMax();
+		else
+			m_life = l;
 	}
 
 	public double getLifePercentage() {
