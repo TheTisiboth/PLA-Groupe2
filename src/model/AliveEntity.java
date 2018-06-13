@@ -236,6 +236,7 @@ public abstract class AliveEntity extends MovableEntity {
 	}
 
 	public void throwProjectile(Directions dir) {
+		dir = this.RelativeToRealDir(dir);
 		if (projectileCooldown <= 0) {
 			setOrientation(dir);
 			Tile spawningTile = this.getLookingTile(dir);
