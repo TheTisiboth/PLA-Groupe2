@@ -11,10 +11,12 @@ public class Projectile extends MovableEntity {
 
 	private boolean isMoving;
 	private int m_damage;
+	private Teams m_equipe;
 
-	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Teams team) {
+	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Teams team, Teams equipe) {
 		super(model, posX, posY, speed, filename, tile, team);
 		// TODO Auto-generated constructor stub
+		m_equipe = equipe;
 		m_team = team;
 		m_layer = 2;
 		tile.putEntity(m_layer,this);
@@ -164,9 +166,9 @@ public class Projectile extends MovableEntity {
 				kill();
 				return true;
 			}
-			if(e instanceof AliveEntity && e.getTeam() != m_team){
+			if(e instanceof AliveEntity && e.getTeam() != m_equipe){
 				kill();
-				((AliveEntity)e).setLife(((AliveEntity)e).getLife()-m_damage);
+				((AliveEntity)e).setLife(((AliveEntity)e).getLife() - m_damage);
 				return true;
 			}
 		}

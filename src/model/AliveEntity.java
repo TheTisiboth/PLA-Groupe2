@@ -241,7 +241,7 @@ public abstract class AliveEntity extends MovableEntity {
 			setOrientation(dir);
 			Tile spawningTile = this.getLookingTile(dir);
 			if (spawningTile.m_entities.get(Options.layers.get("projectile")) == null){
-				Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 3,dir,Teams.Missile);
+				Projectile proj = new Projectile(m_model, spawningTile.m_x * Options.TAILLE_CASE, spawningTile.m_y * Options.TAILLE_CASE, "assets/sprites/fireball.png", 1, spawningTile, 3,dir,Teams.Missile, m_team);
 				spawningTile.putEntity(Options.layers.get("projectile"),proj);
 				proj.m_orientation=dir;
 				projectileCooldown = 500;
