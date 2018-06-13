@@ -1,3 +1,20 @@
-Turner(Init_0){
- *(Init_0) : True ? Kamikaze : (X)
+Joachimfdp(Init){
+ *(Init) : 
+	| Closest(T,F) ? Protect(F) : (M_R)
+	| Cell(F,V) ? Move(F) : (Bim)
+ 	| True ? Turn(R) : (M_R)
+ *(M_R) : 
+	| Closest(T,R) ? Protect(R) : (Bim)
+	| Cell(F,V) ? Move(R) : (Init)
+	| True ? Turn(B) : (M_B)
+ *(M_L) :
+	| Closest(T,L) ? Protect(L) : (Bim)
+	| Cell(L,V) ? Move(L) : (Init)
+	| True ? Turn(B) : (M_B)
+ *(M_B) :
+	| Closest(T,B) ? Protect(B) : (Bim)
+	| Cell(B,V) ? Move(B) : (Init)
+	| True ? Turn(B) : (M_R)
+
+ *(Bim) : True ? Protect(F) : (M_L)
 }

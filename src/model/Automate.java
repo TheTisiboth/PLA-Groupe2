@@ -16,9 +16,11 @@ public class Automate {
 	
 
 	public void step(long now) {
+		if(((AliveEntity)entite).m_life != -1) {
 		if(now - last > cooldown) {
 			comportement.step(entite);
 			last = now;
+		}
 		}
 	}
 }
