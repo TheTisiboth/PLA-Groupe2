@@ -267,4 +267,16 @@ public abstract class AliveEntity extends MovableEntity {
 		}
 	}
 
+	public void flushPortals(){
+		for(int i = 0; i<m_portals.size(); i++) {
+			m_portals.remove(i);			
+		}
+	}
+
+	@Override
+	public void kill() {
+		super.kill();
+		setLife(-1);
+	}
+	
 }
