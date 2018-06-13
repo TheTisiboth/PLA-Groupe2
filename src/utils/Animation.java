@@ -69,7 +69,6 @@ public class Animation {
             m_frameCount++;
 
             if (m_frameCount > m_frameDelay) {
-                System.out.println("current frame : "+ m_currentFrame);
                 m_frameCount = 0;
                 m_currentFrame ++;
 

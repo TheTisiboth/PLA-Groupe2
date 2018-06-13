@@ -1,8 +1,8 @@
 {
   "enemies": [
-    "armorBoy",
-    "demon",
-    "snakeWoman"
+    "bear",
+    "hornet",
+    "shark"
   ],
   "items": [
     "littlePotion",

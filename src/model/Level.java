@@ -1,20 +1,16 @@
 package model;
 
-import org.json.simple.*;
-import org.json.simple.parser.*;
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import model.Boss;
-import model.Enemy;
-import model.Entity;
-import model.Item;
-import model.Model;
-import model.Pet;
-import model.Room;
-import model.Tile;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import model.Item.ItemType;
 
 public class Level {
 
@@ -24,9 +20,10 @@ public class Level {
 	public ArrayList<String> m_pets;
 	public String m_boss;
 	public Model m_model;
-	
+
 	Room m_currentRoom;
-	
+	Iterator<String> m_roomIt;
+
 	private static JSONObject m_allEnemies;
 	{
 		{
@@ -55,13 +52,12 @@ public class Level {
 	private static JSONObject m_allItems;
 	private static JSONObject m_allBoss;
 
-	public Level(String str, Model m) {
+	public Level(int id, Model m) {
 		m_model = m;
-		
-		
+
 		JSONParser parser = new JSONParser();
 		try {
-			Object obj = parser.parse(new FileReader("assets/level/level.json"));
+			Object obj = parser.parse(new FileReader("assets/level/level"+id+".json"));
 			JSONObject jsonObject = (JSONObject) obj;
 
 			m_enemies = new ArrayList<String>();
@@ -96,11 +92,9 @@ public class Level {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		m_roomIt = m_rooms.iterator();
 	}
-	
-	public void loadLevel() {
-		m_currentRoom = new Room(this, 0);
-	}
+
 
 	public Enemy getRandomEnemy(Model m, int x, int y, Tile tile) {
 		int size = m_enemies.size();
@@ -138,15 +132,17 @@ public class Level {
 		int size = m_items.size();
 		int rd_value = (int) (Math.random() * size);
 		String str = m_items.get(rd_value);
-		
-		System.out.print(str);
 
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
+		int itemDamage = Integer.parseInt((String)itemsList.get("damage"));
 		
-		//TODO mettre la vraie vie
-		Item returnItem = new Item(m, x, y, itemSprite, tile, -1,str);
-		return returnItem;
+		if(str.equals("potion")) 
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.smallPotion);
+		else if (str.equals("big_potion")) 
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.bigPotion);
+		else 
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.WEAPON);		
 	}
 
 	public String getRandomRoom() {
@@ -160,12 +156,12 @@ public class Level {
 		String bossSprite = (String) bossList.get("sprite");
 
 		Double speed = (Double) bossList.get("speed");
-		
+
 		//TODO mettre la vraie vie
 		Boss returnBoss = new Boss(m, x, y, bossSprite, speed, tile, 10, 4);
 		return returnBoss;
 	}
-	
+
 	/**
 	 * @return the m_currentRoom
 	 */
@@ -173,4 +169,11 @@ public class Level {
 		return m_currentRoom;
 	}
 
+	public boolean nextRoom() {
+		if(m_roomIt.hasNext()){
+			m_currentRoom = new Room(this, Integer.parseInt(m_roomIt.next()));
+			return true;
+		}
+		return false;
+	}
 }

@@ -1,0 +1,19 @@
+{
+  "enemies": [
+    "armorBoy",
+    "snakeWoman"
+  ],
+  "items": [
+    "potion",
+    "big_potion"
+  ],
+  "rooms": [
+    0,
+    1
+  ],
+  "pets": [
+    "dog",
+    "cat"
+  ],
+  "boss": "elephant"
+}
