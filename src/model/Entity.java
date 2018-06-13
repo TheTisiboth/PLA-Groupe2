@@ -30,6 +30,8 @@ public class Entity{
 	Sprite m_sprite;
 
 	Animation m_animation;
+	
+	int m_power;
 
 	public Entity(Model model, int posX, int posY, boolean moveable, String filename, Tile t, Teams team) {
 		m_model = model;
@@ -41,12 +43,14 @@ public class Entity{
 		m_updatePhysics = 10;
 		m_tile = t;
 		m_orientation = Directions.DOWN;
-
+		
 		m_sprite = new Sprite(filename);
 
 		m_animation = new Animation(new BufferedImage[]{m_sprite.getSprite(0, 0)}, 10);
 
 		m_team = team;
+		
+		m_power = 0;
 	}
 
 	public Directions RelativeToRealDir(Directions dir) {
@@ -169,6 +173,14 @@ public class Entity{
 
 	public Tile getTile(){
 		return m_tile;
+	}
+	
+	public int getPower() {
+		return m_power;
+	}
+	
+	public void Power() {
+		m_power += 1;
 	}
 
 	public boolean changeTile(int newX, int newY){

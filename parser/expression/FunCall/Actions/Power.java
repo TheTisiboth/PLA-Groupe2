@@ -13,6 +13,6 @@ public class Power extends J_Action {
 	}
 
 	public void exec(Entity entite) {
-		System.out.println("Exec Power");
+		entite.Power();
 	}
 }

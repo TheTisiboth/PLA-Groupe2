@@ -12,6 +12,7 @@ import expression.FunCall.Actions.Protect;
 import expression.FunCall.Actions.Turn;
 import expression.FunCall.Condition.Cell;
 import expression.FunCall.Condition.Closest;
+import expression.FunCall.Condition.GotPower;
 import expression.FunCall.Condition.MyDir;
 import expression.FunCall.Condition.True;
 import expression.J_BinaryOp.And;
@@ -371,6 +372,8 @@ public class Ast {
 				return new Protect(j_params);
 			case "MyDir" :
 				return new MyDir(j_params);
+			case "GotPower" :
+				return new GotPower(j_params);
 			}
 
 			System.out.println("Expression non prise en compte: " + (String)name.make());
