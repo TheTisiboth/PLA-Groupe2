@@ -1,8 +1,10 @@
-package model;
+package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import model.AliveEntity;
 
 public class LifeBar {
 	
@@ -24,6 +26,10 @@ public class LifeBar {
 			g.drawRect(m_entity.getPositionX()-3, m_entity.getPositionY()-5, 35, 5);
 		}
 
+	}
+
+	public AliveEntity getEntity(){
+		return m_entity;
 	}
 	
 }

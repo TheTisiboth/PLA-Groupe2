@@ -1,6 +1,7 @@
 package model;
 
 import controller.Options;
+import main.Teams;
 
 public class Item extends Entity {
 
@@ -17,8 +18,9 @@ public class Item extends Entity {
 
 	ItemType m_type;
 
-	public Item(Model model, int x, int y, String spriteFile, Tile t, int life,String type) {
-		super(model, x, y, false, spriteFile, t);
+
+	public Item(Model model, int x, int y, String spriteFile, Tile t, int life, String type) {
+		super(model, x, y, false, spriteFile, t, Teams.Pickable);
 		m_layer = Options.layers.get("character");
 		setItemType(type);
 	}

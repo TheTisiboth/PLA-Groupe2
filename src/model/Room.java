@@ -2,8 +2,6 @@ package model;
 
 import java.awt.Graphics;
 
-import java.util.*;
-
 import controller.Options;
 import controller.Options.TileObject;
 import utils.MapParser;
@@ -30,24 +28,24 @@ public class Room {
 		tileConstructor(m_startingEntities);
 	}
 
-	private void tileConstructor(TileObject[][] to) {
-		for (int i = 0; i < Options.HAUTEUR; i++) {
-			for (int j = 0; j < Options.LARGEUR; j++) {
-				m_tiles[j][i] = new Tile(to[i][j], j, i, m_level.m_model);
-				switch (to[i][j]) {
-				case EXIT:
-					m_exit = m_tiles[j][i];
-					break;
-				case SPAWN:
-					m_spawn = m_tiles[j][i];
-					m_model.getPlayer().setPosition(j * Options.TAILLE_CASE, i * Options.TAILLE_CASE);
-					m_spawn.putEntity(m_model.getPlayer().getLayer(), m_model.getPlayer());
-					break;
-				default:
-					break;
+	private void tileConstructor(TileObject[][] to) {		
+			for (int i = 0; i < Options.HAUTEUR; i++) {
+				for (int j = 0; j < Options.LARGEUR; j++) {
+					m_tiles[j][i] = new Tile(to[i][j], j, i, m_level.m_model, m_model.getAst());
+					switch (to[i][j]) {
+					case EXIT:
+						m_exit = m_tiles[j][i];
+						break;
+					case SPAWN:
+						m_spawn = m_tiles[j][i];
+						m_model.getPlayer().setPosition(j * Options.TAILLE_CASE, i * Options.TAILLE_CASE);
+						m_spawn.putEntity(m_model.getPlayer().getLayer(), m_model.getPlayer());
+						break;
+					default:
+						break;
+					}
 				}
 			}
-		}
 	}
 
 	public void paint(Graphics g) {
@@ -60,11 +58,14 @@ public class Room {
 		}
 	}
 
-	public void update () {
+	public void update (long now) {
 		for (int i = 0; i < 4; i++) {
 			for (int x = 0; x < Options.LARGEUR; x++) {
 				for (int y = 0; y < Options.HAUTEUR; y++) {
-					m_tiles[x][y].update();
+					m_tiles[x][y].update(now);
+					
+					if(m_tiles[x][y].getAutomate() != null)
+						m_tiles[x][y].getAutomate().step(now);
 				}
 			}
 		}
@@ -77,5 +78,5 @@ public class Room {
 	public Tile[][] getTiles() {
 		return m_tiles;
 	}
-
+	
 }

@@ -6,6 +6,9 @@ import java.util.*;
 
 import controller.Options;
 import controller.Options.TileObject;
+import j.J_AI_Definition;
+import j.J_Automaton;
+import main.Directions;
 
 public class Tile {
 
@@ -14,7 +17,9 @@ public class Tile {
 	ArrayList<Entity> m_entities;
 	Model m_model;
 
-	public Tile(TileObject to, int x, int y, Model m) {
+	Automate m_automate;
+
+	public Tile(TileObject to, int x, int y, Model m, J_AI_Definition j_ast) {
 		m_x = x;
 		m_y = y;
 		m_model = m;
@@ -29,8 +34,11 @@ public class Tile {
 					new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this, -1));
 			break;
 		case ENEMY:
-			putEntity(Options.layers.get("character"),
-					m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
+			Entity enn = m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
+			putEntity(Options.layers.get("character"), enn);
+			J_Automaton auto = j_ast.randomAutomaton();
+			m_automate = new Automate(enn, auto.getCopy());
+
 			break;
 		case BOSS:
 			putEntity(Options.layers.get("character"),
@@ -81,11 +89,20 @@ public class Tile {
 		}
 	}
 
-	public void update() {
-		if (m_entities.get(1) instanceof AliveEntity) {
-			AliveEntity entity = (AliveEntity) m_entities.get(1);
-			entity.tryToKill();
+	public void update(long now) {
+		for (int i = 0; i < 4; i++) {
+			if (m_entities.get(i) != null) {
+				m_entities.get(i).step(now);
+			}
 		}
+	}
+
+	public int getCaseX() {
+		return m_x;
+	}
+
+	public int getCaseY() {
+		return m_y;
 	}
 
 	public Portal getPortal() {
@@ -98,13 +115,35 @@ public class Tile {
 		return true;
 	}
 
-	public void deletePortal() {
-		m_entities.set(Options.LAYER_PORTAL, null);
-	}
-
 	public void setPortal(Portal portal) {
 		m_entities.set(Options.LAYER_PORTAL, portal);
 
+	}
+
+	public Automate getAutomate() {
+		return m_automate;
+	}
+
+	public Tile nextTile(Directions dir) {
+		int x = m_x;
+		int y = m_y;
+		switch (dir) {
+			case RIGHT:
+				x += 1;
+				break;
+			case LEFT:
+				x += -1;
+				break;
+			case UP:
+				y += -1;
+				break;
+			case DOWN:
+				y += 1;
+				break;
+			default:
+				break;
+		}
+		return m_model.getRoom().getTile(x, y);
 	}
 
 }

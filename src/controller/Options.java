@@ -93,7 +93,7 @@ public class Options {
 	static{
 		velocities.put("wall",0.0);
 		velocities.put("boss",0.1);
-		velocities.put("player",0.2);
+		velocities.put("player",0.15);
 		velocities.put("pet",1.0);
 		velocities.put("item",0.0);
 	}
