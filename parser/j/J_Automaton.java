@@ -32,8 +32,6 @@ public class J_Automaton {
 					if(transition.eval(entite)) {
 						transition.exec(entite);
 						entry = transition.target;
-						
-						System.out.println("Transition, nouvelle etat: " + entry.name.value);
 						return;
 					}
 				}
