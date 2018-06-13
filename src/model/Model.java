@@ -41,7 +41,7 @@ public class Model extends GameModel {
 
   boolean m_done;
 
-  public Model(J_AI_Definition ast) {  
+  public Model(J_AI_Definition ast) {
 	m_ast = ast;
     m_lbList = new ArrayList<LifeBar>();
     m_player = new Player(this, 0, 0, null, 20, 2);
@@ -77,7 +77,7 @@ public class Model extends GameModel {
   public Player getPlayer() {
     return m_player;
   }
-  
+
   public Room getRoom(){
     return m_room;
   }
@@ -130,5 +130,5 @@ public class Model extends GameModel {
   public J_AI_Definition getAst() {
 	  return m_ast;
   }
-  
+
 }

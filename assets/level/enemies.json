@@ -1,7 +1,7 @@
 {
   "armorBoy": {
     "sprite": "assets/sprites/armorBoy.png",
-    "speed": "0.05"
+    "speed": "2"
   },
   "demon": {
     "sprite": "assets/sprites/demon.png",
