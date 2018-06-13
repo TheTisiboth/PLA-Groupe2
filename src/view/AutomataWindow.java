@@ -23,10 +23,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import j.J_AI_Definition;
+import model.Model;
+
 public class AutomataWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String [] AUTOMATA = {"Guerrier", "Chien", "Dragon", "Elfe", "Test1", "Test2", "Test3", "Test4", "Test5", "Test6", "Test7", "Test8", "Test9", "Test10", "Test11", "Test12", "Test13", "Test14", "Test15"};
 	private JButton m_returnButton;
 	private JButton m_chooseButton;
 	private List<JCheckBox> m_checkBoxes = new ArrayList<JCheckBox>();
@@ -49,12 +51,13 @@ public class AutomataWindow extends JFrame {
 		scroll.setPreferredSize(new Dimension(150,590));
 		scroll.getViewport().setOpaque(false);
 		
-		List<String> names = Menu.retrieveChoosenAutomata();
-		
+		ArrayList<String> names = J_AI_Definition.getAutomataNames();
+		List<String> namesSelection = Menu.retrieveChoosenAutomata();
+
 		JCheckBox checkAuto;
-		for(String auto : AUTOMATA) {
+		for(String auto : names) {
 			checkAuto = new JCheckBox(auto);
-			if(names.contains(auto)) {
+			if(namesSelection.contains(auto)) {
 				checkAuto.setSelected(true);
 			}
 			checkAuto.setIcon(new ImageIcon("assets/view/emptyCheckBox.png"));
@@ -66,7 +69,7 @@ public class AutomataWindow extends JFrame {
 			automata.add(checkAuto);
 			m_checkBoxes.add(checkAuto);
 		}
-		
+				
 		bgPane.add(scroll, BorderLayout.CENTER);
 		
 		JPanel panelSouth = new JPanel();
@@ -81,7 +84,10 @@ public class AutomataWindow extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				writeChoosenAutomata();
-				dispose();
+				if(!Menu.retrieveChoosenAutomata().isEmpty()) {
+					J_AI_Definition.initializeChoosenAutomatons();
+					dispose();
+				}
 			}
 		});
 		panelSouth.add(m_chooseButton, BorderLayout.WEST);
