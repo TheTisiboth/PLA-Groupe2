@@ -8,7 +8,7 @@ import model.Weapons.WeaponsInv;
 
 public class Inventory {
 	AliveEntity m_owner;
-	
+
 	int m_smallPotionNbr;
 	int m_bigPotionNbr;
 	WeaponsInv m_weapon;
@@ -28,7 +28,7 @@ public class Inventory {
 		else if(m_smallPotionNbr > 0)
 			m_owner.setLife(m_owner.getLife() + 5);
 	}
-	
+
 	public void pick(Item item) {
 		switch(item.getType()) {
 		case smallPotion:
@@ -43,16 +43,16 @@ public class Inventory {
 		}
 		item.kill();
 	}
-	
+
 
 	public int getSmallPotion() {
 		return m_smallPotionNbr;
 	}
-	
+
 	public int getBigPotionNbr() {
 		return m_bigPotionNbr;
 	}
-	
+
 	public WeaponsInv getWeapon() {
 		return m_weapon;
 	}
@@ -79,6 +79,7 @@ public class Inventory {
 				m_weapon.setPosition(itemTile.m_x*Options.TAILLE_CASE, itemTile.m_y*Options.TAILLE_CASE);
 			}
 			m_weapon = i;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		}
 		else{

@@ -9,18 +9,25 @@
      "type": "consumable",
     "damage" : "-3"
   },
-  "revival": {
-    "sprite": "assets/sprites/revival.png",
+  "sword": {
+    "sprite": "assets/sprites/sword.png",
     "type": "weapon",
     "damage" : "4"
   },
+<<<<<<< HEAD
   "rifle": {
     "sprite": "assets/sprites/rifle.png",
     "type": "weapon",
     "damage" : "5"
+=======
+  "axe": {
+    "sprite": "assets/sprites/axe.png",
+    "type": "weapon",    
+    "damage" : "7"
+>>>>>>> f587910f6d963a42ca48de58a23f21207fcc2921
   },
-  "bomb": {
-    "sprite": "assets/sprites/bomb.png",
+  "hammer": {
+    "sprite": "assets/sprites/hammer.png",
     "damage" : "10"
   }
 }

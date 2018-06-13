@@ -136,13 +136,13 @@ public class Level {
 		JSONObject itemsList = (JSONObject) Level.m_allItems.get(str);
 		String itemSprite = (String) itemsList.get("sprite");
 		int itemDamage = Integer.parseInt((String)itemsList.get("damage"));
-		
-		if(str.equals("potion")) 
+
+		if(str.equals("potion"))
 			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.smallPotion);
-		else if (str.equals("big_potion")) 
+		else if (str.equals("big_potion"))
 			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.bigPotion);
-		else 
-			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.WEAPON);		
+		else
+			return new Item(m, x, y, itemSprite, tile, itemDamage, ItemType.WEAPON);
 	}
 
 	public String getRandomRoom() {
