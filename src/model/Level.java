@@ -16,7 +16,6 @@ public class Level {
 	public ArrayList<String> m_items;
 	public ArrayList<String> m_rooms;
 	public ArrayList<String> m_pets;
-	public String m_boss;
 	public Model m_model;
 	
 	Room m_currentRoom;
@@ -36,9 +35,6 @@ public class Level {
 				Object obj3 = parser.parse(new FileReader("assets/level/items.json"));
 				m_allItems = (JSONObject) obj3;
 
-				Object obj4 = parser.parse(new FileReader("assets/level/boss.json"));
-				m_allBoss = (JSONObject) obj4;
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ParseException e) {
@@ -48,7 +44,6 @@ public class Level {
 	};
 	private static JSONObject m_allPets;
 	private static JSONObject m_allItems;
-	private static JSONObject m_allBoss;
 
 	public Level(int id, Model m) {
 		m_model = m;
@@ -82,8 +77,6 @@ public class Level {
 				m_pets.add("" + o);
 			}
 
-			String boss = (String) jsonObject.get("boss");
-			m_boss = ("" + boss);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -143,17 +136,6 @@ public class Level {
 		int size = m_rooms.size();
 		int rd_value = (int) (Math.random() * size);
 		return m_rooms.get(rd_value);
-	}
-	
-	public Boss getBoss(Model m, int x, int y, Tile tile) {
-		JSONObject bossList = (JSONObject) Level.m_allBoss.get(m_boss);
-		String bossSprite = (String) bossList.get("sprite");
-		
-		Double speed = (Double) bossList.get("speed");
-		
-		//TODO mettre la vraie vie
-		Boss returnBoss = new Boss(m, x, y, bossSprite, speed, tile, 10, 4);
-		return returnBoss;
 	}
 	
 	/**

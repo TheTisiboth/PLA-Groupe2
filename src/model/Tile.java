@@ -40,10 +40,6 @@ public class Tile {
 			m_automate = new Automate(enn, auto.getCopy());
 
 			break;
-		case BOSS:
-			putEntity(Options.layers.get("character"),
-					m.m_level.getBoss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
-			break;
 		case PET:
 			putEntity(Options.layers.get("character"),
 					m.m_level.getRandomPet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
