@@ -32,7 +32,7 @@ public abstract class AliveEntity extends MovableEntity {
 	Animation m_defaultRight;
 	Animation m_defaultUp;
 	Animation m_defaultDown;
-	
+
 	public AliveEntity(Model model, int posX, int posY, String filename, double speed, Tile t,
 			int life, int damage, Teams team) {
 		super(model, posX, posY, speed, filename, t, team);
@@ -71,62 +71,27 @@ public abstract class AliveEntity extends MovableEntity {
 	public void setOrientation(Directions dir) {
 		super.setOrientation(dir);
 		dir = this.RelativeToRealDir(dir);
-		
+
 		m_inventory.getWeapon().rotate(dir);
-		
+
 	}
 
 	@Override
 	public void step(long now) {
 		m_inventory.step();
-		
+
 		long timeElapsed = now-this.m_lastTime;
+
+		super.step(now);
 		projectileCooldown--;
+		if(m_life<=0)
+			kill();
+	}
 
-		if(timeElapsed >= m_updatePhysics) {
-			this.m_lastTime = now;
-
-			// Checking if entity is dead
-			this.tryToKill();
-
-			//Movement
-			if(m_moveable && m_moving != null) {
-				int deplacement = (int)(m_speed * timeElapsed);
-				m_pixelDone += deplacement;
-
-				switch (this.m_moving) {
-				case RIGHT :
-					this.m_pixelX += deplacement;
-					break;
-
-				case LEFT :
-					this.m_pixelX -= deplacement;
-					break;
-
-				case UP :
-					this.m_pixelY -= deplacement;
-					break;
-
-				case DOWN :
-					this.m_pixelY += deplacement;
-					break;
-
-				default : break;
-
-				}
-
-				//Replace l'entité au milieu de sa case
-				if(m_pixelDone> Options.TAILLE_CASE){
-
-					m_pixelX = m_tile.m_x * Options.TAILLE_CASE;
-					m_pixelY = m_tile.m_y * Options.TAILLE_CASE;
-
-					m_moving = null;
-					m_pixelDone = 0;
-				}
-
-			}
-		}
+	@Override
+	public void move(Directions moving) {
+		super.move(moving);
+		m_orientation = moving;
 	}
 
 	@Override
@@ -138,7 +103,7 @@ public abstract class AliveEntity extends MovableEntity {
 		while(it.hasNext()) {
 			it.next().paint(g);
 		}
-		
+
 		m_inventory.paint(g);
 	}
 
@@ -235,7 +200,7 @@ public abstract class AliveEntity extends MovableEntity {
 		setOrientation(dir);
 
 		m_inventory.getWeapon().hit();;
-		
+
 		//Directions dir = m_model.getPlayer().m_orientation;
 		/*List<Entity> list = this.checkTile(dir);
 		if(list.get(1) instanceof AliveEntity) {
@@ -317,6 +282,18 @@ public abstract class AliveEntity extends MovableEntity {
 		if(this.m_life <= 0) {
 			m_tile.delEntity(this);
 		}
+	}
+
+	public void flushPortals(){
+		for(int i = 0; i<m_portals.size(); i++) {
+			m_portals.remove(i);
+		}
+	}
+
+	@Override
+	public void kill() {
+		super.kill();
+		setLife(-1);
 	}
 
 }

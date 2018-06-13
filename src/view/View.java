@@ -22,7 +22,6 @@ import java.awt.Graphics;
 
 import controller.Controller;
 import edu.ricm3.game.GameView;
-import model.AliveEntity;
 import model.Background;
 import model.Model;
 import model.Room;
@@ -63,6 +62,7 @@ private void computeFPS() {
 
   @Override
   protected void _paint(Graphics g) {
+    m_room = m_model.getRoom();
     computeFPS();
 
     m_back.paint(g);

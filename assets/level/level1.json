@@ -1,0 +1,18 @@
+{
+  "enemies": [
+    "demon",
+    "magician"
+  ],
+  "items": [
+    "potion",
+    "big_potion"
+  ],
+  "rooms": [
+    2
+  ],
+  "pets": [
+    "dog",
+    "cat"
+  ],
+  "boss": "elephant"
+}

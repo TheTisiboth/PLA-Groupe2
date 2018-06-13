@@ -35,5 +35,5 @@ public class Player extends AliveEntity {
 
 
 	}
-
+	
 }

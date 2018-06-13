@@ -18,9 +18,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import controller.Options;
 import edu.ricm3.game.GameModel;
+import view.EndGame;
 import j.J_AI_Definition;
 import view.LifeBar;
 
@@ -30,14 +33,23 @@ public class Model extends GameModel {
   Room m_room;
   List<LifeBar> m_lbList;
   J_AI_Definition m_ast;
-  
-  public Model(J_AI_Definition ast) {  
+
+  List<Level> m_lvlList;
+  Iterator<Level> m_lvlIt;
+
+  int m_lvlID;
+
+  boolean m_done;
+
+  public Model(J_AI_Definition ast) {
 	m_ast = ast;
     m_lbList = new ArrayList<LifeBar>();
     m_player = new Player(this, 0, 0, null, 20, 2);
-    m_level = new Level("assets/level/level.json",this);
-    m_level.loadLevel();
+    m_lvlList = new ArrayList<Level>();
+    m_lvlID = 0;
+    loadLevels();
     m_room = m_level.getCurrentRoom();
+    m_done = false;
   }
 
   @Override
@@ -58,12 +70,14 @@ public class Model extends GameModel {
       if(m_lbList.get(i) != null && m_lbList.get(i).getEntity().getLife()<=0)
         m_lbList.set(i, null);
     }
+    if(m_player.getLife()<=0)
+      end(false);
   }
 
   public Player getPlayer() {
     return m_player;
   }
-  
+
   public Room getRoom(){
     return m_room;
   }
@@ -76,8 +90,45 @@ public class Model extends GameModel {
     return m_lbList;
   }
 
+  public void nextRoom(){
+    flush();
+    if(!m_level.nextRoom())
+      nextLevel();
+    m_room = m_level.getCurrentRoom();
+  }
+
+	public void nextLevel() {
+		if(m_lvlIt.hasNext()){
+      m_level =m_lvlIt.next();
+      if(m_level.getCurrentRoom() == null)
+        m_level.nextRoom();
+    }
+    else
+      end(true);
+    m_room = m_level.getCurrentRoom();
+	}
+  private void flush(){
+    m_lbList = new ArrayList<LifeBar>();
+    addLifeBar(m_player);
+    m_player.flushPortals();
+  }
+
+  private void loadLevels(){
+    for (int i = 0; i < Options.lvlNb; i++) {
+      m_lvlList.add(i, new Level(i,this));
+    }
+    m_lvlIt = m_lvlList.iterator();
+    nextLevel();
+  }
+
+  private void end(boolean win){
+    if(!m_done)
+      m_game.setView(new EndGame(win));
+    m_done = true;
+  }
+
   public J_AI_Definition getAst() {
 	  return m_ast;
   }
-  
-  }
+
+}

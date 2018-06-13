@@ -57,7 +57,6 @@ public abstract class MovableEntity extends Entity {
 				default:
 					break;
 			}
-			m_orientation = moving;
 		}
 	}
 
