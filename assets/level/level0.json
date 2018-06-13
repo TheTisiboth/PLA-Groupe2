@@ -9,11 +9,12 @@
   ],
   "rooms": [
     0,
-    1
+    1,
+    2
+    
   ],
   "pets": [
     "dog",
     "cat"
-  ],
-  "boss": "elephant"
+  ]
 }

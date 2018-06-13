@@ -40,10 +40,6 @@ public class Tile {
 			m_automate = new Automate(enn, auto.getCopy());
 
 			break;
-		case BOSS:
-			putEntity(Options.layers.get("character"),
-					m.m_level.getBoss(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this));
-			break;
 		case PET:
 			Entity pet = m.m_level.getRandomPet(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
 			putEntity(Options.layers.get("character"),pet);
@@ -81,7 +77,8 @@ public class Tile {
 	}
 
 	public void delEntity(Entity e) {
-		m_entities.set(m_entities.indexOf(e), null);
+		if(e!=null && m_entities.contains(e))
+			m_entities.set(m_entities.indexOf(e), null);
 	}
 
 	public void paint(Graphics g) {
