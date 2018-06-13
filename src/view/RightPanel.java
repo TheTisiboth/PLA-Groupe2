@@ -40,11 +40,11 @@ public class RightPanel extends JPanel {
 		
 		m_bg = new ImageIcon("assets/view/Hud.png").getImage().getScaledInstance(150,704,Image.SCALE_DEFAULT);
 		
-		m_panelWeapon = new AutomataWindow.BackgroundPanel("assets/sprites/item.png",30,25,90,90);
+		m_panelWeapon = new AutomataWindow.BackgroundPanel("assets/sprites/sword.png",30,25,90,90);
 		m_panelWeapon.setLayout(null);
 		m_panelWeapon.setPreferredSize(new Dimension(150,130));
 		m_panelWeapon.setOpaque(false);
-		JLabel fireball = new JLabel(new ImageIcon(new ImageIcon("assets/sprites/item.png").getImage().getScaledInstance(32,32,Image.SCALE_DEFAULT)));
+		JLabel fireball = new JLabel(new ImageIcon(new ImageIcon("assets/sprites/fireball.png").getImage().getScaledInstance(32,32,Image.SCALE_DEFAULT)));
 		fireball.setBounds(105,99,32,32);
 		m_panelWeapon.add(fireball);
 		this.add(m_panelWeapon);
