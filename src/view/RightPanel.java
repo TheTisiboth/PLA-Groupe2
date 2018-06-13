@@ -12,17 +12,19 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.GameMain;
 import model.Model;
+import view.AutomataWindow.BackgroundPanel;
 
 
 
 public class RightPanel extends JPanel {
-	Model m_model;
-	JLabel m_labelLife;
-	JLabel m_labelBigLife;
-	JPanel m_panelLife;
-	JPanel m_panelBigLife;
-	JPanel m_panelWeapon;
+	static Model m_model;
+	static JLabel m_labelLife;
+	static JLabel m_labelBigLife;
+	static JPanel m_panelLife;
+	static JPanel m_panelBigLife;
+	static JPanel m_panelWeapon;
 	JPanel m_panelPictures;
 	Image m_bg;
 
@@ -51,7 +53,7 @@ public class RightPanel extends JPanel {
 		m_panelLife.setPreferredSize(new Dimension(150,95));
 		m_panelLife.setOpaque(false);
 		m_labelLife = new JLabel();
-		m_labelBigLife.setText("x"+m_model.getPlayer().getInventory().getSmallPotion());
+		m_labelLife.setText("x"+m_model.getPlayer().getInventory().getSmallPotion());
 		m_labelLife.setSize(30,10);
 		m_labelLife.setLocation(115,47);
 		m_panelLife.add(m_labelLife);
@@ -67,10 +69,27 @@ public class RightPanel extends JPanel {
 		m_labelBigLife.setLocation(115,30);
 		m_panelBigLife.add(m_labelBigLife);
 		this.add(m_panelBigLife);
+		
+		JButton replayButton = new JButton();
+		replayButton.setOpaque(false);
+		replayButton.setBorder(BorderFactory.createEmptyBorder(280,0,0,0));
+		replayButton.setFocusPainted(false);
+		replayButton.setContentAreaFilled(false);
+		replayButton.setBorderPainted(false);
+		replayButton.setIcon(new ImageIcon(new ImageIcon("assets/view/Play.png").getImage().getScaledInstance(150,40,Image.SCALE_DEFAULT)));
+		replayButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				GameMain.showMenu();
+				m_model.getGameUI().close();
+			}
+		});
+		
+		this.add(replayButton);
 
 		JButton quitButton = new JButton();
 		quitButton.setOpaque(false);
-		quitButton.setBorder(BorderFactory.createEmptyBorder(330,0,0,0));
+		quitButton.setBorder(BorderFactory.createEmptyBorder(5,0,0,0));
 		quitButton.setFocusPainted(false);
 		quitButton.setContentAreaFilled(false);
 		quitButton.setBorderPainted(false);
@@ -89,6 +108,13 @@ public class RightPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(m_bg, 0,0,150,704, this);
+	}
+	
+	public static void actualize() {
+		m_labelBigLife.setText("x"+m_model.getPlayer().getInventory().getBigPotionNbr());
+		m_labelLife.setText("x"+m_model.getPlayer().getInventory().getSmallPotion());
+		((BackgroundPanel) m_panelWeapon).changeImg(m_model.getPlayer().getInventory().getWeapon().m_fileSprite);
+		m_panelWeapon.repaint();
 	}
 
 }

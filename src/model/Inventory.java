@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Weapons.WeaponsInv;
+import view.RightPanel;
 
 public class Inventory {
 	AliveEntity m_owner;
@@ -29,7 +30,7 @@ public class Inventory {
 		}
 		else if(m_bigPotionNbr > 0) {
 			m_owner.setLife(m_owner.getLife() + 5);
-			System.out.println("grosse");
+			m_bigPotionNbr--;
 		}
 	}
 
@@ -45,6 +46,7 @@ public class Inventory {
 			switchWeapon(((WeaponsInv)item.getItemInv(m_owner)));
 			break;
 		}
+		RightPanel.actualize();
 		item.kill();
 	}
 

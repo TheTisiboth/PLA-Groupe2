@@ -192,7 +192,7 @@ public class GameUI {
   }
   
   public void close() {
-	  m_frame.getWindowListeners()[0].windowClosing(new WindowEvent(m_frame, m_fps));
+	  m_frame.dispose();
   }
 
   public void setView(GameView v){

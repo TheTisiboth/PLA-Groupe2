@@ -120,13 +120,17 @@ public class AutomataWindow extends JFrame {
 			m_y = y;
 			m_width = width;
 			m_height = height;
-			image = new ImageIcon(img).getImage().getScaledInstance(width,height,Image.SCALE_DEFAULT);
+			this.changeImg(img);
 		}
 		
 		@Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(image, m_x,m_y,m_width,m_height, this);		
+		}
+		
+		public void changeImg(String img) {
+			image = new ImageIcon(img).getImage().getScaledInstance(m_width,m_height,Image.SCALE_DEFAULT);
 		}
 	}
 	
