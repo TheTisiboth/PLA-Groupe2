@@ -19,6 +19,8 @@ public class Level {
 	public ArrayList<String> m_rooms;
 	public ArrayList<String> m_pets;
 	public Model m_model;
+	public String m_tileSprite;
+	public String m_wallSprite;
 	
 	Room m_currentRoom;
 	Iterator<String> m_roomIt;
@@ -78,6 +80,9 @@ public class Level {
 			for (Object o : pets) {
 				m_pets.add("" + o);
 			}
+
+			m_wallSprite = ""+jsonObject.get("wall");
+			m_tileSprite = ""+jsonObject.get("tile");
 
 
 		} catch (IOException e) {

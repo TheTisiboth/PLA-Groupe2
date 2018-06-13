@@ -22,7 +22,6 @@ import java.awt.Graphics;
 
 import controller.Controller;
 import edu.ricm3.game.GameView;
-import model.Background;
 import model.Model;
 import model.Room;
 
@@ -45,6 +44,7 @@ public class View extends GameView {
     m_model = m;
     m_ctr = c;
     m_back = new Background();
+    setBG();
     m_room = m.getRoom();
   }
 
@@ -62,6 +62,7 @@ private void computeFPS() {
 
   @Override
   protected void _paint(Graphics g) {
+    setBG();
     m_room = m_model.getRoom();
     computeFPS();
 
@@ -71,6 +72,10 @@ private void computeFPS() {
       if(lb != null)
         lb.paint(g);
     }
+  }
+
+  public void setBG(){
+    m_back.setNewTile(m_model.getLevel().m_tileSprite);
   }
 
 }

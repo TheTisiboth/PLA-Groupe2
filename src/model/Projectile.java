@@ -15,7 +15,6 @@ public class Projectile extends MovableEntity {
 
 	public Projectile(Model model, int posX, int posY, String filename, double speed, Tile tile, int damage, Directions d, Teams team, Teams equipe) {
 		super(model, posX, posY, speed, filename, tile, team);
-		// TODO Auto-generated constructor stub
 		m_equipe = equipe;
 		m_team = team;
 		m_layer = 2;

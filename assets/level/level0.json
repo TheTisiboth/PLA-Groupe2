@@ -16,5 +16,7 @@
   "pets": [
     "dog",
     "cat"
-  ]
+  ],
+  "wall":"assets/tiles/wall0.png",
+  "tile":"assets/tiles/ground0.png"
 }

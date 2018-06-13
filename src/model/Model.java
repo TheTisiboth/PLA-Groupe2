@@ -26,6 +26,7 @@ import edu.ricm3.game.GameModel;
 import view.EndGame;
 import j.J_AI_Definition;
 import view.LifeBar;
+import view.View;
 
 public class Model extends GameModel {
   Player m_player;
@@ -129,6 +130,10 @@ public class Model extends GameModel {
 
   public J_AI_Definition getAst() {
 	  return m_ast;
+  }
+
+  public Level getLevel(){
+    return m_level;
   }
 
 }

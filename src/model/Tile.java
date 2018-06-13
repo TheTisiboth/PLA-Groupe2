@@ -31,7 +31,7 @@ public class Tile {
 		switch (to) {
 		case WALL:
 			putEntity(Options.layers.get("wall"),
-					new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this, -1));
+					new Wall(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this, m.m_level.m_wallSprite));
 			break;
 		case ENEMY:
 			Entity enn = m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
