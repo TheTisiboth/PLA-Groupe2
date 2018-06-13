@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -71,7 +70,7 @@ public class RightPanel extends JPanel {
 		
 		JButton quitButton = new JButton();
 		quitButton.setOpaque(false);
-		quitButton.setBorder(BorderFactory.createEmptyBorder(340,0,0,0));
+		quitButton.setBorder(BorderFactory.createEmptyBorder(330,0,0,0));
 		quitButton.setFocusPainted(false);
 		quitButton.setContentAreaFilled(false);
 		quitButton.setBorderPainted(false);
@@ -83,24 +82,6 @@ public class RightPanel extends JPanel {
 			}
 		});
 		this.add(quitButton);
-		
-		//m_hud = new HUD(model);
-		
-		/*m_panelLife = new JPanel();
-		m_labelLife = new JLabel("x"+m_model.getPlayer().getInventory().getNumberLife());
-		m_panelLife.add(m_labelLife,BorderLayout.CENTER);
-		this.add(m_panelLife,BorderLayout.EAST);
-		
-		m_panelPoison = new JPanel();
-		m_labelPoison = new JLabel("x"+m_model.getPlayer().getInventory().getNumberPoison());
-		m_panelPoison.add(m_labelPoison,BorderLayout.EAST);
-		this.add(m_panelPoison,BorderLayout.CENTER);
-		
-		
-		m_panelPictures = new JPanel();
-		m_panelPictures.setPreferredSize(new Dimension(100,400));
-		//m_panelPictures.add(m_hud);
-		this.add(m_panelPictures,BorderLayout.WEST);*/
 		
 	}
 	
