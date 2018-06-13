@@ -24,8 +24,9 @@ import java.awt.event.MouseEvent;
 import java.util.EnumMap;
 
 import edu.ricm3.game.GameController;
-import main.Directions;
 import main.Actions;
+import main.Directions;
+
 import controller.Options;
 import model.Model;
 
@@ -66,6 +67,7 @@ public class Controller extends GameController implements ActionListener {
 		m_actions.put(Actions.PORTAL, false);
 		m_actions.put(Actions.PICK, false);
 		m_actions.put(Actions.WIZZ, false);
+		m_actions.put(Actions.POP, false);
 
 	}
 
@@ -116,6 +118,10 @@ public class Controller extends GameController implements ActionListener {
 			m_model.getPlayer().wizz();
 			m_actions.put(Actions.WIZZ, false);
 		}
+		if (m_actions.get(Actions.POP)) {
+			m_model.getPlayer().pop();
+			m_actions.put(Actions.POP, false);
+		}
 	}
 
 	@Override
@@ -150,6 +156,8 @@ public class Controller extends GameController implements ActionListener {
 			m_actions.put(Actions.PICK, true);
 		if (e.getKeyCode() == 32) // space
 			m_actions.put(Actions.WIZZ, true);
+		if (e.getKeyCode() == 17) // ctrl
+			m_actions.put(Actions.POP, true);
 
 		if (Options.ECHO_KEYBOARD)
 			System.out.println("KeyPressed: " + e.getKeyChar() + " code=" + e.getKeyCode());
@@ -183,6 +191,8 @@ public class Controller extends GameController implements ActionListener {
 			m_actions.put(Actions.PICK, false);
 		if (e.getKeyCode() == 32) // space
 			m_actions.put(Actions.WIZZ, false);
+		if (e.getKeyCode() == 17) // ctrl
+			m_actions.put(Actions.POP, false);
 
 		if (Options.ECHO_KEYBOARD)
 			System.out.println("KeyReleased: " + e.getKeyChar() + " code=" + e.getKeyCode());

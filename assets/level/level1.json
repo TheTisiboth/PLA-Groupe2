@@ -1,20 +1,14 @@
 {
   "enemies": [
-    "bear",
-    "hornet",
-    "shark"
+    "demon",
+    "magician"
   ],
   "items": [
     "potion",
     "big_potion"
   ],
   "rooms": [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5
+    2
   ],
   "pets": [
     "dog",

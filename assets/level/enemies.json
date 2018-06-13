@@ -1,22 +1,38 @@
 {
-  "wolf": {
-    "sprite": "assets/sprites/wolf.png",
-    "speed": "0.2"
+  "armorBoy": {
+    "sprite": "assets/sprites/armorBoy.png",
+    "speed": "0.05"
   },
-  "bear": {
-    "sprite": "assets/sprites/bear.png",
-    "speed": "0.1"
-  },
-  "scorpion": {
-    "sprite": "assets/sprites/scorpion.png",
-    "speed": "0.08"
-  },
-  "hornet": {
-    "sprite": "assets/sprites/hornet.png",
+  "demon": {
+    "sprite": "assets/sprites/demon.png",
     "speed": "0.3"
   },
-  "shark": {
-    "sprite": "assets/sprites/shark.png",
+  "knight": {
+    "sprite": "assets/sprites/knight.png",
+    "speed": "0.1"
+  },
+  "magician": {
+    "sprite": "assets/sprites/magician.png",
+    "speed": "0.1"
+  },
+  "minotaur": {
+    "sprite": "assets/sprites/minotaur.png",
+    "speed": "0.2"
+  },
+  "outlawBoy": {
+    "sprite": "assets/sprites/outlawBoy.png",
+    "speed": "0.25"
+  },
+  "skeleton": {
+    "sprite": "assets/sprites/skeleton.png",
     "speed": "0.15"
+  },
+  "snakeWoman": {
+    "sprite": "assets/sprites/snakeWoman.png",
+    "speed": "0.25"
+  },
+  "warrior": {
+    "sprite": "assets/sprites/warrior.png",
+    "speed": "0.05"
   }
 }

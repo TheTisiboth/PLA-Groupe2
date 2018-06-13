@@ -24,6 +24,7 @@ import java.util.List;
 import controller.Options;
 import edu.ricm3.game.GameModel;
 import view.EndGame;
+import j.J_AI_Definition;
 import view.LifeBar;
 
 public class Model extends GameModel {
@@ -31,6 +32,7 @@ public class Model extends GameModel {
   Level m_level;
   Room m_room;
   List<LifeBar> m_lbList;
+  J_AI_Definition m_ast;
 
   List<Level> m_lvlList;
   Iterator<Level> m_lvlIt;
@@ -39,7 +41,8 @@ public class Model extends GameModel {
 
   boolean m_done;
 
-  public Model() {
+  public Model(J_AI_Definition ast) {  
+	m_ast = ast;
     m_lbList = new ArrayList<LifeBar>();
     m_player = new Player(this, 0, 0, null, 20, 2);
     m_lvlList = new ArrayList<Level>();
@@ -67,6 +70,8 @@ public class Model extends GameModel {
       if(m_lbList.get(i) != null && m_lbList.get(i).getEntity().getLife()<=0)
         m_lbList.set(i, null);
     }
+    if(m_player.getLife()<=0)
+      end(false);
   }
 
   public Player getPlayer() {
@@ -93,10 +98,14 @@ public class Model extends GameModel {
   }
 
 	public void nextLevel() {
-		if(m_lvlIt.hasNext())
-			m_level =m_lvlIt.next();
+		if(m_lvlIt.hasNext()){
+      m_level =m_lvlIt.next();
+      if(m_level.getCurrentRoom() == null)
+        m_level.nextRoom();
+    }
     else
-			end(true);
+      end(true);
+    m_room = m_level.getCurrentRoom();
 	}
   private void flush(){
     m_lbList = new ArrayList<LifeBar>();
@@ -110,7 +119,6 @@ public class Model extends GameModel {
     }
     m_lvlIt = m_lvlList.iterator();
     nextLevel();
-    nextRoom();
   }
 
   private void end(boolean win){
@@ -119,4 +127,8 @@ public class Model extends GameModel {
     m_done = true;
   }
 
+  public J_AI_Definition getAst() {
+	  return m_ast;
+  }
+  
 }
