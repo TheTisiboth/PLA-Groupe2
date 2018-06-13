@@ -7,7 +7,7 @@ public class Automate {
 	Entity entite;
 	
 	long last;
-	long cooldown = 1000;
+	long cooldown = 500;
 	
 	public Automate(Entity entite, J_Automaton comportement) {
 		this.entite = entite;

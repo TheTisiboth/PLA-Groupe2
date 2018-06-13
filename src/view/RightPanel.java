@@ -53,7 +53,7 @@ public class RightPanel extends JPanel {
 		m_panelLife.setLayout(null);
 		m_panelLife.setPreferredSize(new Dimension(150,95));
 		m_panelLife.setOpaque(false);
-		m_labelLife = new JLabel("x"+m_model.getPlayer().getInventory().getNumberLife());
+		m_labelLife = new JLabel("x"+"6");
 		m_labelLife.setSize(30,10);
 		m_labelLife.setLocation(115,47);
 		m_panelLife.add(m_labelLife);
@@ -63,7 +63,7 @@ public class RightPanel extends JPanel {
 		m_panelBigLife.setLayout(null);
 		m_panelBigLife.setPreferredSize(new Dimension(150,81));
 		m_panelBigLife.setOpaque(false);
-		m_labelBigLife = new JLabel("x"+m_model.getPlayer().getInventory().getNumberLife());
+		m_labelBigLife = new JLabel("x"+"6");
 		m_labelBigLife.setSize(30,10);
 		m_labelBigLife.setLocation(115,30);
 		m_panelBigLife.add(m_labelBigLife);

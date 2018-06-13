@@ -1,8 +1,26 @@
 {
-  "littlePotion": {
-    "sprite": "assets/sprites/littlePotion.png"
+  "potion": {
+    "sprite": "assets/sprites/littlePotion.png",
+    "type": "consumable",
+    "damage": "-1"
   },
-  "bigPotion": {
-    "sprite": "assets/sprites/bigPotion.png"
+  "big_potion": {
+    "sprite": "assets/sprites/bigPotion.png",
+     "type": "consumable",
+    "damage" : "-3"
+  },
+  "sword": {
+    "sprite": "assets/sprites/sword.png",
+    "type": "weapon",
+    "damage" : "4"
+  },
+  "axe": {
+    "sprite": "assets/sprites/axe.png",
+    "type": "weapon",    
+    "damage" : "7"
+  },
+  "hammer": {
+    "sprite": "assets/sprites/hammer.png",
+    "damage" : "10"
   }
 }

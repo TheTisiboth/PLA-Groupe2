@@ -113,7 +113,7 @@ public class GameUI {
 	m_frame.setTitle("PLA - Groupe2 - Bandol Party");
     m_frame.setLayout(new BorderLayout());
 
-    m_frame.add(m_view, BorderLayout.CENTER);
+    setView(m_view);
 
     m_text = new JLabel();
     m_text.setText("Starting up...");
@@ -129,20 +129,6 @@ public class GameUI {
 
     m_frame.pack();
     m_frame.setLocationRelativeTo(null);
-    
-    GameController ctr = getController();
-
-    // let's hook the controller, 
-    // so it gets mouse events and keyboard events.
-    m_view.addKeyListener(ctr);
-    m_view.addMouseListener(ctr);
-    m_view.addMouseMotionListener(ctr);
-
-    // grab the focus on this JPanel, meaning keyboard events
-    // are coming to our controller. Indeed, the focus controls
-    // which part of the overall GUI receives the keyboard events.
-    m_view.setFocusable(true);
-    m_view.requestFocusInWindow();
     
     m_controller.notifyVisible();
   }
@@ -207,6 +193,22 @@ public class GameUI {
   
   public void close() {
 	  m_frame.getWindowListeners()[0].windowClosing(new WindowEvent(m_frame, m_fps));
+  }
+
+  public void setView(GameView v){
+    m_view.setVisible(false);
+    m_view.setEnabled(false);
+    m_view = v;
+    m_view.m_game = this;
+    m_view.setVisible(true);
+    m_view.setEnabled(true);
+    m_frame.add(m_view, BorderLayout.CENTER);
+    GameController ctr = getController();
+    m_view.addKeyListener(ctr);
+    m_view.addMouseListener(ctr);
+    m_view.addMouseMotionListener(ctr);
+    m_view.setFocusable(true);
+    m_view.requestFocusInWindow();
   }
 
 }

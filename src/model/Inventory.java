@@ -1,32 +1,45 @@
 package model;
 
-import java.util.*;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
-import controller.Options;
-import model.Item.ItemType;
+import model.Weapons.WeaponsInv;
 
 public class Inventory {
+
+	AliveEntity m_owner;
+	List<Item> m_consumable;
+	WeaponsInv m_weapon;
+
+	public Inventory(AliveEntity owner) {
+		this(owner, new WeaponsInv(owner, "assets/sprites/pet.png", 1));
+	}
+
+	public Inventory(AliveEntity owner, WeaponsInv weapon) {		
+		m_owner = owner;
+		m_consumable = new ArrayList<Item>();
+		m_weapon = weapon;
+	}
+
+	public WeaponsInv getWeapon() {
+		return m_weapon;
+	}
 	
-	Map<ItemType,Integer> m_consumable;
-	Item m_weapon;
-
-	public Inventory() {
-		m_consumable = new HashMap<ItemType,Integer>();
+	public void switchWeapon(WeaponsInv weapon) {
+		m_weapon = weapon;
+	}
+	
+	public void step() {
+		m_weapon.step();
 	}
 
-	public Inventory(Item w, HashMap<ItemType,Integer> c){
-		m_weapon = w;
-		m_consumable = c;
+	public void paint(Graphics g) {
+		m_weapon.paint(g);
 	}
-
-	public boolean hasWeapon(){
-		if (m_weapon == null) {
-			return false;
-		}
-		return true;
-	}
-
+	
 	public void switchItem(Item i){
+		/*
 		Tile itemTile = i.getTile();
 		if(i.getType() == ItemType.WEAPON){
 			itemTile.delEntity(i);
@@ -35,48 +48,8 @@ public class Inventory {
 				m_weapon.setPosition(itemTile.m_x*Options.TAILLE_CASE, itemTile.m_y*Options.TAILLE_CASE);
 			}
 			m_weapon = i;
-		}
-		else{
-			
-			itemTile.delEntity(i);
-			if(m_consumable.containsKey(i.getType())) {
-				m_consumable.put(i.getType(), m_consumable.get(i.getType())+1);
-			}
-			else {
-				m_consumable.put(i.getType(),1);
-			}
-			
-		}
-		
-		for (Map.Entry mapentry : m_consumable.entrySet()) {
-	           System.out.println("clé: "+mapentry.getKey() 
-	                              + " | valeur: " + mapentry.getValue());
-	        }
-		
-	}
-	
-	public int getNumberLife() {
-		
-		if(m_consumable.get(ItemType.LIFE) != null)
-		return m_consumable.get(ItemType.LIFE);
-		
-		else return 0;
-			
-	}
-	
-	public int getNumberPoison() {
-		
-		if(m_consumable.get(ItemType.POISON) != null)
-		return m_consumable.get(ItemType.POISON);
-		
-		else return 0;
-			
-	}
-	
-	public Item getWeapon() {
-		
-		return m_weapon;
-			
+
+		}*/
 	}
 
 }
