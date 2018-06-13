@@ -30,7 +30,7 @@ public class Model extends GameModel {
   Room m_room;
   List<LifeBar> m_lbList;
   J_AI_Definition m_ast;
-
+  
   public Model(J_AI_Definition ast) {  
 	m_ast = ast;
     m_lbList = new ArrayList<LifeBar>();
@@ -38,7 +38,6 @@ public class Model extends GameModel {
     m_level = new Level("assets/level/level.json",this);
     m_level.loadLevel();
     m_room = m_level.getCurrentRoom();
-
   }
 
   @Override
@@ -59,10 +58,6 @@ public class Model extends GameModel {
       if(m_lbList.get(i) != null && m_lbList.get(i).getEntity().getLife()<=0)
         m_lbList.set(i, null);
     }
-    //appeler step sur toutes les entites
-	/*
-    for (int i = 0; i < m_cowboys.length; i++)
-      m_cowboys[i].step(now);*/
   }
 
   public Player getPlayer() {

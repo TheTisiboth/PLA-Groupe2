@@ -71,7 +71,6 @@ private void computeFPS() {
       if(lb != null)
         lb.paint(g);
     }
-
   }
 
 }

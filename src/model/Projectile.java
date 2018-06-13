@@ -55,8 +55,6 @@ public class Projectile extends MovableEntity {
 					int deplacement = (int)(m_speed * timeElapsed);
 					m_pixelDone += deplacement;
 
-					System.out.print("Deplacement " + deplacement + " time elapsed: " + timeElapsed + "\n");
-
 					switch (this.m_moving) {
 					case RIGHT :
 						this.m_pixelX += deplacement;
