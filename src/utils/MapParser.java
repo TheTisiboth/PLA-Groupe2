@@ -48,7 +48,10 @@ public class MapParser {
 					}
 						//takes a RGB color and outputs its corresponding entity
 					color = new Color(currentcolor[0],currentcolor[1],currentcolor[2]);
-					tile_list[i][j] = Options.tileColorMap.get(color);
+					TileObject tobject = Options.tileColorMap.get(color);
+					if(tobject == null)
+						throw new Error("Incorrect Color on X:"+j+" Y:"+i+" in map "+mapname);
+					tile_list[i][j] = tobject;
 				}
 			}
 

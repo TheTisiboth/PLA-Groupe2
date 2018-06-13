@@ -70,55 +70,17 @@ public abstract class AliveEntity extends MovableEntity {
 
 	@Override
 	public void step(long now) {
-		long timeElapsed = now-this.m_lastTime;
+	
+		super.step(now);
 		projectileCooldown--;
+		if(m_life<=0)
+			kill();
+	}
 
-		if(timeElapsed >= m_updatePhysics) {
-			this.m_lastTime = now;
-
-			// Checking if entity is dead
-			this.tryToKill();
-
-			//Movement
-			if(m_moveable && m_moving != null) {
-				int deplacement = (int)(m_speed * timeElapsed);
-				m_pixelDone += deplacement;
-
-				System.out.print("Deplacement " + deplacement + " time elapsed: " + timeElapsed + "\n");
-
-				switch (this.m_moving) {
-				case RIGHT :
-					this.m_pixelX += deplacement;
-					break;
-
-				case LEFT :
-					this.m_pixelX -= deplacement;
-					break;
-
-				case UP :
-					this.m_pixelY -= deplacement;
-					break;
-
-				case DOWN :
-					this.m_pixelY += deplacement;
-					break;
-
-				default : break;
-
-				}
-
-				//Replace l'entité au milieu de sa case
-				if(m_pixelDone> Options.TAILLE_CASE){
-
-					m_pixelX = m_tile.m_x * Options.TAILLE_CASE;
-					m_pixelY = m_tile.m_y * Options.TAILLE_CASE;
-
-					m_moving = null;
-					m_pixelDone = 0;
-				}
-
-			}
-		}
+	@Override
+	public void move(Directions moving) {
+		super.move(moving);
+		m_orientation = moving;
 	}
 
 	@Override
@@ -305,4 +267,16 @@ public abstract class AliveEntity extends MovableEntity {
 		}
 	}
 
+	public void flushPortals(){
+		for(int i = 0; i<m_portals.size(); i++) {
+			m_portals.remove(i);			
+		}
+	}
+
+	@Override
+	public void kill() {
+		super.kill();
+		setLife(-1);
+	}
+	
 }

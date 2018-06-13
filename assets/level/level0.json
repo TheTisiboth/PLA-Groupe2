@@ -1,7 +1,6 @@
 {
   "enemies": [
     "armorBoy",
-    "demon",
     "snakeWoman"
   ],
   "items": [
@@ -10,11 +9,7 @@
   ],
   "rooms": [
     0,
-    1,
-    2,
-    3,
-    4,
-    5
+    1
   ],
   "pets": [
     "dog",
