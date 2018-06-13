@@ -177,11 +177,16 @@ public class Entity{
 		Tile newTile = m_model.getRoom().getTiles()[newX][newY];
 		Portal portal = (Portal)newTile.getEntityOnLayer(Options.LAYER_PORTAL);
 		if(newTile.getEntityOnLayer(m_layer)==null || ( portal!=null && portal.Active() && portal.m_orientation==this.m_orientation) ){
-			getTile().delEntity(this);
 			if(portal !=null && portal.Active() && portal.m_orientation==this.m_orientation) {
-				newTile = portal.m_destPortal.m_exitTile;
-				this.m_orientation = portal.m_destPortal.m_exitDir;
+				if(portal.m_destPortal.m_exitTile.getEntityOnLayer(1) == null) {
+					newTile = portal.m_destPortal.m_exitTile;
+					this.m_orientation = portal.m_destPortal.m_exitDir;
+					}
+				else {
+					return false;
+				}
 			}
+			getTile().delEntity(this);
 			newTile.putEntity(m_layer, this);
 			setTile(newTile);
 			return true;

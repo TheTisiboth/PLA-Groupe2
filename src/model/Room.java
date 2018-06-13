@@ -70,8 +70,11 @@ public class Room {
 				}
 			}
 		}
-		if(m_exit.getEntityOnLayer(1) instanceof Player)
-			m_model.nextRoom();
+		if(m_exit.getEntityOnLayer(1) instanceof Player) {
+			if(noEnemyLeft()){
+				m_model.nextRoom();
+			}
+		}
 	}
 
 	public Tile getTile(int x, int y) {
@@ -80,5 +83,16 @@ public class Room {
 
 	public Tile[][] getTiles() {
 		return m_tiles;
+	}
+	
+	private boolean noEnemyLeft() {
+		for (int x = 0; x < Options.LARGEUR; x++) {
+			for (int y = 0; y < Options.HAUTEUR; y++) {
+				if(m_tiles[x][y].getEntityOnLayer(1) instanceof Enemy) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

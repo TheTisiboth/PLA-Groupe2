@@ -18,7 +18,6 @@ public class Level {
 	public ArrayList<String> m_items;
 	public ArrayList<String> m_rooms;
 	public ArrayList<String> m_pets;
-	public String m_boss;
 	public Model m_model;
 
 	Room m_currentRoom;
@@ -38,9 +37,6 @@ public class Level {
 				Object obj3 = parser.parse(new FileReader("assets/level/items.json"));
 				m_allItems = (JSONObject) obj3;
 
-				Object obj4 = parser.parse(new FileReader("assets/level/boss.json"));
-				m_allBoss = (JSONObject) obj4;
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ParseException e) {
@@ -50,7 +46,6 @@ public class Level {
 	};
 	private static JSONObject m_allPets;
 	private static JSONObject m_allItems;
-	private static JSONObject m_allBoss;
 
 	public Level(int id, Model m) {
 		m_model = m;
@@ -84,8 +79,6 @@ public class Level {
 				m_pets.add("" + o);
 			}
 
-			String boss = (String) jsonObject.get("boss");
-			m_boss = ("" + boss);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -107,8 +100,13 @@ public class Level {
 		String speedTxt = (String) enemiesList.get("speed");
 		double speed = Double.parseDouble(speedTxt);
 
-		//TODO mettre la vraie vie
-		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, 10, 2);
+		String lifeTxt = (String) enemiesList.get("life");
+		int life = Integer.parseInt(lifeTxt);
+
+		String dmgTxt = (String) enemiesList.get("dmg");
+		int dmg = Integer.parseInt(dmgTxt);
+
+		Enemy returnEnemy = new Enemy(m, x, y, enemySprite, speed, tile, life, dmg);
 		return returnEnemy;
 	}
 
@@ -150,6 +148,7 @@ public class Level {
 		int rd_value = (int) (Math.random() * size);
 		return m_rooms.get(rd_value);
 	}
+<<<<<<< HEAD
 
 	public Boss getBoss(Model m, int x, int y, Tile tile) {
 		JSONObject bossList = (JSONObject) Level.m_allBoss.get(m_boss);
@@ -162,6 +161,9 @@ public class Level {
 		return returnBoss;
 	}
 
+=======
+
+>>>>>>> master
 	/**
 	 * @return the m_currentRoom
 	 */

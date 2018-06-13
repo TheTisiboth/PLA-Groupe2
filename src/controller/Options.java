@@ -51,7 +51,6 @@ public class Options {
 		tileColorMap.put(Color.green,TileObject.ITEM); //GREEN
 		tileColorMap.put(Color.blue,TileObject.PET); //BLUE
 		tileColorMap.put(Color.yellow,TileObject.EXIT); //YELLOW
-		tileColorMap.put(Color.pink,TileObject.BOSS); //PINK
 		tileColorMap.put(Color.cyan,TileObject.SPAWN); //CYAN
 		tileColorMap.put(Color.black,TileObject.WALL); //BLACK
 		tileColorMap.put(Color.white,TileObject.GROUND); //WHITE
@@ -62,7 +61,6 @@ public class Options {
 		ITEM,
 		PET,
 		EXIT,
-		BOSS,
 		SPAWN,
 		WALL,
 		GROUND,
@@ -73,7 +71,6 @@ public class Options {
 
 	static{
 		sprites.put("wall","assets/sprites/wall.png");
-		sprites.put("boss","assets/sprites/boss.png");
 		sprites.put("player","assets/sprites/player.png");
 		sprites.put("pet","assets/sprites/pet.png");
 		sprites.put("item","assets/sprites/item.png");
@@ -92,7 +89,6 @@ public class Options {
 
 	static{
 		velocities.put("wall",0.0);
-		velocities.put("boss",0.1);
 		velocities.put("player",0.15);
 		velocities.put("pet",1.0);
 		velocities.put("item",0.0);

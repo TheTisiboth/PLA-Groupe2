@@ -1,38 +1,56 @@
 {
   "armorBoy": {
     "sprite": "assets/sprites/armorBoy.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "2"
   },
   "demon": {
     "sprite": "assets/sprites/demon.png",
-    "speed": "0.3"
+    "life" : "10",
+    "dmg" : "2",
+    "speed": "1"
   },
   "knight": {
     "sprite": "assets/sprites/knight.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.1"
   },
   "magician": {
     "sprite": "assets/sprites/magician.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.1"
   },
   "minotaur": {
     "sprite": "assets/sprites/minotaur.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.2"
   },
   "outlawBoy": {
     "sprite": "assets/sprites/outlawBoy.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.25"
   },
   "skeleton": {
     "sprite": "assets/sprites/skeleton.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.15"
   },
   "snakeWoman": {
     "sprite": "assets/sprites/snakeWoman.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.25"
   },
   "warrior": {
     "sprite": "assets/sprites/warrior.png",
+    "life" : "10",
+    "dmg" : "2",
     "speed": "0.05"
   }
 }
