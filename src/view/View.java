@@ -39,7 +39,6 @@ public class View extends GameView {
   Controller m_ctr;
   Background m_back;
   Room m_room;
-  HUD m_hud;
 
 
   public View(Model m, Controller c) {

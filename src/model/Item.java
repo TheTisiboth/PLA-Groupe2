@@ -9,28 +9,27 @@ public class Item extends Entity {
 
 	// static String m_spriteFile = Options.sprites.get("item");
 	// static int m_layer = 0;
-	// static double m_startingSpeed = Options.velocities.get("item"); 
+	// static double m_startingSpeed = Options.velocities.get("item");
 
 	public enum ItemType{
 		WEAPON,
-		LIFE,
-		POISON,
-		CONSUMABLE
+		smallPotion,
+		bigPotion
 	}
 
 	ItemType m_type;
 	String m_filepath;
 	int m_damage;
-	
+
 	public Item(Model model, int x, int y, String spriteFile, Tile t, int damage, ItemType item) {
 		super(model, x, y, false, spriteFile, t, Teams.Pickable);
 		m_layer = Options.layers.get("character");
-		m_type = ItemType.WEAPON;
+		m_type = item;
 		m_filepath = spriteFile;
 		m_damage = damage;
 		m_type = item;
 	}
-	
+
 	public ItemInv getItemInv(AliveEntity entity) {
 		if(m_type == ItemType.WEAPON) {
 			return new WeaponsInv(entity, m_filepath, m_damage);
@@ -40,19 +39,20 @@ public class Item extends Entity {
 
 	public ItemType getType(){
 		return m_type;
-	}
-	
+}
+
+	/*
 	private void setItemType(String type) {
-		
+
 		if(type.equals("life")){
 			m_type = ItemType.LIFE;
 		}
 		else if(type.equals("poison")) {
-			m_type = ItemType.POISON;			
+			m_type = ItemType.POISON;
 		}
 		else {
 			m_type = ItemType.WEAPON;
 		}
-		
-	}
+
+	}*/
 }
