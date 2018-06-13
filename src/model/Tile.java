@@ -7,6 +7,7 @@ import java.util.*;
 import controller.Options;
 import controller.Options.TileObject;
 import j.J_Automaton;
+import main.Directions;
 
 public class Tile {
 
@@ -16,7 +17,7 @@ public class Tile {
 	Model m_model;
 
 	Automate m_automate;
-	
+
 	public Tile(TileObject to, int x, int y, Model m, J_Automaton j_Automaton) {
 		m_x = x;
 		m_y = y;
@@ -35,7 +36,7 @@ public class Tile {
 			Entity enn = m.m_level.getRandomEnemy(m, x * Options.TAILLE_CASE, y * Options.TAILLE_CASE, this);
 			putEntity(Options.layers.get("character"), enn);
 			m_automate = new Automate(enn, j_Automaton.getCopy());
-			
+
 			break;
 		case BOSS:
 			putEntity(Options.layers.get("character"),
@@ -97,11 +98,11 @@ public class Tile {
 	public int getCaseX() {
 		return m_x;
 	}
-	
+
 	public int getCaseY() {
 		return m_y;
 	}
-	
+
 	public Portal getPortal() {
 		return (Portal) m_entities.get(Options.LAYER_PORTAL);
 	}
@@ -112,17 +113,35 @@ public class Tile {
 		return true;
 	}
 
-	public void deletePortal() {
-		m_entities.set(Options.LAYER_PORTAL, null);
-	}
-
 	public void setPortal(Portal portal) {
 		m_entities.set(Options.LAYER_PORTAL, portal);
 
 	}
-	
+
 	public Automate getAutomate() {
 		return m_automate;
+	}
+
+	public Tile nextTile(Directions dir) {
+		int x = m_x;
+		int y = m_y;
+		switch (dir) {
+			case RIGHT:
+				x += 1;
+				break;
+			case LEFT:
+				x += -1;
+				break;
+			case UP:
+				y += -1;
+				break;
+			case DOWN:
+				y += 1;
+				break;
+			default:
+				break;
+		}
+		return m_model.getRoom().getTile(x, y);
 	}
 
 }

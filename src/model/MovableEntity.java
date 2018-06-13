@@ -64,12 +64,11 @@ public abstract class MovableEntity extends Entity {
 	@Override
 	public void step(long now) {
 		long timeElapsed = now-this.m_lastTime;
-
 		if(timeElapsed >= m_updatePhysics) {
 			this.m_lastTime = now;
 
 			//Movement
-			if(m_moving != null) {
+			if(m_moveable && m_moving != null) {
 				int deplacement = (int)(m_speed * timeElapsed);
 				m_pixelDone += deplacement;
 
@@ -102,12 +101,6 @@ public abstract class MovableEntity extends Entity {
 
 					m_moving = null;
 					m_pixelDone = 0;
-					
-					//Passage dans un portail
-					Tile new_tile = m_model.getRoom().getTile(m_pixelX / Options.TAILLE_CASE, m_pixelY / Options.TAILLE_CASE);
-					if(new_tile.hasPortal()){
-						new_tile.getPortal().GoThrough(this);
-					}
 				}
 
 			}
